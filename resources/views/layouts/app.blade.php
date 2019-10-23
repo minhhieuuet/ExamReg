@@ -12,9 +12,6 @@
     @if (Auth::check())
         <meta name="authenticated" content="1">
     @endif
-
-    <title>{{ config('app.name', 'bitCastle') }}</title>
-    <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link rel="icon" href="/images/favicon.ico">
 </head>
