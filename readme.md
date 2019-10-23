@@ -6,8 +6,9 @@ Comes with:
 - database: `Mysql-5.7.22`
 
 ## Installatioin
-- `make docker-start`
-- `make docker-init`
+- `sudo make docker-start`
+- `sudo make docker-init`
+- `sudo make watch`
 
 Now that all containers are up, we can add `127.0.0.1 project.local` to our `/etc/hosts` file
 

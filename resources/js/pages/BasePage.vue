@@ -1,24 +1,69 @@
 <template>
-  <div id="main-content">
-    <h1>BasePage</h1>
-    <Sidebar/>
-    <router-view></router-view>
+  <div class="page-container">
+    <md-app style="min-height: 100vh;" md-waterfall md-mode="overlap">
+      <md-app-toolbar class="md-primary md-large">
+        <div class="md-toolbar-row">
+          <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
+            <md-icon>menu</md-icon>
+          </md-button>
+
+          <span class="md-title">My Title</span>
+        </div>
+      </md-app-toolbar>
+
+      <md-app-drawer :md-active.sync="menuVisible">
+        <md-toolbar class="md-transparent" md-elevation="0">
+          Navigation
+        </md-toolbar>
+
+        <md-list>
+          <md-list-item>
+            <md-icon>move_to_inbox</md-icon>
+            <span class="md-list-item-text">Inbox</span>
+          </md-list-item>
+
+          <md-list-item>
+            <md-icon>send</md-icon>
+            <span class="md-list-item-text">Sent Mail</span>
+          </md-list-item>
+
+          <md-list-item>
+            <md-icon>delete</md-icon>
+            <span class="md-list-item-text">Trash</span>
+          </md-list-item>
+
+          <md-list-item>
+            <md-icon>error</md-icon>
+            <span class="md-list-item-text">Spam</span>
+          </md-list-item>
+        </md-list>
+      </md-app-drawer>
+
+      <md-app-content>
+        <router-view></router-view>
+      </md-app-content>
+    </md-app>
   </div>
 </template>
 
-<script>
-import Sidebar from './components/Sidebar.vue';
-export default {
-  components: {
-      Sidebar
-  },
-  name: "BasePage"
-}
-</script>
+<style lang="scss" scoped>
+  .md-app {
+    max-height: 400px;
+    border: 1px solid rgba(#000, .12);
+  }
 
-<style lang="css" scoped >
-  #main-content {
-    border: 2px solid red;
-    height: 600px;
+   // Demo purposes only
+  .md-drawer {
+    width: 230px;
+    max-width: calc(100vw - 125px);
   }
 </style>
+
+<script>
+export default {
+  name: 'Overlap',
+  data: () => ({
+    menuVisible: false
+  })
+}
+</script>

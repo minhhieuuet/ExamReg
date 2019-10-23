@@ -12,6 +12,9 @@
     @if (Auth::check())
         <meta name="authenticated" content="1">
     @endif
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/theme/default.css">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link rel="icon" href="/images/favicon.ico">
 </head>
@@ -19,6 +22,8 @@
     <div id="app">
       <router-view></router-view>
     </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-material"></script>
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
