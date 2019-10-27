@@ -11,9 +11,6 @@ export default {
       path: '/login',
       name: 'Login',
       component: LoginPage,
-      meta: {
-        requiresGuest: true,
-      },
     },
     {
       path: '/',
@@ -23,6 +20,9 @@ export default {
           path: '/',
           name: 'Dashboard',
           component: Dashboard,
+          meta: {
+            requiresAuth: true,
+          },
         },
         { path: '*', name: '404', component: NotFound }
       ],
