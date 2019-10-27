@@ -1757,6 +1757,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _common_AuthenticationUtils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/AuthenticationUtils */ "./resources/js/common/AuthenticationUtils.js");
 //
 //
 //
@@ -1810,20 +1811,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Overlap',
   data: function data() {
     return {
       menuVisible: false
     };
+  },
+  methods: {
+    logout: function logout() {
+      _common_AuthenticationUtils__WEBPACK_IMPORTED_MODULE_0__["default"].logout();
+      this.$router.push({
+        path: '/login'
+      });
+    }
   }
 });
 
@@ -50059,6 +50061,19 @@ var render = function() {
                       _vm._v(" "),
                       _c("span", { staticClass: "md-list-item-text" }, [
                         _vm._v("Spam")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "md-list-item",
+                    { on: { click: _vm.logout } },
+                    [
+                      _c("md-icon", [_vm._v("logout")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "md-list-item-text" }, [
+                        _vm._v("Logout")
                       ])
                     ],
                     1
