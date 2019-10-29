@@ -13,3 +13,16 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
+
+mix.webpackConfig({
+       plugins: [
+       ],
+       resolve: {
+         alias: {
+           "desktop": path.resolve(__dirname, './resources/assets/js'),
+           "common": path.resolve(__dirname, './resources/assets/js/common'),
+           "config": path.resolve(__dirname, './resources/assets/js/configs'),
+           "requestfactory": path.resolve(__dirname, './resources/assets/js/requests/RequestFactory.js'),
+         }
+       },
+   });

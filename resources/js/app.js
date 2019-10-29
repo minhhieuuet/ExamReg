@@ -11,8 +11,8 @@ import Vue from 'vue';
 import VeeValidate, { Validator } from 'vee-validate';
 import VueRouter from 'vue-router';
 import Routers from './configs/routes';
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
+import VueMaterial from 'vue-material';
+import 'vue-material/dist/vue-material.min.css';
 
 Vue.use(VueMaterial);
 
