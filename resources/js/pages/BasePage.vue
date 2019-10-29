@@ -2,7 +2,7 @@
   <div class="page-container">
     <md-app style="min-height: 100vh;" md-waterfall md-mode="overlap">
       <md-app-toolbar class="md-primary md-large">
-        <div class="md-toolbar-row">
+        <div v-if="$isAuthenticated" class="md-toolbar-row">
           <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
             <md-icon>menu</md-icon>
           </md-button>

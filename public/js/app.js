@@ -49983,28 +49983,32 @@ var render = function() {
         },
         [
           _c("md-app-toolbar", { staticClass: "md-primary md-large" }, [
-            _c(
-              "div",
-              { staticClass: "md-toolbar-row" },
-              [
-                _c(
-                  "md-button",
-                  {
-                    staticClass: "md-icon-button",
-                    on: {
-                      click: function($event) {
-                        _vm.menuVisible = !_vm.menuVisible
-                      }
-                    }
-                  },
-                  [_c("md-icon", [_vm._v("menu")])],
+            _vm.$isAuthenticated
+              ? _c(
+                  "div",
+                  { staticClass: "md-toolbar-row" },
+                  [
+                    _c(
+                      "md-button",
+                      {
+                        staticClass: "md-icon-button",
+                        on: {
+                          click: function($event) {
+                            _vm.menuVisible = !_vm.menuVisible
+                          }
+                        }
+                      },
+                      [_c("md-icon", [_vm._v("menu")])],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "md-title" }, [
+                      _vm._v("Exam Reg")
+                    ])
+                  ],
                   1
-                ),
-                _vm._v(" "),
-                _c("span", { staticClass: "md-title" }, [_vm._v("Exam Reg")])
-              ],
-              1
-            )
+                )
+              : _vm._e()
           ]),
           _vm._v(" "),
           _vm.$isAuthenticated
