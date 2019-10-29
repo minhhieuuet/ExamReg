@@ -50001,104 +50001,106 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("span", { staticClass: "md-title" }, [_vm._v("My Title")])
+                _c("span", { staticClass: "md-title" }, [_vm._v("Exam Reg")])
               ],
               1
             )
           ]),
           _vm._v(" "),
-          _c(
-            "md-app-drawer",
-            {
-              attrs: { "md-active": _vm.menuVisible },
-              on: {
-                "update:mdActive": function($event) {
-                  _vm.menuVisible = $event
-                },
-                "update:md-active": function($event) {
-                  _vm.menuVisible = $event
-                }
-              }
-            },
-            [
-              _c(
-                "md-toolbar",
+          _vm.$isAuthenticated
+            ? _c(
+                "md-app-drawer",
                 {
-                  staticClass: "md-transparent",
-                  attrs: { "md-elevation": "0" }
+                  attrs: { "md-active": _vm.menuVisible },
+                  on: {
+                    "update:mdActive": function($event) {
+                      _vm.menuVisible = $event
+                    },
+                    "update:md-active": function($event) {
+                      _vm.menuVisible = $event
+                    }
+                  }
                 },
-                [_vm._v("\n        Navigation\n      ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "md-list",
                 [
                   _c(
-                    "md-list-item",
-                    [
-                      _c("md-icon", [_vm._v("move_to_inbox")]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "md-list-item-text" }, [
-                        _vm._v("Inbox")
-                      ])
-                    ],
-                    1
+                    "md-toolbar",
+                    {
+                      staticClass: "md-transparent",
+                      attrs: { "md-elevation": "0" }
+                    },
+                    [_vm._v("\n        Navigation\n      ")]
                   ),
                   _vm._v(" "),
                   _c(
-                    "md-list-item",
+                    "md-list",
                     [
-                      _c("md-icon", [_vm._v("send")]),
+                      _c(
+                        "md-list-item",
+                        [
+                          _c("md-icon", [_vm._v("move_to_inbox")]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-list-item-text" }, [
+                            _vm._v("Inbox")
+                          ])
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
-                      _c("span", { staticClass: "md-list-item-text" }, [
-                        _vm._v("Sent Mail")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "md-list-item",
-                    [
-                      _c("md-icon", [_vm._v("delete")]),
+                      _c(
+                        "md-list-item",
+                        [
+                          _c("md-icon", [_vm._v("send")]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-list-item-text" }, [
+                            _vm._v("Sent Mail")
+                          ])
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
-                      _c("span", { staticClass: "md-list-item-text" }, [
-                        _vm._v("Trash")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "md-list-item",
-                    [
-                      _c("md-icon", [_vm._v("error")]),
+                      _c(
+                        "md-list-item",
+                        [
+                          _c("md-icon", [_vm._v("delete")]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-list-item-text" }, [
+                            _vm._v("Trash")
+                          ])
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
-                      _c("span", { staticClass: "md-list-item-text" }, [
-                        _vm._v("Spam")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "md-list-item",
-                    { on: { click: _vm.logout } },
-                    [
-                      _c("md-icon", [_vm._v("logout")]),
+                      _c(
+                        "md-list-item",
+                        [
+                          _c("md-icon", [_vm._v("error")]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-list-item-text" }, [
+                            _vm._v("Spam")
+                          ])
+                        ],
+                        1
+                      ),
                       _vm._v(" "),
-                      _c("span", { staticClass: "md-list-item-text" }, [
-                        _vm._v("Logout")
-                      ])
+                      _c(
+                        "md-list-item",
+                        { on: { click: _vm.logout } },
+                        [
+                          _c("md-icon", [_vm._v("logout")]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "md-list-item-text" }, [
+                            _vm._v("Logout")
+                          ])
+                        ],
+                        1
+                      )
                     ],
                     1
                   )
                 ],
                 1
               )
-            ],
-            1
-          ),
+            : _vm._e(),
           _vm._v(" "),
           _c("md-app-content", [_c("router-view")], 1)
         ],
@@ -50297,42 +50299,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "not-found-page" }, [
-      _c("div", { staticClass: "page1920 container" }, [
-        _c("div", { staticClass: "not-found-content" }, [
-          _c("div", { staticClass: "content-wrapper" }, [
-            _c("div", { staticClass: "not-found-icon" }, [
-              _c("span", { staticClass: "iconmo-404" }, [
-                _c("span", { staticClass: "path1" }),
-                _c("span", { staticClass: "path2" }),
-                _c("span", { staticClass: "path3" }),
-                _c("span", { staticClass: "path4" }),
-                _c("span", { staticClass: "path5" }),
-                _c("span", { staticClass: "path6" }),
-                _c("span", { staticClass: "path7" }),
-                _c("span", { staticClass: "path8" }),
-                _c("span", { staticClass: "path9" }),
-                _c("span", { staticClass: "path10" }),
-                _c("span", { staticClass: "path11" }),
-                _c("span", { staticClass: "path12" }),
-                _c("span", { staticClass: "path13" }),
-                _c("span", { staticClass: "path14" }),
-                _c("span", { staticClass: "path15" }),
-                _c("span", { staticClass: "path16" }),
-                _c("span", { staticClass: "path17" }),
-                _c("span", { staticClass: "path18" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "not-found-textbox" }, [
-              _c("h3", { staticClass: "title" }, [_vm._v("404")]),
-              _vm._v(" "),
-              _c("article", { staticClass: "description" }),
-              _vm._v(" "),
-              _c("h1", [_vm._v("404 error")])
-            ])
-          ])
-        ])
-      ])
+      _c("h1", { attrs: { align: "center" } }, [_vm._v("404 Not Found")])
     ])
   }
 ]

@@ -1,21 +1,6 @@
 <template>
   <div class="not-found-page">
-    <div class="page1920 container">
-      <div class="not-found-content">
-        <div class="content-wrapper">
-          <div class="not-found-icon">
-            <span class="iconmo-404"><span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/><span class="path5"/><span class="path6"/><span class="path7"/><span class="path8"/><span class="path9"/><span class="path10"/><span class="path11"/><span class="path12"/><span class="path13"/><span class="path14"/><span class="path15"/><span class="path16"/><span class="path17"/><span class="path18"/></span>
-          </div>
-
-          <div class="not-found-textbox">
-            <h3 class="title">404</h3>
-            <article class="description" />
-
-              <h1>404 error</h1>
-          </div>
-        </div>
-      </div>
-    </div>
+      <h1 align="center">404 Not Found</h1>
   </div>
 </template>
 
