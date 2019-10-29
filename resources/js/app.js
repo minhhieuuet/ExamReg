@@ -11,8 +11,8 @@ import Vue from 'vue';
 import VeeValidate, { Validator } from 'vee-validate';
 import VueRouter from 'vue-router';
 import Routers from './configs/routes';
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
+import VueMaterial from 'vue-material';
+import 'vue-material/dist/vue-material.min.css';
 
 Vue.use(VueMaterial);
 
@@ -22,8 +22,10 @@ const router = new VueRouter(Routers);
 
 router.beforeEach((to, from, next) => {
   document.title = 'ExamReg';
+    console.log(window.isAuthenticated);
   if (to.matched.some((record) => record.meta.requiresAuth === true) &&
     !window.isAuthenticated) {
+
     return router.push({ name: 'Login' });
   }
 
@@ -39,6 +41,7 @@ router.afterEach((to) => {
   });
 });
 
+Vue.prototype.$isAuthenticated = window.isAuthenticated;
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

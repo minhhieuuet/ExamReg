@@ -36,6 +36,11 @@
             <md-icon>error</md-icon>
             <span class="md-list-item-text">Spam</span>
           </md-list-item>
+
+          <md-list-item @click="logout">
+            <md-icon>logout</md-icon>
+            <span class="md-list-item-text" >Logout</span>
+          </md-list-item>
         </md-list>
       </md-app-drawer>
 
@@ -45,6 +50,23 @@
     </md-app>
   </div>
 </template>
+
+<script>
+import AuthenticationUtils from '../common/AuthenticationUtils';
+
+export default {
+    name: 'Overlap',
+    data: () => ({
+      menuVisible: false
+    }),
+    methods: {
+      logout () {
+        AuthenticationUtils.logout();
+        this.$router.push({ path: '/login' });
+      },
+    }
+};
+</script>
 
 <style lang="scss" scoped>
   .md-app {
@@ -58,12 +80,3 @@
     max-width: calc(100vw - 125px);
   }
 </style>
-
-<script>
-export default {
-  name: 'Overlap',
-  data: () => ({
-    menuVisible: false
-  })
-}
-</script>
