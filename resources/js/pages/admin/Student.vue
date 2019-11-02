@@ -1,11 +1,7 @@
 <template>
   <div class="dash">
-    <h1 align="center">Dashboard</h1>
-    <md-table v-model="users" md-sort="name" md-sort-order="asc" md-card md-fixed-header>
-      <md-table-toolbar>
-        <h1 class="md-title">Users</h1>
-      </md-table-toolbar>
-
+    <h1>Student</h1>
+    <md-table v-model="users" md-sort="name" md-sort-order="asc" class="md-layout-item">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
         <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
@@ -19,7 +15,7 @@
 
 <script>
 export default {
-  name: "Dashboard",
+  name: "Student",
   data: () => ({
       users: [
         {

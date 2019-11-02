@@ -73,7 +73,7 @@ build:
 	docker exec -it app npm run dev
 
 watch:
-	docker exec -it app npm run watch
+	docker exec -it app npm run watch-poll
 
 autoload:
 	composer dump-autoload

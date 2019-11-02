@@ -61,7 +61,7 @@ export default {
       login (params) {
         return rf.getRequest('UserRequest').login(params).then(async (response) => {
           await AuthenticationUtils.login(response);
-          this.$router.push({ path: '/' });
+          this.$router.push({ path: '/dashboard' });
         }).catch(async (error) => {
           console.log(error);
         }).finally(() => {

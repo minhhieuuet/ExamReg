@@ -31,7 +31,7 @@ router.beforeEach((to, from, next) => {
 
   if (to.matched.some((record) => record.meta.requiresGuest === true) &&
     window.isAuthenticated) {
-    return router.push({ path: '/' });
+    return router.push({ path: '/dashboard' });
   }
   return next();
 });
