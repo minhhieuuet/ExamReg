@@ -1,165 +1,160 @@
 <template>
   <div class="dash">
-    <h1>Student</h1>
-    <md-table v-model="users" md-sort="name" md-sort-order="asc" class="md-layout-item">
-      <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
-        <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
-        <md-table-cell md-label="Email" md-sort-by="email">{{ item.email }}</md-table-cell>
-        <md-table-cell md-label="Gender" md-sort-by="gender">{{ item.gender }}</md-table-cell>
-        <md-table-cell md-label="Job Title" md-sort-by="title">{{ item.title }}</md-table-cell>
-      </md-table-row>
-    </md-table>
+    <div class="md-layout md-gutter">
+      <div class="md-layout-item">
+        <md-button  class="md-raised md-primary">Add</md-button>
+        <md-button  class="md-raised" @click="refresh">Refresh</md-button>
+        <md-button  class="md-raised md-accent" @click="removeManyStudent()">Delete</md-button>
+      </div>
+      <div class="md-layout-item md-size-30">
+        <md-field >
+          <label>Search</label>
+          <md-input type="text" name="text" v-model="searchInput" @keyup.enter="$refs.datatable.refresh()"></md-input>
+          <md-icon>search</md-icon>
+        </md-field>
+      </div>
+    </div>
+
+    <data-table :get-data="getData" ref="datatable">
+        <th class="col_checkbox">
+          <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
+        </th>
+        <th class="col_title_en">Username</th>
+        <th class="col_title_jp">Email</th>
+        <th class="col_summary_en">Name</th>
+        <th class="col_created_at">Created at</th>
+        <th class="col_tools">Tool</th>
+        <template slot="body" slot-scope="{ item, index }">
+          <tr>
+            <td class="text-center">
+              <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
+            </td>
+            <td class="text-center" v-html="item.username"></td>
+            <td class="text-center" v-html="item.email"></td>
+            <td class="text-center" v-html="item.name"></td>
+            <td class="text-center" v-html="item.created_at"></td>
+            <td class="text-center">
+              <md-button class="md-raised md-primary">Edit</md-button>
+              <md-button class="md-raised md-accent" @click="removeOneStudent(item.id)">Delete</md-button>
+            </td>
+          </tr>
+        </template>
+    </data-table>
+    <v-dialog/>
   </div>
 </template>
 
 <script>
+
+import rf from '../../requests/RequestFactory';
 export default {
   name: "Student",
-  data: () => ({
-      users: [
-        {
-          id: 1,
-          name: "Shawna Dubbin",
-          email: "sdubbin0@geocities.com",
-          gender: "Male",
-          title: "Assistant Media Planner"
-        },
-        {
-          id: 2,
-          name: "Odette Demageard",
-          email: "odemageard1@spotify.com",
-          gender: "Female",
-          title: "Account Coordinator"
-        },
-        {
-          id: 3,
-          name: "Vera Taleworth",
-          email: "vtaleworth2@google.ca",
-          gender: "Male",
-          title: "Community Outreach Specialist"
-        },
-        {
-          id: 4,
-          name: "Lonnie Izkovitz",
-          email: "lizkovitz3@youtu.be",
-          gender: "Female",
-          title: "Operator"
-        },
-        {
-          id: 5,
-          name: "Thatcher Stave",
-          email: "tstave4@reference.com",
-          gender: "Male",
-          title: "Software Test Engineer III"
-        },
-        {
-          id: 6,
-          name: "Karim Chipping",
-          email: "kchipping5@scribd.com",
-          gender: "Female",
-          title: "Safety Technician II"
-        },
-        {
-          id: 7,
-          name: "Helge Holyard",
-          email: "hholyard6@howstuffworks.com",
-          gender: "Female",
-          title: "Internal Auditor"
-        },
-        {
-          id: 8,
-          name: "Rod Titterton",
-          email: "rtitterton7@nydailynews.com",
-          gender: "Male",
-          title: "Technical Writer"
-        },
-        {
-          id: 9,
-          name: "Gawen Applewhite",
-          email: "gapplewhite8@reverbnation.com",
-          gender: "Female",
-          title: "GIS Technical Architect"
-        },
-        {
-          id: 10,
-          name: "Nero Mulgrew",
-          email: "nmulgrew9@plala.or.jp",
-          gender: "Female",
-          title: "Staff Scientist"
-        },
-        {
-          id: 11,
-          name: "Cybill Rimington",
-          email: "crimingtona@usnews.com",
-          gender: "Female",
-          title: "Assistant Professor"
-        },
-        {
-          id: 12,
-          name: "Maureene Eggleson",
-          email: "megglesonb@elpais.com",
-          gender: "Male",
-          title: "Recruiting Manager"
-        },
-        {
-          id: 13,
-          name: "Cortney Caulket",
-          email: "ccaulketc@cbsnews.com",
-          gender: "Male",
-          title: "Safety Technician IV"
-        },
-        {
-          id: 14,
-          name: "Selig Swynfen",
-          email: "sswynfend@cpanel.net",
-          gender: "Female",
-          title: "Environmental Specialist"
-        },
-        {
-          id: 15,
-          name: "Ingar Raggles",
-          email: "iragglese@cbc.ca",
-          gender: "Female",
-          title: "VP Sales"
-        },
-        {
-          id: 16,
-          name: "Karmen Mines",
-          email: "kminesf@topsy.com",
-          gender: "Male",
-          title: "Administrative Officer"
-        },
-        {
-          id: 17,
-          name: "Salome Judron",
-          email: "sjudrong@jigsy.com",
-          gender: "Male",
-          title: "Staff Scientist"
-        },
-        {
-          id: 18,
-          name: "Clarinda Marieton",
-          email: "cmarietonh@theatlantic.com",
-          gender: "Male",
-          title: "Paralegal"
-        },
-        {
-          id: 19,
-          name: "Paxon Lotterington",
-          email: "plotteringtoni@netvibes.com",
-          gender: "Female",
-          title: "Marketing Assistant"
-        },
-        {
-          id: 20,
-          name: "Maura Thoms",
-          email: "mthomsj@webeden.co.uk",
-          gender: "Male",
-          title: "Actuary"
-        }
-      ]
-    })
+  data () {
+    return {
+      searchInput: '',
+      selectedAll: false
+    }
+  },
+  methods: {
+    removeOneStudent(studentId) {
+      this.$modal.show('dialog', {
+        title: 'Alert!',
+        text: 'Are you sure delete ?',
+        buttons: [
+          {
+            title: 'Cancel',
+            handler: () => {
+              this.$modal.hide('dialog');
+            }
+          },
+          {
+            title: 'Confirm',
+            default: true,
+            handler: () => {
+              return rf.getRequest('StudentRequest').removeOneStudent(studentId).then(() => {
+                this.$modal.hide('dialog');
+                this.$refs.datatable.refresh();
+                this.$toasted.show('Student removed successfully!', {
+                  theme: 'bubble',
+                  position: 'top-right',
+                  duration : 1500,
+                  type: 'success'
+                });
+              });
+            }
+          },
+        ]
+      });
+    },
+    removeManyStudent() {
+        this.$modal.show('dialog', {
+          title: 'Alert!',
+          text: 'Are you sure delete ?',
+          buttons: [
+            {
+              title: 'Cancel',
+              handler: () => {
+                this.$modal.hide('dialog');
+              }
+            },
+            {
+              title: 'Confirm',
+              default: true,
+              handler: () => {
+                const studentIds = this.$refs.datatable.rows.filter((row) => {
+                  return row.selected === true;
+                }).map(record => record.id);
+
+                return rf.getRequest('StudentRequest').removeManyStudents(studentIds).then(() => {
+                  this.$modal.hide('dialog');
+                  this.$refs.datatable.refresh();
+                  this.$toasted.show('Student removed successfully!', {
+                    theme: 'bubble',
+                    position: 'top-right',
+                    duration : 1500,
+                    type: 'success'
+                  });
+                });
+              }
+            },
+          ]
+        });
+      },
+    listenSelectRow() {
+      if (!this.$refs.datatable) {
+        return true;
+      }
+
+      this.selectedAll = this.$refs.datatable.rows.filter(row => row.selected === true).length === this.$refs.datatable.rows.length;
+    },
+    getData (params) {
+      const meta = Object.assign({}, params, {
+        search: this.searchInput,
+        category: 'ai'
+      });
+      return rf.getRequest('StudentRequest').getStudents(meta);
+    },
+    refresh() {
+      this.isLoading = true;
+      this.$refs.datatable.refresh();
+      this.$refs.datatable.$on('DataTable:finish', () => {
+        this.isLoading = false;
+      });
+    },
+  },
+  watch: {
+    searchInput() {
+      this.$refs.datatable.refresh();
+    },
+    selectedAll() {
+      if (!this.$refs.datatable) {
+        return true;
+      }
+      this.$refs.datatable.rows.forEach((row) => {
+        this.$set(row, 'selected', this.selectedAll);
+      });
+    },
+  }
 }
 </script>
 
