@@ -28,6 +28,6 @@ class CreateTestRoomStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('test_room_students');
+        Schema::dropIfExists('test_room_student');
     }
 }
