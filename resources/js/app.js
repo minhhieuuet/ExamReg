@@ -12,11 +12,18 @@ import VeeValidate, { Validator } from 'vee-validate';
 import VueRouter from 'vue-router';
 import Routers from './configs/routes';
 import VueMaterial from 'vue-material';
+import VModal from 'vue-js-modal';
+import Toasted from 'vue-toasted';
+
 import 'vue-material/dist/vue-material.min.css';
 
-Vue.use(VueMaterial);
+import DataTable from './components/datatable/DataTable';
 
+Vue.use(VueMaterial);
+Vue.use(VModal, { dialog: true });
+Vue.use(Toasted);
 Vue.use(VueRouter);
+Vue.component('data-table', DataTable);
 
 const router = new VueRouter(Routers);
 

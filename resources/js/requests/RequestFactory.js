@@ -1,8 +1,9 @@
 import UserRequest from './UserRequest';
-
+import StudentRequest from './StudentRequest';
 
 const requestMap = {
   UserRequest,
+  StudentRequest
 };
 
 const instances = {};
