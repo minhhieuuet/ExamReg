@@ -2311,6 +2311,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 Promise.all([this.$validator.validateAll('general')]).then(function () {
+                  if (_this2.errors.any()) {
+                    return;
+                  }
+
                   if (_this2.editingId) {
                     _this2.updateOneStudent();
                   } else {

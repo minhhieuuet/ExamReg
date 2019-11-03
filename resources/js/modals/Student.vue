@@ -154,6 +154,9 @@ export default {
         Promise.all([
           this.$validator.validateAll('general'),
         ]).then(() => {
+            if (this.errors.any()) {
+              return;
+            }
             if(this.editingId) {
               this.updateOneStudent();
             } else {
