@@ -20,6 +20,7 @@ import 'vue-material/dist/vue-material.min.css';
 import DataTable from './components/datatable/DataTable';
 
 Vue.use(VueMaterial);
+Vue.use(VeeValidate);
 Vue.use(VModal, { dialog: true });
 Vue.use(Toasted);
 Vue.use(VueRouter);

@@ -2,7 +2,7 @@
   <div class="dash">
     <div class="md-layout md-gutter">
       <div class="md-layout-item">
-        <md-button  class="md-raised md-primary">Add</md-button>
+        <md-button  class="md-raised md-primary" @click="createStudent">Add</md-button>
         <md-button  class="md-raised" @click="refresh">Refresh</md-button>
         <md-button  class="md-raised md-accent" @click="removeManyStudent()">Delete</md-button>
       </div>
@@ -34,21 +34,26 @@
             <td class="text-center" v-html="item.name"></td>
             <td class="text-center" v-html="item.created_at"></td>
             <td class="text-center">
-              <md-button class="md-raised md-primary">Edit</md-button>
+              <md-button class="md-raised md-primary" @click="editStudent(item.id)">Edit</md-button>
               <md-button class="md-raised md-accent" @click="removeOneStudent(item.id)">Delete</md-button>
             </td>
           </tr>
         </template>
     </data-table>
     <v-dialog/>
+    <StudentModal @refresh="refresh()"/>
   </div>
 </template>
 
 <script>
 
 import rf from '../../requests/RequestFactory';
+import StudentModal from '../../modals/Student';
 export default {
   name: "Student",
+  components: {
+      StudentModal,
+  },
   data () {
     return {
       searchInput: '',
@@ -120,27 +125,32 @@ export default {
           ]
         });
       },
-    listenSelectRow() {
-      if (!this.$refs.datatable) {
-        return true;
-      }
+      createStudent() {
+        this.$modal.show('student', {title: 'Add Student'});
+      },
+      editStudent(studentId) {
+        this.$modal.show('student', {title: 'Edit Student', studentId: studentId});
+      },
+      listenSelectRow() {
+        if (!this.$refs.datatable) {
+          return true;
+        }
 
-      this.selectedAll = this.$refs.datatable.rows.filter(row => row.selected === true).length === this.$refs.datatable.rows.length;
-    },
-    getData (params) {
-      const meta = Object.assign({}, params, {
-        search: this.searchInput,
-        category: 'ai'
-      });
-      return rf.getRequest('StudentRequest').getStudents(meta);
-    },
-    refresh() {
-      this.isLoading = true;
-      this.$refs.datatable.refresh();
-      this.$refs.datatable.$on('DataTable:finish', () => {
-        this.isLoading = false;
-      });
-    },
+        this.selectedAll = this.$refs.datatable.rows.filter(row => row.selected === true).length === this.$refs.datatable.rows.length;
+      },
+      getData (params) {
+        const meta = Object.assign({}, params, {
+          search: this.searchInput,
+        });
+        return rf.getRequest('StudentRequest').getStudents(meta);
+      },
+      refresh() {
+        this.isLoading = true;
+        this.$refs.datatable.refresh();
+        this.$refs.datatable.$on('DataTable:finish', () => {
+          this.isLoading = false;
+        });
+      },
   },
   watch: {
     searchInput() {

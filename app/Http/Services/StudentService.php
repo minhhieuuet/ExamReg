@@ -18,35 +18,35 @@ class StudentService
         })->orderBy('created_at', 'desc')->paginate($limit);
     }
 
-    public function storeTestimonial($params)
+    public function storeStudent($params)
     {
-        $testimonial = Testimonial::create([
-            'contact_id' => array_get($params, 'contact_id'),
-            'text_en' => array_get($params, 'text_en'),
-            'text_jp' => array_get($params, 'text_jp'),
-            'priority' => array_get($params, 'priority'),
-            'created_at' => Carbon::now()->format('Y-m-d H:m:s'),
+        $student = Student::create([
+            'name' => array_get($params, 'name'),
+            'username' => array_get($params, 'username'),
+            'email' => array_get($params, 'email'),
+            'password' => bcrypt(array_get($params, 'password')),
         ]);
 
-        return $this->getOneTestimonial($testimonial);
+        return $this->getOneStudent($student);
     }
 
-    public function updateTestimonial(Testimonial $testimonial, $params)
+    public function updateStudent(Student $student, $params)
     {
-        $testimonial->update([
-            'contact_id' => array_get($params, 'contact_id'),
-            'text_en' => array_get($params, 'text_en'),
-            'text_jp' => array_get($params, 'text_jp'),
-            'priority' => array_get($params, 'priority'),
-            'created_at' => array_get($params, 'created_at'),
+        $student->update([
+          'name' => array_get($params, 'name'),
+          'username' => array_get($params, 'username'),
+          'email' => array_get($params, 'email'),
         ]);
-
-        return $testimonial;
+        if(array_get($params, 'password')) {
+          $student->update(['password' => bcrypt(array_get($params, 'password'))]);
+        }
+        return $student;
     }
 
-    public function getOneTestimonial(Testimonial $testimonial)
+    public function getOneStudent(Student $student)
     {
-        return $testimonial;
+        $student->makeHidden('password');
+        return $student;
     }
 
     public function deleteOneStudent(Student $student)

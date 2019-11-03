@@ -18,13 +18,17 @@ class StudentController extends Controller
       return $this->studentService->getStudents($request->all());
     }
 
-    public function storeTestimonial(Request $request)
+    public function getOneStudent(Student $student){
+      return $this->studentService->getOneStudent($student);
+    }
+
+    public function storeStudent(Request $request)
     {
         DB::beginTransaction();
         try {
-            $testimonial = $this->testimonialService->storeTestimonial($request->all());
+            $student = $this->studentService->storeStudent($request->all());
             DB::commit();
-            return $testimonial;
+            return $student;
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
@@ -32,13 +36,13 @@ class StudentController extends Controller
         }
     }
 
-    public function updateTestimonial(Request $request, Testimonial $testimonial)
+    public function updateStudent(Request $request, Student $student)
     {
         DB::beginTransaction();
         try {
-            $testimonial = $this->testimonialService->updateTestimonial($testimonial, $request->all());
+            $student = $this->studentService->updateStudent($student, $request->all());
             DB::commit();
-            return $testimonial;
+            return $student;
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
