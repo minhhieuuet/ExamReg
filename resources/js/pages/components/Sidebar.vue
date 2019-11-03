@@ -5,7 +5,7 @@
     </md-toolbar>
 
     <md-list>
-      <md-list-item v-for="(item, index) in listMenu" :key="index" @click="redirect(item.link)">
+      <md-list-item v-for="(item, index) in listMenu" :key="index" :class="{'active': activeTab == item.link}" @click="redirect(item.link)">
         <md-icon>{{item.icon}}</md-icon>
         <span class="md-list-item-text">{{item.text}}</span>
       </md-list-item>
@@ -18,6 +18,7 @@ export default {
   name: "Sidebar",
   data () {
     return {
+      activeTab: '/',
       listMenu: [
         {
           text: 'Trang chủ',
@@ -32,22 +33,22 @@ export default {
         {
           text: 'Phòng máy',
           icon: 'computer',
-          link: '/student'
+          link: '/computer'
         },
         {
           text: 'Học phần',
           icon: 'book',
-          link: '/student'
+          link: '/module'
         },
         {
           text: 'Kì thi',
           icon: 'school',
-          link: '/student'
+          link: '/exam'
         },
         {
           text: 'Ca thi',
           icon: 'school',
-          link: '/student'
+          link: '/exam-session'
         },
       ]
     }
@@ -56,12 +57,23 @@ export default {
     redirect: function (link) {
       this.$router.push({ path: link });
     },
+  },
+  watch: {
+    '$route' (to, from) {
+      this.activeTab = this.$router.currentRoute.path;
+    }
+  },
+  mounted: function () {
+    this.activeTab = this.$router.currentRoute.path;
   }
 }
 </script>
 
 <style lang="scss" scoped >
 // Demo purposes only
+.active {
+  background-color: #ccdae6;
+}
 .md-drawer {
  width: 230px;
  max-width: calc(100vw - 125px);

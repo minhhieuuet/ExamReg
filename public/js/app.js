@@ -2984,6 +2984,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "Sidebar",
   data: function data() {
     return {
+      activeTab: '/',
       listMenu: [{
         text: 'Trang chủ',
         icon: 'dashboard',
@@ -2995,19 +2996,19 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         text: 'Phòng máy',
         icon: 'computer',
-        link: '/student'
+        link: '/computer'
       }, {
         text: 'Học phần',
         icon: 'book',
-        link: '/student'
+        link: '/module'
       }, {
         text: 'Kì thi',
         icon: 'school',
-        link: '/student'
+        link: '/exam'
       }, {
         text: 'Ca thi',
         icon: 'school',
-        link: '/student'
+        link: '/exam-session'
       }]
     };
   },
@@ -3017,6 +3018,14 @@ __webpack_require__.r(__webpack_exports__);
         path: link
       });
     }
+  },
+  watch: {
+    '$route': function $route(to, from) {
+      this.activeTab = this.$router.currentRoute.path;
+    }
+  },
+  mounted: function mounted() {
+    this.activeTab = this.$router.currentRoute.path;
   }
 });
 
@@ -7574,7 +7583,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".md-drawer[data-v-23e50e28] {\n  width: 230px;\n  max-width: calc(100vw - 125px);\n}", ""]);
+exports.push([module.i, ".active[data-v-23e50e28] {\n  background-color: #ccdae6;\n}\n.md-drawer[data-v-23e50e28] {\n  width: 230px;\n  max-width: calc(100vw - 125px);\n}", ""]);
 
 // exports
 
@@ -52336,6 +52345,7 @@ var render = function() {
             "md-list-item",
             {
               key: index,
+              class: { active: _vm.activeTab == item.link },
               on: {
                 click: function($event) {
                   return _vm.redirect(item.link)
