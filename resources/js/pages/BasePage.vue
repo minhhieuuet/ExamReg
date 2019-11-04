@@ -28,12 +28,22 @@
             </md-button>
 
               <md-menu-content>
-                <md-menu-item>Profile</md-menu-item>
-                <md-menu-item>Change Password</md-menu-item>
+                <md-menu-item>
+                  <div class="md-content">
+                    <md-icon>info</md-icon>
+                    <span>Thông tin cá nhân</span>
+                  </div>
+                </md-menu-item>
+                <md-menu-item>
+                  <div class="md-content">
+                    <md-icon>lock</md-icon>
+                    <span>Đổi mật khẩu</span>
+                  </div>
+                </md-menu-item>
                 <md-menu-item @click="logout">
-                  <div class="">
-                    <md-icon>logout</md-icon>
-                    Logout
+                  <div class="md-content">
+                    <md-icon style="color: red;">logout</md-icon>
+                    <span>Đăng xuất</span>
                   </div>
                 </md-menu-item>
               </md-menu-content>
@@ -89,5 +99,7 @@ export default {
      width: 230px;
      max-width: calc(100vw - 125px);
    }
-
+   .md-content > md-icon{
+     font-size: 20px;
+   }
 </style>

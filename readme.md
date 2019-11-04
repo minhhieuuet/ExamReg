@@ -15,3 +15,5 @@ Now that all containers are up, we can add `127.0.0.1 project.local` to our `/et
 Now you can access `project.local` on your favorite browser
 
 <b>If you got any error, attempt to run </b> `make docker-init` <b>again</b>
+<br>
+Login information: admin@gmail.com / 123456

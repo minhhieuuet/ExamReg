@@ -2448,6 +2448,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7582,7 +7592,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".md-app[data-v-6bcf9789] {\n  max-height: 400px;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n}\n.md-app[data-v-6bcf9789] {\n  max-height: 400px;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n}\n.md-drawer[data-v-6bcf9789] {\n  width: 230px;\n  max-width: calc(100vw - 125px);\n}", ""]);
+exports.push([module.i, ".md-app[data-v-6bcf9789] {\n  max-height: 400px;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n}\n.md-app[data-v-6bcf9789] {\n  max-height: 400px;\n  border: 1px solid rgba(0, 0, 0, 0.12);\n}\n.md-drawer[data-v-6bcf9789] {\n  width: 230px;\n  max-width: calc(100vw - 125px);\n}\n.md-content > md-icon[data-v-6bcf9789] {\n  font-size: 20px;\n}", ""]);
 
 // exports
 
@@ -51947,19 +51957,44 @@ var render = function() {
                       _c(
                         "md-menu-content",
                         [
-                          _c("md-menu-item", [_vm._v("Profile")]),
+                          _c("md-menu-item", [
+                            _c(
+                              "div",
+                              { staticClass: "md-content" },
+                              [
+                                _c("md-icon", [_vm._v("info")]),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("Thông tin cá nhân")])
+                              ],
+                              1
+                            )
+                          ]),
                           _vm._v(" "),
-                          _c("md-menu-item", [_vm._v("Change Password")]),
+                          _c("md-menu-item", [
+                            _c(
+                              "div",
+                              { staticClass: "md-content" },
+                              [
+                                _c("md-icon", [_vm._v("lock")]),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("Đổi mật khẩu")])
+                              ],
+                              1
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("md-menu-item", { on: { click: _vm.logout } }, [
                             _c(
                               "div",
-                              {},
+                              { staticClass: "md-content" },
                               [
-                                _c("md-icon", [_vm._v("logout")]),
-                                _vm._v(
-                                  "\n                  Logout\n                "
-                                )
+                                _c(
+                                  "md-icon",
+                                  { staticStyle: { color: "red" } },
+                                  [_vm._v("logout")]
+                                ),
+                                _vm._v(" "),
+                                _c("span", [_vm._v("Đăng xuất")])
                               ],
                               1
                             )
@@ -52522,13 +52557,13 @@ var render = function() {
                 staticClass: "md-raised md-primary",
                 on: { click: _vm.createStudent }
               },
-              [_vm._v("Add")]
+              [_vm._v("Thêm")]
             ),
             _vm._v(" "),
             _c(
               "md-button",
               { staticClass: "md-raised", on: { click: _vm.refresh } },
-              [_vm._v("Refresh")]
+              [_vm._v("Làm mới")]
             ),
             _vm._v(" "),
             _c(
@@ -52541,7 +52576,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("Delete")]
+              [_vm._v("Xóa")]
             )
           ],
           1
@@ -52554,7 +52589,7 @@ var render = function() {
             _c(
               "md-field",
               [
-                _c("label", [_vm._v("Search")]),
+                _c("label", [_vm._v("Tìm kiếm")]),
                 _vm._v(" "),
                 _c("md-input", {
                   attrs: { type: "text", name: "text" },
@@ -52652,7 +52687,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Edit")]
+                          [_vm._v("Sửa")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -52665,7 +52700,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Delete")]
+                          [_vm._v("Xóa")]
                         )
                       ],
                       1
@@ -52695,15 +52730,15 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("th", { staticClass: "col_title_en" }, [_vm._v("Username")]),
+          _c("th", { staticClass: "col_title_en" }, [_vm._v("Tên đăng nhập")]),
           _vm._v(" "),
           _c("th", { staticClass: "col_title_jp" }, [_vm._v("Email")]),
           _vm._v(" "),
-          _c("th", { staticClass: "col_summary_en" }, [_vm._v("Name")]),
+          _c("th", { staticClass: "col_summary_en" }, [_vm._v("Tên")]),
           _vm._v(" "),
-          _c("th", { staticClass: "col_created_at" }, [_vm._v("Created at")]),
+          _c("th", { staticClass: "col_created_at" }, [_vm._v("Ngày tạo")]),
           _vm._v(" "),
-          _c("th", { staticClass: "col_tools" }, [_vm._v("Tool")])
+          _c("th", { staticClass: "col_tools" }, [_vm._v("Công cụ")])
         ]
       ),
       _vm._v(" "),

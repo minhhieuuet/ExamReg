@@ -2,13 +2,13 @@
   <div class="dash">
     <div class="md-layout md-gutter">
       <div class="md-layout-item">
-        <md-button  class="md-raised md-primary" @click="createStudent">Add</md-button>
-        <md-button  class="md-raised" @click="refresh">Refresh</md-button>
-        <md-button  class="md-raised md-accent" @click="removeManyStudent()">Delete</md-button>
+        <md-button  class="md-raised md-primary" @click="createStudent">Thêm</md-button>
+        <md-button  class="md-raised" @click="refresh">Làm mới</md-button>
+        <md-button  class="md-raised md-accent" @click="removeManyStudent()">Xóa</md-button>
       </div>
       <div class="md-layout-item md-size-30">
         <md-field >
-          <label>Search</label>
+          <label>Tìm kiếm</label>
           <md-input type="text" name="text" v-model="searchInput" @keyup.enter="$refs.datatable.refresh()"></md-input>
           <md-icon>search</md-icon>
         </md-field>
@@ -19,11 +19,11 @@
         <th class="col_checkbox">
           <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
         </th>
-        <th class="col_title_en">Username</th>
+        <th class="col_title_en">Tên đăng nhập</th>
         <th class="col_title_jp">Email</th>
-        <th class="col_summary_en">Name</th>
-        <th class="col_created_at">Created at</th>
-        <th class="col_tools">Tool</th>
+        <th class="col_summary_en">Tên</th>
+        <th class="col_created_at">Ngày tạo</th>
+        <th class="col_tools">Công cụ</th>
         <template slot="body" slot-scope="{ item, index }">
           <tr>
             <td class="text-center">
@@ -34,8 +34,8 @@
             <td class="text-center" v-html="item.name"></td>
             <td class="text-center" v-html="item.created_at"></td>
             <td class="text-center">
-              <md-button class="md-raised md-primary" @click="editStudent(item.id)">Edit</md-button>
-              <md-button class="md-raised md-accent" @click="removeOneStudent(item.id)">Delete</md-button>
+              <md-button class="md-raised md-primary" @click="editStudent(item.id)">Sửa</md-button>
+              <md-button class="md-raised md-accent" @click="removeOneStudent(item.id)">Xóa</md-button>
             </td>
           </tr>
         </template>
