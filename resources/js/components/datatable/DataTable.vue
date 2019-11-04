@@ -204,4 +204,9 @@
     padding: 0px 12px !important;
     vertical-align: middle;
   }
+
+  th {
+    text-align: center;
+    font-size: 17px;
+  }
 </style>
