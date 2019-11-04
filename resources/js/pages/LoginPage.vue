@@ -45,6 +45,7 @@ export default {
         email: '',
         password: '',
         isLoading: false,
+        loading: false
       };
     },
     mounted () {
@@ -60,12 +61,19 @@ export default {
       },
       login (params) {
         return rf.getRequest('UserRequest').login(params).then(async (response) => {
+          this.loading = true;
           await AuthenticationUtils.login(response);
-          this.$router.push({ path: '/dashboard' });
+          rf.getRequest('UserRequest').getCurrentUser().then((user)=>{
+            if(user.role == 2) {
+              this.$router.push({ path: '/admin' });
+            } else {
+              this.$router.push({ path: '/' });
+            }
+          });
         }).catch(async (error) => {
           console.log(error);
         }).finally(() => {
-          this.isLoading = false;
+          this.loading = false;
         });
       },
     },

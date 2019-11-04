@@ -25,31 +25,6 @@ export default {
           icon: 'dashboard',
           link: '/'
         },
-        {
-          text: 'Sinh viên',
-          icon: 'school',
-          link: '/student'
-        },
-        {
-          text: 'Phòng máy',
-          icon: 'computer',
-          link: '/computer'
-        },
-        {
-          text: 'Học phần',
-          icon: 'book',
-          link: '/module'
-        },
-        {
-          text: 'Kì thi',
-          icon: 'school',
-          link: '/exam'
-        },
-        {
-          text: 'Ca thi',
-          icon: 'school',
-          link: '/exam-session'
-        },
       ]
     }
   },

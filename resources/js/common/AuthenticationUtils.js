@@ -8,6 +8,11 @@ export default class AuthenticationUtils {
 
   static saveAuthenticationData (data) {
     AuthenticationUtils.accessToken = data.access_token || '';
+    let isAdmin = data.role == 2;
+    AuthenticationUtils.isAdmin = isAdmin;
+    window.isAdmin = isAdmin;
+    Vue.prototype.$isAmin = window.isAdmin;
+
     window.sessionStorage.setItem('access_token', data.access_token || '');
     window.sessionStorage.setItem('prev_login', data.access_token ? new Date().valueOf() : '');
   }
@@ -20,7 +25,6 @@ export default class AuthenticationUtils {
 
   static getAccessToken () {
     AuthenticationUtils.loadDataIfNeed();
-
     return AuthenticationUtils.accessToken;
   }
 
