@@ -2296,7 +2296,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editingId = '';
       this.isEditPassword = false, this.student = {
         name: '',
-        username: '',
+        full_name: '',
         email: ''
       };
     },
@@ -2343,8 +2343,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (!this.isEditPassword) {
         params = {};
-        params.username = this.student.username;
         params.name = this.student.name;
+        params.full_name = this.student.full_name;
         params.email = this.student.email;
       }
 

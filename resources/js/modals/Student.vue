@@ -146,7 +146,7 @@ export default {
       this.isEditPassword = false,
       this.student = {
         name: '',
-        username: '',
+        full_name: '',
         email: '',
       };
     },
@@ -168,8 +168,8 @@ export default {
       let params = this.student;
       if(!this.isEditPassword) {
         params = {};
-        params.username = this.student.username;
         params.name = this.student.name;
+        params.full_name = this.student.full_name;
         params.email = this.student.email;
       }
       rf.getRequest('StudentRequest').update(this.editingId, params).then((res)=> {

@@ -21,8 +21,8 @@ class StudentService
     public function storeStudent($params)
     {
         $student = User::create([
-            'full_name' => array_get($params, 'name'),
-            'name' => array_get($params, 'username'),
+            'full_name' => array_get($params, 'full_name'),
+            'name' => array_get($params, 'name'),
             'email' => array_get($params, 'email'),
             'password' => bcrypt(array_get($params, 'password')),
             'role' => 1
@@ -34,8 +34,8 @@ class StudentService
     public function updateStudent(User $student, $params)
     {
         $student->update([
-          'full_name' => array_get($params, 'name'),
-          'name' => array_get($params, 'username'),
+          'full_name' => array_get($params, 'full_name'),
+          'name' => array_get($params, 'name'),
           'email' => array_get($params, 'email'),
         ]);
         if(array_get($params, 'password')) {
