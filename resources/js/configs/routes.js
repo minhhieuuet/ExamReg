@@ -1,7 +1,11 @@
-import BasePage from '../pages/BasePage.vue';
 import LoginPage from '../pages/LoginPage.vue';
+
+import BasePage from '../pages/admin/BasePage.vue';
 import Dashboard from '../pages/admin/Dashboard.vue';
 import StudentPage from '../pages/admin/Student.vue';
+
+import BaseUserPage from '../pages/user/BaseUserPage.vue';
+import UserDashboard from '../pages/user/Dashboard.vue';
 
 import NotFound from '../pages/errors/404.vue';
 
@@ -15,6 +19,20 @@ export default {
     },
     {
       path: '/',
+      component: BaseUserPage,
+      meta: {
+        requiresAuth: true
+      },
+      children: [
+        {
+          path: '/',
+          name: 'UserDashboard',
+          component: UserDashboard,
+        }
+      ]
+    },
+    {
+      path: '/admin',
       component: BasePage,
       children: [
         {
@@ -22,24 +40,13 @@ export default {
           name: 'Dashboard',
           component: Dashboard,
           meta: {
-            requiresAuth: true,
-          },
-        },
-        {
-          path: '/dashboard',
-          name: 'Dashboard',
-          component: Dashboard,
-          meta: {
-            requiresAuth: true,
+            requiresAdmin: true,
           },
         },
         {
           path: 'student',
           name: 'Student',
           component: StudentPage,
-          meta: {
-            requiresAuth: true,
-          },
         },
         { path: '*', name: '404', component: NotFound }
       ],

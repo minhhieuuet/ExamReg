@@ -14,4 +14,4 @@ Now you can access `http://localhost` on your favorite browser
 
 <b>If you got any error, attempt to run </b> `make docker-init` <b>again</b>
 <br>
-Login information: admin@gmail.com / 123456
+Login information: admin / 123456

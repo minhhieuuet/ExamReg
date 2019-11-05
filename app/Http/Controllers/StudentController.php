@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Services\StudentService;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 class StudentController extends Controller
@@ -18,7 +19,7 @@ class StudentController extends Controller
       return $this->studentService->getStudents($request->all());
     }
 
-    public function getOneStudent(Student $student){
+    public function getOneStudent(User $student){
       return $this->studentService->getOneStudent($student);
     }
 
@@ -36,7 +37,7 @@ class StudentController extends Controller
         }
     }
 
-    public function updateStudent(Request $request, Student $student)
+    public function updateStudent(Request $request, User $student)
     {
         DB::beginTransaction();
         try {
@@ -50,7 +51,7 @@ class StudentController extends Controller
         }
     }
 
-    public function deleteOneStudent(Student $student)
+    public function deleteOneStudent(User $student)
     {
         DB::beginTransaction();
         try {

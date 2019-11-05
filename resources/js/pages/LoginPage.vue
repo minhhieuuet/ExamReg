@@ -10,8 +10,8 @@
 
       <div class="form">
         <md-field>
-          <label>E-mail</label>
-          <md-input v-model="email" autofocus></md-input>
+          <label>Username</label>
+          <md-input v-model="name" autofocus></md-input>
         </md-field>
 
         <md-field md-has-password>
@@ -42,30 +42,38 @@ export default {
     name: 'LoginPage',
     data () {
       return {
-        email: '',
+        name: '',
         password: '',
         isLoading: false,
+        loading: false
       };
     },
     mounted () {
-      this.email = this.$route.query.email;
+      this.name = this.$route.query.name;
     },
     methods: {
       submit () {
           const params = {
-            email: this.email,
+            name: this.name,
             password: this.password,
           };
           this.login(params);
       },
       login (params) {
         return rf.getRequest('UserRequest').login(params).then(async (response) => {
+          this.loading = true;
           await AuthenticationUtils.login(response);
-          this.$router.push({ path: '/dashboard' });
+          rf.getRequest('UserRequest').getCurrentUser().then((user)=>{
+            if(user.role == 2) {
+              this.$router.push({ path: '/admin' });
+            } else {
+              this.$router.push({ path: '/' });
+            }
+          });
         }).catch(async (error) => {
           console.log(error);
         }).finally(() => {
-          this.isLoading = false;
+          this.loading = false;
         });
       },
     },

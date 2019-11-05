@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import AuthenticationUtils from '../common/AuthenticationUtils';
+import AuthenticationUtils from '../../common/AuthenticationUtils';
 import Sidebar from './components/Sidebar.vue';
 export default {
     name: 'Overlap',
