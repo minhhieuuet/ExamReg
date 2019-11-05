@@ -34,14 +34,14 @@ export default {
     {
       path: '/admin',
       component: BasePage,
-      meta: {
-        requiresAdmin: true,
-      },
       children: [
         {
           path: '/',
           name: 'Dashboard',
           component: Dashboard,
+          meta: {
+            requiresAdmin: true,
+          },
         },
         {
           path: 'student',

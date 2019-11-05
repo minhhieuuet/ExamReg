@@ -6,9 +6,12 @@ export default class AuthenticationUtils {
     return !!AuthenticationUtils.accessToken;
   }
 
+  static isAdminRole () {
+    return !!AuthenticationUtils.isAdmin;
+  }
   static saveAuthenticationData (data) {
     AuthenticationUtils.accessToken = data.access_token || '';
-    let isAdmin = data.role == 2;
+    let isAdmin = (data.role == 2)|| false;
     AuthenticationUtils.isAdmin = isAdmin;
     window.isAdmin = isAdmin;
     Vue.prototype.$isAmin = window.isAdmin;
@@ -48,6 +51,7 @@ export default class AuthenticationUtils {
   static logout () {
     AuthenticationUtils.removeAuthenticationData();
     Vue.prototype.$isAuthenticated = window.isAuthenticated = false;
+    Vue.prototype.$isAdmin = window.isAdmin = false;
     window.axios.defaults.headers.common.Authorization = '';
 
   }

@@ -23,7 +23,7 @@
                       data-vv-as="name"
                       v-validate="'required|max:30'"
                       data-vv-scope="general"
-                      v-model="student.name"
+                      v-model="student.full_name"
                       :class="errors.has(`general.${_uid}_name`) ? 'is-invalid' : ''"
                       md-counter="30">
             </md-input>
@@ -41,7 +41,7 @@
                       data-vv-as="username"
                       v-validate="'required|min:6|max:30'"
                       data-vv-scope="general"
-                      v-model="student.username"
+                      v-model="student.name"
                       :class="errors.has(`general.${_uid}_username`) ? 'is-invalid' : ''"
                       md-counter="30">
            </md-input>
@@ -125,8 +125,8 @@ export default {
       editingId: '',
       isEditPassword: false,
       student: {
+        full_name: '',
         name: '',
-        username: '',
         email: '',
       }
     }

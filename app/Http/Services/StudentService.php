@@ -2,7 +2,7 @@
 
 namespace App\Http\Services;
 
-use App\Models\Student;
+use App\User;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -11,7 +11,7 @@ class StudentService
     public function getStudents($params)
     {
         $limit = array_get($params, 'limit', 10);
-        return Student::when(!empty(array_get($params, 'search')), function ($query) use ($params) {
+        return User::where('role', 1)->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
             $search = array_get($params, 'search');
             return $query->where('username', 'like', "%$search%")
                         ->orWhere('email', 'like', "%$search%");
@@ -20,21 +20,22 @@ class StudentService
 
     public function storeStudent($params)
     {
-        $student = Student::create([
-            'name' => array_get($params, 'name'),
-            'username' => array_get($params, 'username'),
+        $student = User::create([
+            'full_name' => array_get($params, 'name'),
+            'name' => array_get($params, 'username'),
             'email' => array_get($params, 'email'),
             'password' => bcrypt(array_get($params, 'password')),
+            'role' => 1
         ]);
 
         return $this->getOneStudent($student);
     }
 
-    public function updateStudent(Student $student, $params)
+    public function updateStudent(User $student, $params)
     {
         $student->update([
-          'name' => array_get($params, 'name'),
-          'username' => array_get($params, 'username'),
+          'full_name' => array_get($params, 'name'),
+          'name' => array_get($params, 'username'),
           'email' => array_get($params, 'email'),
         ]);
         if(array_get($params, 'password')) {
@@ -43,13 +44,13 @@ class StudentService
         return $student;
     }
 
-    public function getOneStudent(Student $student)
+    public function getOneStudent(User $student)
     {
         $student->makeHidden('password');
         return $student;
     }
 
-    public function deleteOneStudent(Student $student)
+    public function deleteOneStudent(User $student)
     {
         $student->delete();
 
@@ -60,7 +61,7 @@ class StudentService
     {
         $studentIds = array_get($params, 'ids', []);
         if (count($studentIds) > 0) {
-            Student::whereIn('id', $studentIds)->delete();
+            User::whereIn('id', $studentIds)->delete();
         }
         return 'ok';
     }

@@ -2273,8 +2273,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       editingId: '',
       isEditPassword: false,
       student: {
+        full_name: '',
         name: '',
-        username: '',
         email: ''
       }
     };
@@ -2444,19 +2444,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   name: 'LoginPage',
   data: function data() {
     return {
-      email: '',
+      name: '',
       password: '',
       isLoading: false,
       loading: false
     };
   },
   mounted: function mounted() {
-    this.email = this.$route.query.email;
+    this.name = this.$route.query.name;
   },
   methods: {
     submit: function submit() {
       var params = {
-        email: this.email,
+        name: this.name,
         password: this.password
       };
       this.login(params);
@@ -52030,11 +52030,11 @@ var render = function() {
                   "md-counter": "30"
                 },
                 model: {
-                  value: _vm.student.name,
+                  value: _vm.student.full_name,
                   callback: function($$v) {
-                    _vm.$set(_vm.student, "name", $$v)
+                    _vm.$set(_vm.student, "full_name", $$v)
                   },
-                  expression: "student.name"
+                  expression: "student.full_name"
                 }
               }),
               _vm._v(" "),
@@ -52086,11 +52086,11 @@ var render = function() {
                   "md-counter": "30"
                 },
                 model: {
-                  value: _vm.student.username,
+                  value: _vm.student.name,
                   callback: function($$v) {
-                    _vm.$set(_vm.student, "username", $$v)
+                    _vm.$set(_vm.student, "name", $$v)
                   },
-                  expression: "student.username"
+                  expression: "student.name"
                 }
               }),
               _vm._v(" "),
@@ -52384,16 +52384,16 @@ var render = function() {
             _c(
               "md-field",
               [
-                _c("label", [_vm._v("E-mail")]),
+                _c("label", [_vm._v("Username")]),
                 _vm._v(" "),
                 _c("md-input", {
                   attrs: { autofocus: "" },
                   model: {
-                    value: _vm.email,
+                    value: _vm.name,
                     callback: function($$v) {
-                      _vm.email = $$v
+                      _vm.name = $$v
                     },
-                    expression: "email"
+                    expression: "name"
                   }
                 })
               ],
@@ -53150,7 +53150,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", {
                       staticClass: "text-center",
-                      domProps: { innerHTML: _vm._s(item.username) }
+                      domProps: { innerHTML: _vm._s(item.name) }
                     }),
                     _vm._v(" "),
                     _c("td", {
@@ -53160,7 +53160,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", {
                       staticClass: "text-center",
-                      domProps: { innerHTML: _vm._s(item.name) }
+                      domProps: { innerHTML: _vm._s(item.full_name) }
                     }),
                     _vm._v(" "),
                     _c("td", {
@@ -101648,7 +101648,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('data-table', _components_d
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"](_configs_routes__WEBPACK_IMPORTED_MODULE_3__["default"]);
 router.beforeEach(function (to, from, next) {
   document.title = 'ExamReg';
-  console.log(window.isAuthenticated);
 
   if (to.matched.some(function (record) {
     return record.meta.requiresAuth === true;
@@ -101661,9 +101660,15 @@ router.beforeEach(function (to, from, next) {
   if (to.matched.some(function (record) {
     return record.meta.requiresAdmin === true;
   }) && !window.isAdmin) {
-    return router.push({
-      name: 'Login'
-    });
+    if (window.isAuthenticated) {
+      return router.push({
+        path: '/'
+      });
+    } else {
+      return router.push({
+        name: 'Login'
+      });
+    }
   }
 
   return next();
@@ -101673,6 +101678,7 @@ router.afterEach(function (to) {
   });
 });
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$isAuthenticated = window.isAuthenticated;
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$isAdmin = window.isAdmin;
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -101735,6 +101741,7 @@ if (token) {
 }
 
 window.isAuthenticated = _common_AuthenticationUtils__WEBPACK_IMPORTED_MODULE_0__["default"].checkSession() && _common_AuthenticationUtils__WEBPACK_IMPORTED_MODULE_0__["default"].isAuthenticated();
+window.isAdmin = _common_AuthenticationUtils__WEBPACK_IMPORTED_MODULE_0__["default"].isAdminRole();
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -101792,10 +101799,15 @@ function () {
       return !!AuthenticationUtils.accessToken;
     }
   }, {
+    key: "isAdminRole",
+    value: function isAdminRole() {
+      return !!AuthenticationUtils.isAdmin;
+    }
+  }, {
     key: "saveAuthenticationData",
     value: function saveAuthenticationData(data) {
       AuthenticationUtils.accessToken = data.access_token || '';
-      var isAdmin = data.role == 2;
+      var isAdmin = data.role == 2 || false;
       AuthenticationUtils.isAdmin = isAdmin;
       window.isAdmin = isAdmin;
       vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.$isAmin = window.isAdmin;
@@ -101840,6 +101852,7 @@ function () {
     value: function logout() {
       AuthenticationUtils.removeAuthenticationData();
       vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.$isAuthenticated = window.isAuthenticated = false;
+      vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.$isAdmin = window.isAdmin = false;
       window.axios.defaults.headers.common.Authorization = '';
     }
   }, {
@@ -102108,13 +102121,13 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: '/admin',
     component: _pages_admin_BasePage_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    meta: {
-      requiresAdmin: true
-    },
     children: [{
       path: '/',
       name: 'Dashboard',
-      component: _pages_admin_Dashboard_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+      component: _pages_admin_Dashboard_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+      meta: {
+        requiresAdmin: true
+      }
     }, {
       path: 'student',
       name: 'Student',

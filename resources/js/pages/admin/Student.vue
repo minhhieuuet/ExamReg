@@ -29,9 +29,9 @@
             <td class="text-center">
               <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
             </td>
-            <td class="text-center" v-html="item.username"></td>
-            <td class="text-center" v-html="item.email"></td>
             <td class="text-center" v-html="item.name"></td>
+            <td class="text-center" v-html="item.email"></td>
+            <td class="text-center" v-html="item.full_name"></td>
             <td class="text-center" v-html="item.created_at"></td>
             <td class="text-center">
               <md-button class="md-raised md-primary" @click="editStudent(item.id)">Sửa</md-button>
