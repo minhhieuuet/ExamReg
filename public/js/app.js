@@ -101660,9 +101660,9 @@ router.beforeEach(function (to, from, next) {
 
   if (to.matched.some(function (record) {
     return record.meta.requiresAdmin === true;
-  }) && window.isAuthenticated && !window.isAdmin) {
+  }) && !window.isAdmin) {
     return router.push({
-      path: '/'
+      name: 'Login'
     });
   }
 
@@ -102097,29 +102097,28 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: '/',
     component: _pages_user_BaseUserPage_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    meta: {
+      requiresAuth: true
+    },
     children: [{
       path: '/',
       name: 'UserDashboard',
-      component: _pages_user_Dashboard_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-      requiresAuth: true
+      component: _pages_user_Dashboard_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
     }]
   }, {
     path: '/admin',
     component: _pages_admin_BasePage_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    meta: {
+      requiresAdmin: true
+    },
     children: [{
       path: '/',
       name: 'Dashboard',
-      component: _pages_admin_Dashboard_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-      meta: {
-        requiresAdmin: true
-      }
+      component: _pages_admin_Dashboard_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
     }, {
       path: 'student',
       name: 'Student',
-      component: _pages_admin_Student_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-      meta: {
-        requiresAdmin: true
-      }
+      component: _pages_admin_Student_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
     }, {
       path: '*',
       name: '404',

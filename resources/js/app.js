@@ -37,9 +37,8 @@ router.beforeEach((to, from, next) => {
     return router.push({ name: 'Login' });
   }
 
-  if (to.matched.some((record) => record.meta.requiresAdmin === true) &&
-    window.isAuthenticated && !window.isAdmin) {
-    return router.push({ path: '/' });
+  if (to.matched.some((record) => record.meta.requiresAdmin === true) && !window.isAdmin) {
+    return router.push({ name: 'Login' });
   }
   return next();
 });

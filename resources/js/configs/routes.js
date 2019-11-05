@@ -20,34 +20,33 @@ export default {
     {
       path: '/',
       component: BaseUserPage,
+      meta: {
+        requiresAuth: true
+      },
       children: [
         {
           path: '/',
           name: 'UserDashboard',
           component: UserDashboard,
-          requiresAuth: true
         }
       ]
     },
     {
       path: '/admin',
       component: BasePage,
+      meta: {
+        requiresAdmin: true,
+      },
       children: [
         {
           path: '/',
           name: 'Dashboard',
           component: Dashboard,
-          meta: {
-            requiresAdmin: true
-          },
         },
         {
           path: 'student',
           name: 'Student',
           component: StudentPage,
-          meta: {
-            requiresAdmin: true,
-          },
         },
         { path: '*', name: '404', component: NotFound }
       ],
