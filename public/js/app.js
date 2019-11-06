@@ -101658,6 +101658,14 @@ router.beforeEach(function (to, from, next) {
   }
 
   if (to.matched.some(function (record) {
+    return record.meta.requiresAuth === true;
+  }) && window.isAdmin) {
+    return router.push({
+      path: '/admin'
+    });
+  }
+
+  if (to.matched.some(function (record) {
     return record.meta.requiresAdmin === true;
   }) && !window.isAdmin) {
     if (window.isAuthenticated) {
@@ -101813,6 +101821,7 @@ function () {
       vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.$isAmin = window.isAdmin;
       window.sessionStorage.setItem('access_token', data.access_token || '');
       window.sessionStorage.setItem('prev_login', data.access_token ? new Date().valueOf() : '');
+      window.sessionStorage.setItem('is_admin', isAdmin || '');
     }
   }, {
     key: "removeAuthenticationData",
@@ -101820,6 +101829,7 @@ function () {
       AuthenticationUtils.saveAuthenticationData({});
       AuthenticationUtils.prevLogin = '';
       AuthenticationUtils.accessToken = '';
+      AuthenticationUtils.isAdmin = false;
     }
   }, {
     key: "getAccessToken",
@@ -101838,6 +101848,7 @@ function () {
     value: function loadData() {
       AuthenticationUtils.prevLogin = window.sessionStorage.getItem('prev_login') || '';
       AuthenticationUtils.accessToken = window.sessionStorage.getItem('access_token') || '';
+      AuthenticationUtils.isAdmin = window.sessionStorage.getItem('is_admin') || '';
       AuthenticationUtils.dataLoaded = true;
     }
   }, {

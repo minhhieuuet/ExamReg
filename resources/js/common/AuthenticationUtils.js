@@ -18,12 +18,14 @@ export default class AuthenticationUtils {
 
     window.sessionStorage.setItem('access_token', data.access_token || '');
     window.sessionStorage.setItem('prev_login', data.access_token ? new Date().valueOf() : '');
+    window.sessionStorage.setItem('is_admin', isAdmin || '');
   }
 
   static removeAuthenticationData () {
     AuthenticationUtils.saveAuthenticationData({});
     AuthenticationUtils.prevLogin = '';
     AuthenticationUtils.accessToken = '';
+    AuthenticationUtils.isAdmin = false;
   }
 
   static getAccessToken () {
@@ -39,6 +41,7 @@ export default class AuthenticationUtils {
   static loadData () {
     AuthenticationUtils.prevLogin = window.sessionStorage.getItem('prev_login') || '';
     AuthenticationUtils.accessToken = window.sessionStorage.getItem('access_token') || '';
+    AuthenticationUtils.isAdmin = window.sessionStorage.getItem('is_admin') || '';
     AuthenticationUtils.dataLoaded = true;
   }
 
