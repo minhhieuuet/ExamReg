@@ -20,14 +20,14 @@ export default {
     {
       path: '/',
       component: BaseUserPage,
-      meta: {
-        requiresAuth: true
-      },
       children: [
         {
           path: '/',
           name: 'UserDashboard',
           component: UserDashboard,
+          meta: {
+            requiresAuth: true
+          },
         }
       ]
     },

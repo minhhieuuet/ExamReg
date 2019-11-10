@@ -102143,13 +102143,13 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: '/',
     component: _pages_user_BaseUserPage_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    meta: {
-      requiresAuth: true
-    },
     children: [{
       path: '/',
       name: 'UserDashboard',
-      component: _pages_user_Dashboard_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+      component: _pages_user_Dashboard_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+      meta: {
+        requiresAuth: true
+      }
     }]
   }, {
     path: '/admin',
