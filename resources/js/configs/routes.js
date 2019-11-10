@@ -47,6 +47,9 @@ export default {
           path: 'student',
           name: 'Student',
           component: StudentPage,
+          meta: {
+            requiresAdmin: true,
+          },
         },
         { path: '*', name: '404', component: NotFound }
       ],

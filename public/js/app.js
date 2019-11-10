@@ -102164,7 +102164,10 @@ __webpack_require__.r(__webpack_exports__);
     }, {
       path: 'student',
       name: 'Student',
-      component: _pages_admin_Student_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+      component: _pages_admin_Student_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+      meta: {
+        requiresAdmin: true
+      }
     }, {
       path: '*',
       name: '404',
