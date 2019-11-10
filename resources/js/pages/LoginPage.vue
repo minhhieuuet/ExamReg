@@ -11,12 +11,12 @@
       <div class="form">
         <md-field>
           <label>Username</label>
-          <md-input v-model="name" autofocus></md-input>
+          <md-input v-model="name" @keyup.enter="submit"  autofocus></md-input>
         </md-field>
 
         <md-field md-has-password>
           <label>Password</label>
-          <md-input v-model="password" type="password"></md-input>
+          <md-input v-model="password" type="password" @keyup.enter="submit"></md-input>
         </md-field>
       </div>
 

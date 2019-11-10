@@ -13,7 +13,7 @@ class StudentService
         $limit = array_get($params, 'limit', 10);
         return User::where('role', 1)->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
             $search = array_get($params, 'search');
-            return $query->where('username', 'like', "%$search%")
+            return $query->where('name', 'like', "%$search%")
                         ->orWhere('email', 'like', "%$search%");
         })->orderBy('created_at', 'desc')->paginate($limit);
     }

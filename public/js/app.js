@@ -52388,6 +52388,17 @@ var render = function() {
                 _vm._v(" "),
                 _c("md-input", {
                   attrs: { autofocus: "" },
+                  on: {
+                    keyup: function($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.submit($event)
+                    }
+                  },
                   model: {
                     value: _vm.name,
                     callback: function($$v) {
@@ -52408,6 +52419,17 @@ var render = function() {
                 _vm._v(" "),
                 _c("md-input", {
                   attrs: { type: "password" },
+                  on: {
+                    keyup: function($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.submit($event)
+                    }
+                  },
                   model: {
                     value: _vm.password,
                     callback: function($$v) {
