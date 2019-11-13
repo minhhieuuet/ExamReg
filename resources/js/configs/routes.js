@@ -1,5 +1,5 @@
 import DashboardLayout from '@/pages/Layout/DashboardLayout.vue'
-
+import Login from '@/pages/LoginPage.vue';
 import Dashboard from '@/pages/Dashboard.vue'
 import UserProfile from '@/pages/UserProfile.vue'
 import TableList from '@/pages/TableList.vue'
@@ -11,9 +11,14 @@ export default {
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/admin',
       component: DashboardLayout,
-      redirect: '/dashboard',
+      redirect: '/admin/dashboard',
       children: [
         {
           path: 'dashboard',
