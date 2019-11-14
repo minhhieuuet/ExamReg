@@ -23,7 +23,32 @@ export default {
         {
           text: 'Trang chủ',
           icon: 'dashboard',
-          link: '/'
+          link: '/admin'
+        },
+        {
+          text: 'Sinh viên',
+          icon: 'school',
+          link: '/admin/student'
+        },
+        {
+          text: 'Phòng máy',
+          icon: 'computer',
+          link: '/admin/computer'
+        },
+        {
+          text: 'Học phần',
+          icon: 'book',
+          link: '/admin/module'
+        },
+        {
+          text: 'Kì thi',
+          icon: 'school',
+          link: '/admin/exam'
+        },
+        {
+          text: 'Ca thi',
+          icon: 'school',
+          link: '/admin/exam-session'
         },
       ]
     }

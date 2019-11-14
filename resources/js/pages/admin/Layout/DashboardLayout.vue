@@ -8,29 +8,9 @@
         <md-icon>dashboard</md-icon>
         <p>Dashboard</p>
       </sidebar-link>
-      <sidebar-link to="/admin/user">
-        <md-icon>person</md-icon>
-        <p>User Profile</p>
-      </sidebar-link>
       <sidebar-link to="/admin/table">
         <md-icon>content_paste</md-icon>
-        <p>Table list</p>
-      </sidebar-link>
-      <sidebar-link to="/admin/typography">
-        <md-icon>library_books</md-icon>
-        <p>Typography</p>
-      </sidebar-link>
-      <sidebar-link to="/admin/icons">
-        <md-icon>bubble_chart</md-icon>
-        <p>Icons</p>
-      </sidebar-link>
-      <sidebar-link to="/admin/maps">
-        <md-icon>location_on</md-icon>
-        <p>Maps</p>
-      </sidebar-link>
-      <sidebar-link to="/admin/notifications">
-        <md-icon>notifications</md-icon>
-        <p>Notifications</p>
+        <p>Sinh viên</p>
       </sidebar-link>
     </side-bar>
 
@@ -52,7 +32,7 @@
 import TopNavbar from './TopNavbar.vue'
 import ContentFooter from './ContentFooter.vue'
 import DashboardContent from './Content.vue'
-import MobileMenu from '@/pages/Layout/MobileMenu.vue'
+import MobileMenu from '@/pages/admin/Layout/MobileMenu.vue'
 
 export default {
   components: {

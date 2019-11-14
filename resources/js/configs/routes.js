@@ -1,11 +1,13 @@
-import DashboardLayout from '@/pages/Layout/DashboardLayout.vue'
 import Login from '@/pages/LoginPage.vue';
-import Dashboard from '@/pages/Dashboard.vue'
-import UserProfile from '@/pages/UserProfile.vue'
-import TableList from '@/pages/TableList.vue'
-import Typography from '@/pages/Typography.vue'
-import Icons from '@/pages/Icons.vue'
-import Notifications from '@/pages/Notifications.vue'
+
+import AdminDashboardLayout from '@/pages/admin/Layout/DashboardLayout.vue'
+import AdminDashboard from '@/pages/admin/Dashboard.vue';
+import AdminTableList from '@/pages/admin/TableList.vue';
+
+import UserDashboardLayout from '@/pages/user/Layout/DashboardLayout.vue'
+import UserDashboard from '@/pages/user/Dashboard.vue';
+import UserProfile from '@/pages/user/UserProfile.vue';
+import UserTableList from '@/pages/user/TableList.vue';
 
 export default {
   mode: 'history',
@@ -16,40 +18,57 @@ export default {
       component: Login
     },
     {
+      path : '/',
+      component: UserDashboardLayout,
+      redirect: '/dashboard',
+      children: [
+        {
+          path: 'dashboard',
+          name: 'Dashboard',
+          component: UserDashboard,
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: 'user',
+          name: 'User Profile',
+          component: UserProfile,
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: 'table',
+          name: 'Table List',
+          component: UserTableList,
+          meta: {
+            requiresAuth: true
+          }
+        },
+      ]
+    },
+    {
       path: '/admin',
-      component: DashboardLayout,
+      component: AdminDashboardLayout,
       redirect: '/admin/dashboard',
       children: [
         {
           path: 'dashboard',
           name: 'Dashboard',
-          component: Dashboard
-        },
-        {
-          path: 'user',
-          name: 'User Profile',
-          component: UserProfile
+          component: AdminDashboard,
+          meta: {
+            requiresAdmin: true
+          }
         },
         {
           path: 'table',
           name: 'Table List',
-          component: TableList
+          component: AdminTableList,
+          meta: {
+            requiresAdmin: true
+          }
         },
-        {
-          path: 'typography',
-          name: 'Typography',
-          component: Typography
-        },
-        {
-          path: 'icons',
-          name: 'Icons',
-          component: Icons
-        },
-        {
-          path: 'notifications',
-          name: 'Notifications',
-          component: Notifications
-        }
       ]
     }
   ]
