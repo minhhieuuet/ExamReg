@@ -12,13 +12,13 @@
         </md-button>
 
         <div class="md-collapse">
-          <div class="md-autocomplete">
+          <!-- <div class="md-autocomplete">
             <md-autocomplete class="search" v-model="selectedEmployee" :md-options="employees">
               <label>Search...</label>
             </md-autocomplete>
-          </div>
+          </div> -->
           <md-list>
-            <md-list-item to="/">
+            <md-list-item>
               <i class="material-icons">dashboard</i>
               <p class="hidden-lg hidden-md">Dashboard</p>
             </md-list-item>
@@ -89,5 +89,12 @@ export default{
 }
 </script>
 
-<style lang="css">
+<style lang="scss">
+.router-link-active {
+  background-color: #55af50 !important;
+
+  p {
+    color: white !important;
+  }
+}
 </style>

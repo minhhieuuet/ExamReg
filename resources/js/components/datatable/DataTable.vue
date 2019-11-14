@@ -209,4 +209,23 @@
     text-align: center;
     font-size: 17px;
   }
+  ul {
+  width: 100%;
+}
+
+td, th {
+  border-top: 1px solid #dfe2e5;
+  padding: 8px;
+}
+
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: #4CAF50;
+  font-weight: normal;
+  text-align: center;
+  border-bottom: 1px solid #dfe2e5;
+}
 </style>
