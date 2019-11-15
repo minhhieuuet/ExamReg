@@ -39,7 +39,7 @@ class StudentController extends Controller
         }
     }
 
-    public function updateStudent(Request $request, User $student)
+    public function updateStudent(StudentRequest $request, User $student)
     {
         DB::beginTransaction();
         try {

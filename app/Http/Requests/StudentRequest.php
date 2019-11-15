@@ -25,9 +25,8 @@ class StudentRequest extends FormRequest
     {
         return [
             'full_name' => 'required',
-            'name' => 'required|unique:users',
-            'email' => 'required|unique:users|email',
-            'password' => 'required'
+            'name' => 'required|unique:users,name,'.$this->student['id'],
+            'email' => 'required|email|unique:users,email,'.$this->student['id'],
         ];
     }
 
