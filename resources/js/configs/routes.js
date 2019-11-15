@@ -1,13 +1,13 @@
-import LoginPage from '../pages/LoginPage.vue';
+import Login from '@/pages/LoginPage.vue';
 
-import BasePage from '../pages/admin/BasePage.vue';
-import Dashboard from '../pages/admin/Dashboard.vue';
-import StudentPage from '../pages/admin/Student.vue';
+import AdminDashboardLayout from '@/pages/admin/Layout/DashboardLayout.vue'
+import AdminDashboard from '@/pages/admin/Dashboard.vue';
+import AdminStudent from '@/pages/admin/Student.vue';
 
-import BaseUserPage from '../pages/user/BaseUserPage.vue';
-import UserDashboard from '../pages/user/Dashboard.vue';
-
-import NotFound from '../pages/errors/404.vue';
+import UserDashboardLayout from '@/pages/user/Layout/DashboardLayout.vue'
+import UserDashboard from '@/pages/user/Dashboard.vue';
+import UserProfile from '@/pages/user/UserProfile.vue';
+import UserTableList from '@/pages/user/TableList.vue';
 
 export default {
   mode: 'history',
@@ -15,44 +15,61 @@ export default {
     {
       path: '/login',
       name: 'Login',
-      component: LoginPage,
+      component: Login
     },
     {
-      path: '/',
-      component: BaseUserPage,
+      path : '/',
+      component: UserDashboardLayout,
+      redirect: '/dashboard',
       children: [
         {
-          path: '/',
-          name: 'UserDashboard',
+          path: 'dashboard',
+          name: 'Dashboard',
           component: UserDashboard,
           meta: {
             requiresAuth: true
-          },
-        }
+          }
+        },
+        {
+          path: 'user',
+          name: 'User Profile',
+          component: UserProfile,
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: 'table',
+          name: 'Table List',
+          component: UserTableList,
+          meta: {
+            requiresAuth: true
+          }
+        },
       ]
     },
     {
       path: '/admin',
-      component: BasePage,
+      component: AdminDashboardLayout,
+      redirect: '/admin/dashboard',
       children: [
         {
-          path: '/',
-          name: 'Dashboard',
-          component: Dashboard,
+          path: 'dashboard',
+          name: 'Trang chủ',
+          component: AdminDashboard,
           meta: {
-            requiresAdmin: true,
-          },
+            requiresAdmin: true
+          }
         },
         {
           path: 'student',
-          name: 'Student',
-          component: StudentPage,
+          name: 'Sinh viên',
+          component: AdminStudent,
           meta: {
-            requiresAdmin: true,
-          },
+            requiresAdmin: true
+          }
         },
-        { path: '*', name: '404', component: NotFound }
-      ],
-    },
-  ],
-};
+      ]
+    }
+  ]
+}

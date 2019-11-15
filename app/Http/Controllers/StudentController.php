@@ -7,6 +7,8 @@ use App\Models\Student;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\StudentRequest;
+
 class StudentController extends Controller
 {
     protected $studentService;
@@ -23,7 +25,7 @@ class StudentController extends Controller
       return $this->studentService->getOneStudent($student);
     }
 
-    public function storeStudent(Request $request)
+    public function storeStudent(StudentRequest $request)
     {
         DB::beginTransaction();
         try {

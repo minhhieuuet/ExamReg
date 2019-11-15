@@ -16,7 +16,14 @@ import VModal from 'vue-js-modal';
 import Toasted from 'vue-toasted';
 
 import 'vue-material/dist/vue-material.min.css';
+import GlobalComponents from './globalComponents';
+import GlobalDirectives from './globalDirectives';
+import Notifications from './components/NotificationPlugin';
 
+// MaterialDashboard plugin
+import MaterialDashboard from './material-dashboard';
+
+import Chartist from 'chartist';
 import DataTable from './components/datatable/DataTable';
 
 Vue.use(VueMaterial);
@@ -25,6 +32,18 @@ Vue.use(VModal, { dialog: true });
 Vue.use(Toasted);
 Vue.use(VueRouter);
 Vue.component('data-table', DataTable);
+Vue.use(VueRouter)
+Vue.use(MaterialDashboard)
+Vue.use(GlobalComponents)
+Vue.use(GlobalDirectives)
+Vue.use(Notifications)
+
+// global library setup
+Object.defineProperty(Vue.prototype, '$Chartist', {
+  get () {
+    return this.$root.Chartist
+  }
+})
 
 const router = new VueRouter(Routers);
 
@@ -65,5 +84,8 @@ Vue.prototype.$isAdmin = window.isAdmin;
  */
 
 const app = new Vue({
-    router
+    router,
+    data: {
+    Chartist: Chartist
+    }
 }).$mount('#app');

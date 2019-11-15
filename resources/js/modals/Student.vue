@@ -16,7 +16,7 @@
           <span class="md-title">{{title}}</span>
 
           <md-field>
-            <label>Name</label>
+            <label>Họ và tên</label>
             <md-input type="text"
                       :name="`${_uid}_name`"
                       data-vv-validate-on="none"
@@ -34,7 +34,7 @@
           </md-field>
 
           <md-field>
-            <label>Username</label>
+            <label>Tài khoản</label>
             <md-input type="text"
                       :name="`${_uid}_username`"
                       data-vv-validate-on="none"
@@ -71,7 +71,7 @@
           <md-checkbox v-if="editingId" v-model="isEditPassword">Edit Password</md-checkbox>
           <div style="red-outline">
             <md-field>
-              <label>Password</label>
+              <label>Mật khẩu</label>
               <md-input type="password"
                         :name="`${_uid}_password`"
                         data-vv-validate-on="none"
@@ -90,7 +90,7 @@
             </md-field>
 
             <md-field :md-toggle-password="false">
-              <label>Retype Password</label>
+              <label>Nhập lại mật khẩu</label>
               <md-input type="password"
                         :name="`${_uid}_repassword`"
                         data-vv-validate-on="none"
@@ -110,8 +110,8 @@
       </div>
 
       <div class="md-right">
-        <md-button class="md-raised md-primary" @click="submit">Submit</md-button>
-        <md-button class="md-raised md-accent" @click="cancel">Cancel</md-button>
+        <md-button class="md-raised md-primary" @click="submit">Gửi</md-button>
+        <md-button class="md-raised md-accent" @click="cancel">Bỏ qua</md-button>
       </div>
   </modal>
 </template>
@@ -176,7 +176,7 @@ export default {
         this.$modal.hide('student');
         this.$emit('refresh');
       });
-      this.$toasted.show('Student updated successfully!', {
+      this.$toasted.show('Cập nhật sinh viên thành công!', {
         theme: 'bubble',
         position: 'top-right',
         duration : 1500,
@@ -187,12 +187,13 @@ export default {
           rf.getRequest('StudentRequest').store(this.student).then((res)=>{
             this.$modal.hide('student');
             this.$emit('refresh');
-          });
-          this.$toasted.show('Student created successfully!', {
-            theme: 'bubble',
-            position: 'top-right',
-            duration : 1500,
-            type: 'success'
+          }).catch((err) => {
+            // this.$toasted.show('Đã có lỗi xảy ra, vui lòng kiểm tra lại!', {
+            //   theme: 'bubble',
+            //   position: 'top-right',
+            //   duration : 1500,
+            //   type: 'danger'
+            // });
           });
     },
     cancel() {
