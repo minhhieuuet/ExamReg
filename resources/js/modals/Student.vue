@@ -176,7 +176,7 @@ export default {
         this.$modal.hide('student');
         this.$emit('refresh');
       });
-      this.$toasted.show('Student updated successfully!', {
+      this.$toasted.show('Cập nhật sinh viên thành công!', {
         theme: 'bubble',
         position: 'top-right',
         duration : 1500,
@@ -187,12 +187,13 @@ export default {
           rf.getRequest('StudentRequest').store(this.student).then((res)=>{
             this.$modal.hide('student');
             this.$emit('refresh');
-          });
-          this.$toasted.show('Student created successfully!', {
-            theme: 'bubble',
-            position: 'top-right',
-            duration : 1500,
-            type: 'success'
+          }).catch((err) => {
+            // this.$toasted.show('Đã có lỗi xảy ra, vui lòng kiểm tra lại!', {
+            //   theme: 'bubble',
+            //   position: 'top-right',
+            //   duration : 1500,
+            //   type: 'danger'
+            // });
           });
     },
     cancel() {

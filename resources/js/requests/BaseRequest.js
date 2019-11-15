@@ -1,5 +1,6 @@
 import Vue from 'vue';
-
+import Toasted from 'vue-toasted';
+Vue.use(Toasted);
 export default class BaseRequest {
   getUrlPrefix () {
     return '/api';
@@ -52,6 +53,20 @@ export default class BaseRequest {
 
 
   _errorHandler (err) {
+    if(err.response.status == 422) {
+      Object.values(err.response.data.errors).forEach(el =>{
+        console.log(el);
+      	el.forEach(msg => {
+          Vue.toasted.show(msg, {
+            theme: 'bubble',
+            position: 'top-right',
+            duration : 1500,
+            type: 'danger'
+          });
+        });
+      });
+    }
+
     if (err.message === 'Network Error' && err.response && err.response.status === 503) {
       Vue.prototype.$isMaintenanceMode = true;
       window.app.$broadcast('MaintenanceSetting', 1);

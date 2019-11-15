@@ -3040,7 +3040,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         _this3.$emit('refresh');
       });
-      this.$toasted.show('Student updated successfully!', {
+      this.$toasted.show('Cập nhật sinh viên thành công!', {
         theme: 'bubble',
         position: 'top-right',
         duration: 1500,
@@ -3054,12 +3054,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this4.$modal.hide('student');
 
         _this4.$emit('refresh');
-      });
-      this.$toasted.show('Student created successfully!', {
-        theme: 'bubble',
-        position: 'top-right',
-        duration: 1500,
-        type: 'success'
+      })["catch"](function (err) {// this.$toasted.show('Đã có lỗi xảy ra, vui lòng kiểm tra lại!', {
+        //   theme: 'bubble',
+        //   position: 'top-right',
+        //   duration : 1500,
+        //   type: 'danger'
+        // });
       });
     },
     cancel: function cancel() {
@@ -98843,6 +98843,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-toasted */ "./node_modules/vue-toasted/dist/vue-toasted.min.js");
+/* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_toasted__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -98856,6 +98858,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_toasted__WEBPACK_IMPORTED_MODULE_2___default.a);
 
 var BaseRequest =
 /*#__PURE__*/
@@ -99077,6 +99081,20 @@ function () {
   }, {
     key: "_errorHandler",
     value: function _errorHandler(err) {
+      if (err.response.status == 422) {
+        Object.values(err.response.data.errors).forEach(function (el) {
+          console.log(el);
+          el.forEach(function (msg) {
+            vue__WEBPACK_IMPORTED_MODULE_1___default.a.toasted.show(msg, {
+              theme: 'bubble',
+              position: 'top-right',
+              duration: 1500,
+              type: 'danger'
+            });
+          });
+        });
+      }
+
       if (err.message === 'Network Error' && err.response && err.response.status === 503) {
         vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.$isMaintenanceMode = true;
         window.app.$broadcast('MaintenanceSetting', 1);
