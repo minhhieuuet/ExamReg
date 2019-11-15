@@ -2,7 +2,7 @@ import Login from '@/pages/LoginPage.vue';
 
 import AdminDashboardLayout from '@/pages/admin/Layout/DashboardLayout.vue'
 import AdminDashboard from '@/pages/admin/Dashboard.vue';
-import AdminTableList from '@/pages/admin/TableList.vue';
+import AdminStudent from '@/pages/admin/Student.vue';
 
 import UserDashboardLayout from '@/pages/user/Layout/DashboardLayout.vue'
 import UserDashboard from '@/pages/user/Dashboard.vue';
@@ -55,16 +55,16 @@ export default {
       children: [
         {
           path: 'dashboard',
-          name: 'Dashboard',
+          name: 'Trang chủ',
           component: AdminDashboard,
           meta: {
             requiresAdmin: true
           }
         },
         {
-          path: 'table',
-          name: 'Table List',
-          component: AdminTableList,
+          path: 'student',
+          name: 'Sinh viên',
+          component: AdminStudent,
           meta: {
             requiresAdmin: true
           }

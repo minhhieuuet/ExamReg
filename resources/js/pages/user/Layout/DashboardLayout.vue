@@ -4,11 +4,19 @@
 
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
-      <sidebar-link to="/admin/dashboard">
+
+      <sidebar-link to="/dashboard">
         <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
+        <p>Trang chủ</p>
       </sidebar-link>
+
+      <sidebar-link to="/user">
+        <md-icon>account_circle</md-icon>
+        <p>Thông tin sinh viên</p>
+      </sidebar-link>
+
     </side-bar>
+
 
     <div class="main-panel">
       <top-navbar></top-navbar>

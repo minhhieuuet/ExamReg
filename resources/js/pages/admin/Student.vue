@@ -80,23 +80,23 @@ export default{
   methods: {
     removeOneStudent(studentId) {
       this.$modal.show('dialog', {
-        title: 'Alert!',
-        text: 'Are you sure delete ?',
+        title: 'Cảnh báo!',
+        text: 'Bạn có chắc chắn muốn xóa ?',
         buttons: [
           {
-            title: 'Cancel',
+            title: 'Bỏ qua',
             handler: () => {
               this.$modal.hide('dialog');
             }
           },
           {
-            title: 'Confirm',
+            title: 'Xác nhận',
             default: true,
             handler: () => {
               return rf.getRequest('StudentRequest').removeOneStudent(studentId).then(() => {
                 this.$modal.hide('dialog');
                 this.$refs.datatable.refresh();
-                this.$toasted.show('Student removed successfully!', {
+                this.$toasted.show('Xóa sinh viên thành công!', {
                   theme: 'bubble',
                   position: 'top-right',
                   duration : 1500,
@@ -110,17 +110,17 @@ export default{
     },
     removeManyStudent() {
         this.$modal.show('dialog', {
-          title: 'Alert!',
-          text: 'Are you sure delete ?',
+          title: 'Cảnh báo!',
+          text: 'Bạn có chắc chắn muốn xóa ?',
           buttons: [
             {
-              title: 'Cancel',
+              title: 'Bỏ qua',
               handler: () => {
                 this.$modal.hide('dialog');
               }
             },
             {
-              title: 'Confirm',
+              title: 'Xác nhận',
               default: true,
               handler: () => {
                 const studentIds = this.$refs.datatable.rows.filter((row) => {
@@ -143,10 +143,10 @@ export default{
         });
       },
       createStudent() {
-        this.$modal.show('student', {title: 'Add Student'});
+        this.$modal.show('student', {title: 'Thêm sinh viên'});
       },
       editStudent(studentId) {
-        this.$modal.show('student', {title: 'Edit Student', studentId: studentId});
+        this.$modal.show('student', {title: 'Sửa thông tin sinh viên', studentId: studentId});
       },
       listenSelectRow() {
         if (!this.$refs.datatable) {

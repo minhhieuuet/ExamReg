@@ -6,9 +6,9 @@
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/admin/dashboard">
         <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
+        <p>Trang chủ</p>
       </sidebar-link>
-      <sidebar-link to="/admin/table">
+      <sidebar-link to="/admin/student">
         <md-icon>content_paste</md-icon>
         <p>Sinh viên</p>
       </sidebar-link>

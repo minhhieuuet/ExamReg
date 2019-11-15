@@ -14,7 +14,7 @@
         <li class="VuePagination__pagination-item page-item VuePagination__pagination-item-prev-page page-prev"
             :class="{disabled : !allowedPage(page - 1)}">
           <a class="page-link " href="javascript:void(0);"
-             @click="prev()">Prev</a>
+             @click="prev()">Trang trước</a>
         </li>
 
         <template v-for="item in pages">
@@ -28,7 +28,7 @@
         <li class="VuePagination__pagination-item page-item VuePagination__pagination-item-next-page page-next"
             :class="{disabled : !allowedPage(page + 1)}">
           <a class="page-link" href="javascript:void(0);"
-             @click="next()">Next</a>
+             @click="next()">Trang kế</a>
         </li>
 
         <!--<li class="VuePagination__pagination-item page-item VuePagination__pagination-item-next-chunk "-->
