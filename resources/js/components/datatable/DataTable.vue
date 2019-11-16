@@ -196,6 +196,9 @@
 </script>
 
 <style lang="scss" scoped>
+  table {
+    width: 100%;
+  }
   table thead th {
     padding: 12px !important;
   }
