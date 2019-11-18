@@ -17,28 +17,28 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
     /* Admin 4 */
-    Route::get('/test-rooms', 'TestRoomController@getTestRooms');
-    Route::get('test-room/{testRoom}', 'TestRoomController@getOneTestRoom');
-    Route::post('test-room', 'TestRoomController@storeTestRoom');
-    Route::put('test-room/{testRoom}', 'TestRoomController@updateTestRoom');
-    Route::delete('test-room/{testRoom}', 'TestRoomController@deleteOneTestRoom');
-    Route::delete('many-test-rooms', 'TestRoomController@deleteManyTestRooms');
+    // Route::get('/test-rooms', 'TestRoomController@getTestRooms');
+    // Route::get('test-room/{testRoom}', 'TestRoomController@getOneTestRoom');
+    // Route::post('test-room', 'TestRoomController@storeTestRoom');
+    // Route::put('test-room/{testRoom}', 'TestRoomController@updateTestRoom');
+    // Route::delete('test-room/{testRoom}', 'TestRoomController@deleteOneTestRoom');
+    // Route::delete('many-test-rooms', 'TestRoomController@deleteManyTestRooms');
 
     /* Admin 5 */
-    Route::get('/test-sites', 'TestSiteController@getTestSites');
-    Route::get('test-site/{testSite}', 'TestSiteController@getOneTestSite');
-    Route::post('test-site', 'TestSiteController@storeTestSite');
-    Route::put('test-site/{testSite}', 'TestSiteController@updateTestSite');
-    Route::delete('test-site/{testSite}', 'TestSiteController@deleteOneTestSite');
-    Route::delete('many-test-sites', 'TestSiteController@deleteManyTestSites');
+    // Route::get('/test-sites', 'TestSiteController@getTestSites');
+    // Route::get('test-site/{testSite}', 'TestSiteController@getOneTestSite');
+    // Route::post('test-site', 'TestSiteController@storeTestSite');
+    // Route::put('test-site/{testSite}', 'TestSiteController@updateTestSite');
+    // Route::delete('test-site/{testSite}', 'TestSiteController@deleteOneTestSite');
+    // Route::delete('many-test-sites', 'TestSiteController@deleteManyTestSites');
 
     /* Admin 6 */
-    Route::get('/exams', 'ExamController@getExams');
-    Route::get('exam/{exam}', 'ExamController@getOneExam');
-    Route::post('exam', 'ExamController@storeExam');
-    Route::put('exam/{exam}', 'ExamController@updateExam');
-    Route::delete('exam/{exam}', 'ExamController@deleteOneExam');
-    Route::delete('many-exams', 'ExamController@deleteManyExams');
+    // Route::get('/exams', 'ExamController@getExams');
+    // Route::get('exam/{exam}', 'ExamController@getOneExam');
+    // Route::post('exam', 'ExamController@storeExam');
+    // Route::put('exam/{exam}', 'ExamController@updateExam');
+    // Route::delete('exam/{exam}', 'ExamController@deleteOneExam');
+    // Route::delete('many-exams', 'ExamController@deleteManyExams');
 
     /* Admin 7 */
     Route::get('/students', 'StudentController@getStudents');
