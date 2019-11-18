@@ -67,11 +67,11 @@ class StudentController extends Controller
         }
     }
 
-    public function deleteManyStudent(Request $request)
+    public function deleteManyStudents(Request $request)
     {
         DB::beginTransaction();
         try {
-            $status = $this->studentService->deleteManyStudent($request->all());
+            $status = $this->studentService->deleteManyStudents($request->all());
             DB::commit();
             return $status;
         } catch (\Exception $e) {

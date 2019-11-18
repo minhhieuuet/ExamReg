@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::post('student', 'StudentController@storeStudent');
     Route::put('student/{student}', 'StudentController@updateStudent');
     Route::delete('student/{student}', 'StudentController@deleteOneStudent');
-    Route::delete('many-students', 'StudentController@deleteManyStudent');
+    Route::delete('many-students', 'StudentController@deleteManyStudents');
 
     /* Admin 8 */
     Route::get('/modules', 'ModuleController@getModules');
