@@ -12,6 +12,10 @@
         <md-icon>content_paste</md-icon>
         <p>Sinh viên</p>
       </sidebar-link>
+      <sidebar-link to="/admin/exam-session">
+        <md-icon>content_paste</md-icon>
+        <p>Ca thi</p>
+      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">

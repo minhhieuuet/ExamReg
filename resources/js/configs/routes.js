@@ -3,6 +3,7 @@ import Login from '@/pages/LoginPage.vue';
 import AdminDashboardLayout from '@/pages/admin/Layout/DashboardLayout.vue'
 import AdminDashboard from '@/pages/admin/Dashboard.vue';
 import AdminStudent from '@/pages/admin/Student.vue';
+import AdminExamSession from '@/pages/admin/ExamSession.vue';
 
 import UserDashboardLayout from '@/pages/user/Layout/DashboardLayout.vue'
 import UserDashboard from '@/pages/user/Dashboard.vue';
@@ -65,6 +66,14 @@ export default {
           path: 'student',
           name: 'Sinh viên',
           component: AdminStudent,
+          meta: {
+            requiresAdmin: true
+          }
+        },
+        {
+          path: 'exam-session',
+          name: 'Ca thi',
+          component: AdminExamSession,
           meta: {
             requiresAdmin: true
           }
