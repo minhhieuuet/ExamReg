@@ -2,83 +2,120 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\StudentService;
+use App\Http\Requests\UniversityRequest;
+use App\Http\Services\UniversityService;
+use App\Models\University;
+use Exception;
 use Illuminate\Http\Request;
-use App\Models\Student;
-use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Http\Requests\StudentRequest;
 
-class StudentController extends Controller
+class UniversityController extends Controller
 {
-    protected $studentService;
+    /**
+     * @var UniversityService
+     */
+    protected $universityService;
 
-    public function __construct(StudentService $studentService)
+    /**
+     * UniversityController constructor.
+     *
+     * @param UniversityService $universityService
+     */
+    public function __construct(UniversityService $universityService)
     {
-        $this->studentService = $studentService;
+        $this->universityService = $universityService;
     }
 
-    public function getStudents(Request $request)
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getUniversities(Request $request)
     {
-        return $this->studentService->getStudents($request->all());
+        return $this->universityService->getUniversities($request->all());
     }
 
-    public function getOneStudent(User $student)
+    /**
+     * @param University $university
+     * @return University
+     */
+    public function getOneUniversity(University $university)
     {
-        return $this->studentService->getOneStudent($student);
+        return $this->universityService->getOneUniversity($university);
     }
 
-    public function storeStudent(StudentRequest $request)
+    /**
+     * @param UniversityRequest $request
+     * @return University
+     * @throws Exception
+     */
+    public function storeUniversity(UniversityRequest $request)
     {
         DB::beginTransaction();
         try {
-            $student = $this->studentService->storeStudent($request->all());
+            $university = $this->universityService->storeUniversity($request->all());
             DB::commit();
-            return $student;
-        } catch (\Exception $e) {
+            return $university;
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             throw $e;
         }
     }
 
-    public function updateStudent(StudentRequest $request, User $student)
+    /**
+     * @param UniversityRequest $request
+     * @param University $university
+     * @return University
+     * @throws Exception
+     */
+    public function updateUniversity(UniversityRequest $request, University $university)
     {
         DB::beginTransaction();
         try {
-            $student = $this->studentService->updateStudent($student, $request->all());
+            $university = $this->universityService->updateUniversity($university, $request->all());
             DB::commit();
-            return $student;
-        } catch (\Exception $e) {
+            return $university;
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             throw $e;
         }
     }
 
-    public function deleteOneStudent(User $student)
+    /**
+     * @param Request $request
+     * @return string
+     * @throws Exception
+     */
+    public function deleteManyUniversities(Request $request)
     {
         DB::beginTransaction();
         try {
-            $status = $this->studentService->deleteOneStudent($student);
+            $status = $this->universityService->deleteManyUniversities($request->all());
             DB::commit();
             return $status;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             throw $e;
         }
     }
 
-    public function deleteManyStudent(Request $request)
+    /**
+     * @param University $university
+     * @return string
+     * @throws Exception
+     */
+    public function deleteOneUniversity(University $university)
     {
         DB::beginTransaction();
         try {
-            $status = $this->studentService->deleteManyStudent($request->all());
+            $status = $this->universityService->deleteOneUniversity($university);
             DB::commit();
             return $status;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             throw $e;

@@ -2,68 +2,87 @@
 
 namespace App\Http\Services;
 
-use App\User;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
+use App\Models\Module;
+use Exception;
 
-class StudentService
+class ModuleService
 {
-    public function getStudents($params)
+    /**
+     * @param $params
+     * @return mixed
+     */
+    public function getModules($params)
     {
         $limit = array_get($params, 'limit', 10);
-        return User::where('role', 1)->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
+
+        return Module::when(!empty(array_get($params, 'search')), function ($query) use ($params) {
             $search = array_get($params, 'search');
-            return $query->where('name', 'like', "%$search%")
-                        ->orWhere('email', 'like', "%$search%")
-                        ->orWhere('full_name', 'like', "%$search%");
+            return $query->where('name', 'like', "%$search%")->orWhere('code', 'like', "%$search%");
         })->orderBy('created_at', 'desc')->paginate($limit);
     }
 
-    public function storeStudent($params)
+    /**
+     * @param Module $module
+     * @return Module
+     */
+    public function getOneModule(Module $module)
     {
-        $student = User::create([
-            'full_name' => array_get($params, 'full_name'),
+        return $module;
+    }
+
+    /**
+     * @param $params
+     * @return Module
+     */
+    public function storeModule($params)
+    {
+        $module = Module::create([
             'name' => array_get($params, 'name'),
-            'email' => array_get($params, 'email'),
-            'password' => bcrypt(array_get($params, 'password')),
-            'role' => 1
+            'code' => array_get($params, 'code'),
         ]);
 
-        return $this->getOneStudent($student);
+        return $this->getOneModule($module);
     }
 
-    public function updateStudent(User $student, $params)
+    /**
+     * @param Module $module
+     * @param $params
+     * @return Module
+     */
+    public function updateModule(Module $module, $params)
     {
-        $student->update([
-          'full_name' => array_get($params, 'full_name'),
-          'name' => array_get($params, 'name'),
-          'email' => array_get($params, 'email'),
+        $module->update([
+            'name' => array_get($params, 'name'),
+            'code' => array_get($params, 'code'),
         ]);
-        if(array_get($params, 'password')) {
-          $student->update(['password' => bcrypt(array_get($params, 'password'))]);
+
+        return $module;
+    }
+
+    /**
+     * @param $params
+     * @return string
+     */
+    public function deleteManyModules($params)
+    {
+        $moduleIds = array_get($params, 'ids', []);
+
+        if (count($moduleIds) > 0) {
+            Module::whereIn('id', $moduleIds)->delete();
         }
-        return $student;
-    }
-
-    public function getOneStudent(User $student)
-    {
-        $student->makeHidden('password');
-        return $student;
-    }
-
-    public function deleteOneStudent(User $student)
-    {
-        $student->delete();
 
         return 'ok';
     }
 
-    public function deleteManyStudent($params)
+    /**
+     * @param Module $module
+     * @return string
+     * @throws Exception
+     */
+    public function deleteOneModule(Module $module)
     {
-        $studentIds = array_get($params, 'ids', []);
-        if (count($studentIds) > 0) {
-            User::whereIn('id', $studentIds)->delete();
-        }
+        $module->delete();
+
         return 'ok';
     }
 }

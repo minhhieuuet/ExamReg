@@ -2,83 +2,120 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\StudentService;
+use App\Http\Requests\ModuleRequest;
+use App\Http\Services\ModuleService;
+use App\Models\Module;
+use Exception;
 use Illuminate\Http\Request;
-use App\Models\Student;
-use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Http\Requests\StudentRequest;
 
-class StudentController extends Controller
+class ModuleController extends Controller
 {
-    protected $studentService;
+    /**
+     * @var ModuleService
+     */
+    protected $moduleService;
 
-    public function __construct(StudentService $studentService)
+    /**
+     * ModuleController constructor.
+     *
+     * @param ModuleService $moduleService
+     */
+    public function __construct(ModuleService $moduleService)
     {
-        $this->studentService = $studentService;
+        $this->moduleService = $moduleService;
     }
 
-    public function getStudents(Request $request)
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getModules(Request $request)
     {
-        return $this->studentService->getStudents($request->all());
+        return $this->moduleService->getModules($request->all());
     }
 
-    public function getOneStudent(User $student)
+    /**
+     * @param Module $module
+     * @return Module
+     */
+    public function getOneModule(Module $module)
     {
-        return $this->studentService->getOneStudent($student);
+        return $this->moduleService->getOneModule($module);
     }
 
-    public function storeStudent(StudentRequest $request)
+    /**
+     * @param ModuleRequest $request
+     * @return Module
+     * @throws Exception
+     */
+    public function storeModule(ModuleRequest $request)
     {
         DB::beginTransaction();
         try {
-            $student = $this->studentService->storeStudent($request->all());
+            $module = $this->moduleService->storeModule($request->all());
             DB::commit();
-            return $student;
-        } catch (\Exception $e) {
+            return $module;
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             throw $e;
         }
     }
 
-    public function updateStudent(StudentRequest $request, User $student)
+    /**
+     * @param ModuleRequest $request
+     * @param Module $module
+     * @return Module
+     * @throws Exception
+     */
+    public function updateModule(ModuleRequest $request, Module $module)
     {
         DB::beginTransaction();
         try {
-            $student = $this->studentService->updateStudent($student, $request->all());
+            $module = $this->moduleService->updateModule($module, $request->all());
             DB::commit();
-            return $student;
-        } catch (\Exception $e) {
+            return $module;
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             throw $e;
         }
     }
 
-    public function deleteOneStudent(User $student)
+    /**
+     * @param Request $request
+     * @return string
+     * @throws Exception
+     */
+    public function deleteManyModules(Request $request)
     {
         DB::beginTransaction();
         try {
-            $status = $this->studentService->deleteOneStudent($student);
+            $status = $this->moduleService->deleteManyModules($request->all());
             DB::commit();
             return $status;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             throw $e;
         }
     }
 
-    public function deleteManyStudent(Request $request)
+    /**
+     * @param Module $module
+     * @return string
+     * @throws Exception
+     */
+    public function deleteOneModule(Module $module)
     {
         DB::beginTransaction();
         try {
-            $status = $this->studentService->deleteManyStudent($request->all());
+            $status = $this->moduleService->deleteOneModule($module);
             DB::commit();
             return $status;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             throw $e;

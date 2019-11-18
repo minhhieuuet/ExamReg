@@ -2,68 +2,87 @@
 
 namespace App\Http\Services;
 
-use App\User;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
+use App\Models\Room;
+use Exception;
 
-class StudentService
+class RoomService
 {
-    public function getStudents($params)
+    /**
+     * @param $params
+     * @return mixed
+     */
+    public function getRooms($params)
     {
         $limit = array_get($params, 'limit', 10);
-        return User::where('role', 1)->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
+
+        return Room::when(!empty(array_get($params, 'search')), function ($query) use ($params) {
             $search = array_get($params, 'search');
-            return $query->where('name', 'like', "%$search%")
-                        ->orWhere('email', 'like', "%$search%")
-                        ->orWhere('full_name', 'like', "%$search%");
+            return $query->where('name', 'like', "%$search%")->orWhere('capacity', 'like', "%$search%");
         })->orderBy('created_at', 'desc')->paginate($limit);
     }
 
-    public function storeStudent($params)
+    /**
+     * @param Room $room
+     * @return Room
+     */
+    public function getOneRoom(Room $room)
     {
-        $student = User::create([
-            'full_name' => array_get($params, 'full_name'),
+        return $room;
+    }
+
+    /**
+     * @param $params
+     * @return Room
+     */
+    public function storeRoom($params)
+    {
+        $room = Room::create([
             'name' => array_get($params, 'name'),
-            'email' => array_get($params, 'email'),
-            'password' => bcrypt(array_get($params, 'password')),
-            'role' => 1
+            'capacity' => array_get($params, 'capacity'),
         ]);
 
-        return $this->getOneStudent($student);
+        return $this->getOneRoom($room);
     }
 
-    public function updateStudent(User $student, $params)
+    /**
+     * @param Room $room
+     * @param $params
+     * @return Room
+     */
+    public function updateRoom(Room $room, $params)
     {
-        $student->update([
-          'full_name' => array_get($params, 'full_name'),
+        $room->update([
           'name' => array_get($params, 'name'),
-          'email' => array_get($params, 'email'),
+          'capacity' => array_get($params, 'capacity'),
         ]);
-        if(array_get($params, 'password')) {
-          $student->update(['password' => bcrypt(array_get($params, 'password'))]);
+
+        return $room;
+    }
+
+    /**
+     * @param $params
+     * @return string
+     */
+    public function deleteManyRooms($params)
+    {
+        $roomIds = array_get($params, 'ids', []);
+
+        if (count($roomIds) > 0) {
+            Room::whereIn('id', $roomIds)->delete();
         }
-        return $student;
-    }
-
-    public function getOneStudent(User $student)
-    {
-        $student->makeHidden('password');
-        return $student;
-    }
-
-    public function deleteOneStudent(User $student)
-    {
-        $student->delete();
 
         return 'ok';
     }
 
-    public function deleteManyStudent($params)
+    /**
+     * @param Room $room
+     * @return string
+     * @throws Exception
+     */
+    public function deleteOneRoom(Room $room)
     {
-        $studentIds = array_get($params, 'ids', []);
-        if (count($studentIds) > 0) {
-            User::whereIn('id', $studentIds)->delete();
-        }
+        $room->delete();
+
         return 'ok';
     }
 }

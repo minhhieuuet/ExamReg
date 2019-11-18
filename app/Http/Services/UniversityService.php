@@ -2,68 +2,87 @@
 
 namespace App\Http\Services;
 
-use App\User;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
+use App\Models\University;
+use Exception;
 
-class StudentService
+class UniversityService
 {
-    public function getStudents($params)
+    /**
+     * @param $params
+     * @return mixed
+     */
+    public function getUniversities($params)
     {
         $limit = array_get($params, 'limit', 10);
-        return User::where('role', 1)->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
+
+        return University::when(!empty(array_get($params, 'search')), function ($query) use ($params) {
             $search = array_get($params, 'search');
-            return $query->where('name', 'like', "%$search%")
-                        ->orWhere('email', 'like', "%$search%")
-                        ->orWhere('full_name', 'like', "%$search%");
+            return $query->where('name', 'like', "%$search%")->orWhere('short_name', 'like', "%$search%");
         })->orderBy('created_at', 'desc')->paginate($limit);
     }
 
-    public function storeStudent($params)
+    /**
+     * @param University $university
+     * @return University
+     */
+    public function getOneUniversity(University $university)
     {
-        $student = User::create([
-            'full_name' => array_get($params, 'full_name'),
+        return $university;
+    }
+
+    /**
+     * @param $params
+     * @return University
+     */
+    public function storeUniversity($params)
+    {
+        $university = University::create([
             'name' => array_get($params, 'name'),
-            'email' => array_get($params, 'email'),
-            'password' => bcrypt(array_get($params, 'password')),
-            'role' => 1
+            'short_name' => array_get($params, 'short_name'),
         ]);
 
-        return $this->getOneStudent($student);
+        return $this->getOneUniversity($university);
     }
 
-    public function updateStudent(User $student, $params)
+    /**
+     * @param University $university
+     * @param $params
+     * @return University
+     */
+    public function updateUniversity(University $university, $params)
     {
-        $student->update([
-          'full_name' => array_get($params, 'full_name'),
-          'name' => array_get($params, 'name'),
-          'email' => array_get($params, 'email'),
+        $university->update([
+            'name' => array_get($params, 'name'),
+            'short_name' => array_get($params, 'short_name'),
         ]);
-        if(array_get($params, 'password')) {
-          $student->update(['password' => bcrypt(array_get($params, 'password'))]);
+
+        return $university;
+    }
+
+    /**
+     * @param $params
+     * @return string
+     */
+    public function deleteManyUniversities($params)
+    {
+        $universityIds = array_get($params, 'ids', []);
+
+        if (count($universityIds) > 0) {
+            University::whereIn('id', $universityIds)->delete();
         }
-        return $student;
-    }
-
-    public function getOneStudent(User $student)
-    {
-        $student->makeHidden('password');
-        return $student;
-    }
-
-    public function deleteOneStudent(User $student)
-    {
-        $student->delete();
 
         return 'ok';
     }
 
-    public function deleteManyStudent($params)
+    /**
+     * @param University $university
+     * @return string
+     * @throws Exception
+     */
+    public function deleteOneUniversity(University $university)
     {
-        $studentIds = array_get($params, 'ids', []);
-        if (count($studentIds) > 0) {
-            User::whereIn('id', $studentIds)->delete();
-        }
+        $university->delete();
+
         return 'ok';
     }
 }

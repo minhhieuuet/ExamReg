@@ -2,83 +2,120 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\StudentService;
+use App\Http\Requests\RoomRequest;
+use App\Http\Services\RoomService;
+use App\Models\Room;
+use Exception;
 use Illuminate\Http\Request;
-use App\Models\Student;
-use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Http\Requests\StudentRequest;
 
-class StudentController extends Controller
+class RoomController extends Controller
 {
-    protected $studentService;
+    /**
+     * @var RoomService
+     */
+    protected $roomService;
 
-    public function __construct(StudentService $studentService)
+    /**
+     * RoomController constructor.
+     *
+     * @param RoomService $roomService
+     */
+    public function __construct(RoomService $roomService)
     {
-        $this->studentService = $studentService;
+        $this->roomService = $roomService;
     }
 
-    public function getStudents(Request $request)
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getRooms(Request $request)
     {
-        return $this->studentService->getStudents($request->all());
+        return $this->roomService->getRooms($request->all());
     }
 
-    public function getOneStudent(User $student)
+    /**
+     * @param Room $room
+     * @return Room
+     */
+    public function getOneRoom(Room $room)
     {
-        return $this->studentService->getOneStudent($student);
+        return $this->roomService->getOneRoom($room);
     }
 
-    public function storeStudent(StudentRequest $request)
+    /**
+     * @param RoomRequest $request
+     * @return Room
+     * @throws Exception
+     */
+    public function storeRoom(RoomRequest $request)
     {
         DB::beginTransaction();
         try {
-            $student = $this->studentService->storeStudent($request->all());
+            $room = $this->roomService->storeRoom($request->all());
             DB::commit();
-            return $student;
-        } catch (\Exception $e) {
+            return $room;
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             throw $e;
         }
     }
 
-    public function updateStudent(StudentRequest $request, User $student)
+    /**
+     * @param RoomRequest $request
+     * @param Room $room
+     * @return Room
+     * @throws Exception
+     */
+    public function updateRoom(RoomRequest $request, Room $room)
     {
         DB::beginTransaction();
         try {
-            $student = $this->studentService->updateStudent($student, $request->all());
+            $room = $this->roomService->updateRoom($room, $request->all());
             DB::commit();
-            return $student;
-        } catch (\Exception $e) {
+            return $room;
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             throw $e;
         }
     }
 
-    public function deleteOneStudent(User $student)
+    /**
+     * @param Request $request
+     * @return string
+     * @throws Exception
+     */
+    public function deleteManyRooms(Request $request)
     {
         DB::beginTransaction();
         try {
-            $status = $this->studentService->deleteOneStudent($student);
+            $status = $this->roomService->deleteManyRooms($request->all());
             DB::commit();
             return $status;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             throw $e;
         }
     }
 
-    public function deleteManyStudent(Request $request)
+    /**
+     * @param Room $room
+     * @return string
+     * @throws Exception
+     */
+    public function deleteOneRoom(Room $room)
     {
         DB::beginTransaction();
         try {
-            $status = $this->studentService->deleteManyStudent($request->all());
+            $status = $this->roomService->deleteOneRoom($room);
             DB::commit();
             return $status;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             Log::error($e->getMessage());
             throw $e;

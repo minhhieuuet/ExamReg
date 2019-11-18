@@ -15,16 +15,6 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
-/* Admin 3 */
-Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
-    Route::get('/exam-sessions', 'ExamSessionController@getExamSessions');
-    Route::get('exam-session/{examSession}', 'ExamSessionController@getOneExamSession');
-    Route::post('exam-session', 'ExamSessionController@storeExamSession');
-    Route::put('exam-session/{examSession}', 'ExamSessionController@updateExamSession');
-    Route::delete('exam-session/{examSession}', 'ExamSessionController@deleteOneExamSession');
-    Route::delete('many-exam-sessions', 'ExamSessionController@deleteManyExamSessions');
-});
-
 /* Admin 4 */
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
     Route::get('/test-rooms', 'TestRoomController@getTestRooms');

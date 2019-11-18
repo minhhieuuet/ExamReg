@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StudentRequest extends FormRequest
+class RoomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,23 @@ class StudentRequest extends FormRequest
     public function rules()
     {
         return [
-            'full_name' => 'required',
-            'name' => 'required|unique:users,name,'.$this->student['id'],
-            'email' => 'required|email|unique:users,email,'.$this->student['id'],
+            'name' => 'required' . $this->room['id'],
+            'capacity' => 'required|numeric|between:1,100' . $this->room['id'],
         ];
     }
 
+    /**
+     * Get the messages if validate fail.
+     *
+     * @return array
+     */
     public function messages()
     {
         return [
-            'name.unique' => 'Tên đăng nhập đã tồn tại',
-            'email.unique'  => 'Email đã tồn tại',
+            'name.required' => 'Tên phòng máy là bắt buộc',
+            'capacity.required' => 'Số lượng máy là bắt buộc',
+            'capacity.numeric' => 'Số lượng máy phải là số',
+            'capacity.between' => 'Số lượng máy phải nằm trong khoảng 1-100',
         ];
     }
 }
