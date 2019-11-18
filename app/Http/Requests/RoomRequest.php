@@ -24,8 +24,8 @@ class RoomRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required' . $this->room['id'],
-            'capacity' => 'required|numeric|between:1,100' . $this->room['id'],
+            'name' => 'required',
+            'capacity' => 'required|numeric|between:1,100',
         ];
     }
 

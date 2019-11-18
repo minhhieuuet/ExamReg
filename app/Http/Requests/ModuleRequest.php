@@ -24,8 +24,8 @@ class ModuleRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required' . $this->module['id'],
-            'code' => 'required|between:1,16' . $this->module['id'],
+            'name' => 'required',
+            'code' => 'required|between:1,16',
         ];
     }
 

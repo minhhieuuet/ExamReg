@@ -24,8 +24,8 @@ class UniversityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required' . $this->university['id'],
-            'short_name' => 'required|between:1,4' . $this->university['id'],
+            'name' => 'required',
+            'short_name' => 'required|between:1,4',
         ];
     }
 
