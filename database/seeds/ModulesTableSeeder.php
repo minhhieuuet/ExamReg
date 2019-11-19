@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\Module;
 use Illuminate\Database\Seeder;
-use App\Models\Student;
-class StudentsTableSeeder extends Seeder
+
+class ModulesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +12,7 @@ class StudentsTableSeeder extends Seeder
      */
     public function run()
     {
-      factory(Student::class, 50)->create();
+        DB::table('modules')->truncate();
+        factory(Module::class, 10)->create();
     }
 }

@@ -3835,6 +3835,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -9439,7 +9449,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "table thead th[data-v-0bc9d484] {\n  padding: 12px !important;\n}\ntable tbody td[data-v-0bc9d484] {\n  padding: 0px 12px !important;\n  vertical-align: middle;\n}\nth[data-v-0bc9d484] {\n  text-align: center;\n  font-size: 17px;\n}\nul[data-v-0bc9d484] {\n  width: 100%;\n}\ntd[data-v-0bc9d484], th[data-v-0bc9d484] {\n  border-top: 1px solid #dfe2e5;\n  padding: 8px;\n}\nth[data-v-0bc9d484] {\n  padding-top: 12px;\n  padding-bottom: 12px;\n  text-align: left;\n  color: #4CAF50;\n  font-weight: normal;\n  text-align: center;\n  border-bottom: 1px solid #dfe2e5;\n}", ""]);
+exports.push([module.i, "table[data-v-0bc9d484] {\n  width: 100%;\n}\ntable thead th[data-v-0bc9d484] {\n  padding: 12px !important;\n}\ntable tbody td[data-v-0bc9d484] {\n  padding: 0px 12px !important;\n  vertical-align: middle;\n}\nth[data-v-0bc9d484] {\n  text-align: center;\n  font-size: 17px;\n}\nul[data-v-0bc9d484] {\n  width: 100%;\n}\ntd[data-v-0bc9d484], th[data-v-0bc9d484] {\n  border-top: 1px solid #dfe2e5;\n  padding: 8px;\n}\nth[data-v-0bc9d484] {\n  padding-top: 12px;\n  padding-bottom: 12px;\n  text-align: left;\n  color: #4CAF50;\n  font-weight: normal;\n  text-align: center;\n  border-bottom: 1px solid #dfe2e5;\n}", ""]);
 
 // exports
 
@@ -9515,7 +9525,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".router-link-active {\n  background-color: #55af50 !important;\n}\n.router-link-active p {\n  color: white !important;\n}", ""]);
+exports.push([module.i, ".router-link-active {\n  background-color: #55af50 !important;\n}\n.router-link-active p {\n  color: white !important;\n}\n.router-link-active .md-list-item-router:hover {\n  background-color: gray !important;\n}", ""]);
 
 // exports
 
@@ -46161,116 +46171,25 @@ var render = function() {
               "div",
               { staticClass: "md-collapse" },
               [
-                _c(
-                  "md-list",
-                  [
-                    _c("md-list-item", [
-                      _c("i", { staticClass: "material-icons" }, [
-                        _vm._v("dashboard")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "hidden-lg hidden-md" }, [
-                        _vm._v("Dashboard")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "md-list-item",
-                      {
-                        staticClass: "dropdown",
-                        attrs: { to: "/notifications" }
-                      },
-                      [
-                        _c("drop-down", [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "dropdown-toggle",
-                              attrs: {
-                                slot: "title",
-                                "data-toggle": "dropdown"
-                              },
-                              slot: "title"
-                            },
-                            [
-                              _c("i", { staticClass: "material-icons" }, [
-                                _vm._v("notifications")
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "notification" }, [
-                                _vm._v("5")
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "hidden-lg hidden-md" }, [
-                                _vm._v("Notifications")
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "ul",
-                            {
-                              staticClass: "dropdown-menu dropdown-menu-right"
-                            },
-                            [
-                              _c("li", [
-                                _c("a", { attrs: { href: "#" } }, [
-                                  _vm._v("Mike John responded to your email")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("li", [
-                                _c("a", { attrs: { href: "#" } }, [
-                                  _vm._v("You have 5 new tasks")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("li", [
-                                _c("a", { attrs: { href: "#" } }, [
-                                  _vm._v("You're now friend with Andrew")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("li", [
-                                _c("a", { attrs: { href: "#" } }, [
-                                  _vm._v("Another Notification")
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("li", [
-                                _c("a", { attrs: { href: "#" } }, [
-                                  _vm._v("Another One")
-                                ])
-                              ])
-                            ]
-                          )
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("md-list-item", { attrs: { to: "/user" } }, [
-                      _c("i", { staticClass: "material-icons" }, [
-                        _vm._v("person")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "hidden-lg hidden-md" }, [
-                        _vm._v("Profile")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("md-list-item", { on: { click: _vm.logout } }, [
-                      _c("i", { staticClass: "material-icons" }, [
-                        _vm._v("logout")
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "hidden-lg hidden-md" }, [
-                        _vm._v("Đăng xuất")
-                      ])
-                    ])
-                  ],
-                  1
-                )
+                _c("md-list-item", { attrs: { to: "/user" } }, [
+                  _c("i", { staticClass: "material-icons" }, [
+                    _vm._v("person")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "hidden-lg hidden-md" }, [
+                    _vm._v("Profile")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("md-list-item", { on: { click: _vm.logout } }, [
+                  _c("i", { staticClass: "material-icons" }, [
+                    _vm._v("logout")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "hidden-lg hidden-md" }, [
+                    _vm._v("Đăng xuất")
+                  ])
+                ])
               ],
               1
             )
@@ -46309,37 +46228,7 @@ var render = function() {
       { staticClass: "md-layout" },
       [
         _c("div", { staticClass: "md-layout md-gutter" }, [
-          _c(
-            "div",
-            { staticClass: "md-layout-item" },
-            [
-              _c(
-                "md-button",
-                { staticClass: "md-primary", on: { click: _vm.createStudent } },
-                [_vm._v("Thêm")]
-              ),
-              _vm._v(" "),
-              _c(
-                "md-button",
-                { staticClass: "md-info", on: { click: _vm.refresh } },
-                [_vm._v("Làm mới")]
-              ),
-              _vm._v(" "),
-              _c(
-                "md-button",
-                {
-                  staticClass: "md-danger",
-                  on: {
-                    click: function($event) {
-                      return _vm.removeManyStudent()
-                    }
-                  }
-                },
-                [_vm._v("Xóa")]
-              )
-            ],
-            1
-          ),
+          _c("div", { staticClass: "md-layout-item md-size-5" }),
           _vm._v(" "),
           _c(
             "div",
@@ -46381,6 +46270,40 @@ var render = function() {
                   _c("md-icon", [_vm._v("search")])
                 ],
                 1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "md-layout-item md-size-35" }),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "md-layout-item" },
+            [
+              _c(
+                "md-button",
+                { staticClass: "md-success", on: { click: _vm.createStudent } },
+                [_vm._v("Thêm")]
+              ),
+              _vm._v(" "),
+              _c(
+                "md-button",
+                { staticClass: "md-info", on: { click: _vm.refresh } },
+                [_vm._v("Làm mới")]
+              ),
+              _vm._v(" "),
+              _c(
+                "md-button",
+                {
+                  staticClass: "md-danger",
+                  on: {
+                    click: function($event) {
+                      return _vm.removeManyStudent()
+                    }
+                  }
+                },
+                [_vm._v("Xóa")]
               )
             ],
             1
@@ -46476,20 +46399,33 @@ var render = function() {
                                       _c(
                                         "md-button",
                                         {
-                                          staticClass: "md-info",
+                                          staticClass:
+                                            "md-just-icon md-simple md-primary",
                                           on: {
                                             click: function($event) {
                                               return _vm.editStudent(item.id)
                                             }
                                           }
                                         },
-                                        [_vm._v("Sửa")]
+                                        [
+                                          _c("md-icon", [_vm._v("edit")]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "md-tooltip",
+                                            {
+                                              attrs: { "md-direction": "top" }
+                                            },
+                                            [_vm._v("Sửa")]
+                                          )
+                                        ],
+                                        1
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "md-button",
                                         {
-                                          staticClass: "md-danger",
+                                          staticClass:
+                                            "md-just-icon md-simple md-danger",
                                           on: {
                                             click: function($event) {
                                               return _vm.removeOneStudent(
@@ -46498,7 +46434,18 @@ var render = function() {
                                             }
                                           }
                                         },
-                                        [_vm._v("Xóa")]
+                                        [
+                                          _c("md-icon", [_vm._v("close")]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "md-tooltip",
+                                            {
+                                              attrs: { "md-direction": "top" }
+                                            },
+                                            [_vm._v("Xóa")]
+                                          )
+                                        ],
+                                        1
                                       )
                                     ],
                                     1

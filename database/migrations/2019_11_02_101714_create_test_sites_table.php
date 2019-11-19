@@ -15,6 +15,7 @@ class CreateTestSitesTable extends Migration
     {
         Schema::create('test_sites', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedInteger('exam_id');
             $table->string('name');
             $table->timestamps();
         });
