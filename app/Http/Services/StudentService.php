@@ -58,7 +58,7 @@ class StudentService
         return 'ok';
     }
 
-    public function deleteManyStudent($params)
+    public function deleteManyStudents($params)
     {
         $studentIds = array_get($params, 'ids', []);
         if (count($studentIds) > 0) {
