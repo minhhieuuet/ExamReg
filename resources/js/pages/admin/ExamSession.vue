@@ -113,7 +113,7 @@ import {
 } from '@/components'
 
 import rf from '../../requests/RequestFactory';
-import ExamSessionModal from '../../modals/ExamSession'
+import ExamSessionModal from '../../modals/ExamSession';
 
 export default{
   components: {
