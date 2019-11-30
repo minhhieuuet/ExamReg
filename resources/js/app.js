@@ -6,7 +6,7 @@
  */
 
 require('./bootstrap');
-
+import './common/filters';
 import Vue from 'vue';
 import VeeValidate, { Validator } from 'vee-validate';
 import VueRouter from 'vue-router';
@@ -14,6 +14,7 @@ import Routers from './configs/routes';
 import VueMaterial from 'vue-material';
 import VModal from 'vue-js-modal';
 import Toasted from 'vue-toasted';
+import Multiselect from 'vue-multiselect';
 
 import 'vue-material/dist/vue-material.min.css';
 import GlobalComponents from './globalComponents';
@@ -38,6 +39,8 @@ Vue.use(GlobalComponents)
 Vue.use(GlobalDirectives)
 Vue.use(Notifications)
 
+
+Vue.component('multiselect', Multiselect)
 // global library setup
 Object.defineProperty(Vue.prototype, '$Chartist', {
   get () {

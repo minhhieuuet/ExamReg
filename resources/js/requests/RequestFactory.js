@@ -1,10 +1,10 @@
 import UserRequest from './UserRequest';
 import StudentRequest from './StudentRequest';
-import UniversityRequest from './UniversityRequest';
-
+import ExamSessionRequest from './ExamSessionRequest';
 const requestMap = {
   UserRequest,
   StudentRequest,
+  ExamSessionRequest,
   UniversityRequest
 };
 
