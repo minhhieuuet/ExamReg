@@ -15,10 +15,13 @@ class ExamSessionService
     {
         $limit = array_get($params, 'limit', 10);
 
-        return ExamSession::when(!empty(array_get($params, 'search')), function ($query) use ($params) {
+        return ExamSession::join('modules', 'exam_sessions.module_id','modules.id')
+        ->join('test_sites', 'exam_sessions.test_site_id','test_sites.id')
+        ->select('modules.name as module_name', 'test_sites.name as test_site_name', 'exam_sessions.started_at', 'exam_sessions.finished_at')
+        ->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
             $search = array_get($params, 'search');
             return $query->where('name', 'like', "%$search%");
-        })->orderBy('created_at', 'desc')->paginate($limit);
+        })->orderBy('exam_sessions.created_at', 'desc')->paginate($limit);
     }
 
     /**
@@ -37,8 +40,10 @@ class ExamSessionService
     public function storeExamSession($params)
     {
         $examSession = ExamSession::create([
-            'name' => array_get($params, 'name'),
-            'capacity' => array_get($params, 'capacity'),
+            'module_id' => array_get($params, 'module_id'),
+            'test_site_id' => array_get($params, 'test_site_id'),
+            'started_at' => array_get($params, 'started_at'),
+            'finished_at' => array_get($params, 'finished_at'),
         ]);
 
         return $this->getOneExamSession($examSession);

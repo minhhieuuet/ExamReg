@@ -75,6 +75,8 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     /* Admin 3 */
     Route::get('/exam-sessions', 'ExamSessionController@getExamSessions');
     Route::get('exam-session/{examSession}', 'ExamSessionController@getOneExamSession');
+    Route::get('all-module', 'ExamSessionController@getAllModules');
+    Route::get('all-testSites', 'ExamSessionController@getAllTestSites');
     Route::post('exam-session', 'ExamSessionController@storeExamSession');
     Route::put('exam-session/{examSession}', 'ExamSessionController@updateExamSession');
     Route::delete('exam-session/{examSession}', 'ExamSessionController@deleteOneExamSession');

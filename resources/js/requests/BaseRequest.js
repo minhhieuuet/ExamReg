@@ -60,8 +60,8 @@ export default class BaseRequest {
           Vue.toasted.show(msg, {
             theme: 'bubble',
             position: 'top-right',
-            duration : 1500,
-            type: 'danger'
+            duration : 2500,
+            type: 'error'
           });
         });
       });

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ExamSessionRequest;
 use App\Http\Services\ExamSessionService;
 use App\Models\ExamSession;
+use App\Models\Module;
+use App\Models\TestSite;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -45,6 +47,15 @@ class ExamSessionController extends Controller
         return $examSession;
     }
 
+    public function getAllModules()
+    {
+      return Module::all();
+    }
+
+    public function getAllTestSites()
+    {
+      return TestSite::all();
+    }
     /**
      * @param ExamSessionRequest $request
      * @return ExamSession
