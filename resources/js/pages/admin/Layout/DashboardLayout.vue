@@ -16,6 +16,10 @@
         <md-icon>content_paste</md-icon>
         <p>Ca thi</p>
       </sidebar-link>
+      <sidebar-link to="/admin/university">
+        <md-icon>content_paste</md-icon>
+        <p>Trường</p>
+      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">

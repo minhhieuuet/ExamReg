@@ -4,7 +4,8 @@ import ExamSessionRequest from './ExamSessionRequest';
 const requestMap = {
   UserRequest,
   StudentRequest,
-  ExamSessionRequest
+  ExamSessionRequest,
+  UniversityRequest
 };
 
 const instances = {};
