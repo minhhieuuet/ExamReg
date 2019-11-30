@@ -18,7 +18,7 @@ export default class UniversityRequest extends BaseModelRequest {
     return this.get(url);
   }
 
-  update(studentId, params) {
+  update(universityId, params) {
     const url = '/admin/university/' + universityId;
     return this.put(url, params);
   }
@@ -29,7 +29,7 @@ export default class UniversityRequest extends BaseModelRequest {
   }
 
   removeManyUniversities(universityIds) {
-    const url = '/admin/universities';
+    const url = '/admin/many-universities';
     return this.del(url, {ids: universityIds});
   }
 

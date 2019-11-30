@@ -13,99 +13,23 @@
               <md-icon>close</md-icon>
             </md-button>
           </div>
-          <span class="md-title">bla bla</span>
+          <span class="md-title">Tạo trường</span>
 
           <md-field>
-            <label>Họ và tên</label>
+            <label>Tên</label>
             <md-input type="text"
-                      :name="`${_uid}_name`"
-                      data-vv-validate-on="none"
-                      data-vv-as="name"
-                      v-validate="'required|max:30'"
-                      data-vv-scope="general"
-                      v-model="student.full_name"
-                      :class="errors.has(`general.${_uid}_name`) ? 'is-invalid' : ''"
+                      v-model="university.name"
                       md-counter="30">
             </md-input>
-            <div v-if="errors.has(`general.${_uid}_name`)">
-              <md-icon class="md-accent">warning</md-icon>
-              {{errors.first(`general.${_uid}_name`)}}
-            </div>
           </md-field>
 
           <md-field>
-            <label>Tài khoản</label>
+            <label>Tên viết tắt</label>
             <md-input type="text"
-                      :name="`${_uid}_username`"
-                      data-vv-validate-on="none"
-                      data-vv-as="username"
-                      v-validate="'required|min:6|max:30'"
-                      data-vv-scope="general"
-                      v-model="student.name"
-                      :class="errors.has(`general.${_uid}_username`) ? 'is-invalid' : ''"
+                      v-model="university.short_name"
                       md-counter="30">
            </md-input>
-           <div v-if="errors.has(`general.${_uid}_username`)">
-             <md-icon class="md-accent">warning</md-icon>
-             {{errors.first(`general.${_uid}_username`)}}
-           </div>
           </md-field>
-
-          <md-field>
-            <label>Email</label>
-            <md-input  type="text"
-                      :name="`${_uid}_email`"
-                      data-vv-validate-on="none"
-                      data-vv-as="email"
-                      v-validate="'required|email'"
-                      data-vv-scope="general"
-                      v-model="student.email"
-                      :class="errors.has(`general.${_uid}_email`) ? 'is-invalid' : ''">
-            </md-input>
-            <div v-if="errors.has(`general.${_uid}_email`)">
-              <md-icon class="md-accent">warning</md-icon>
-              {{errors.first(`general.${_uid}_email`)}}
-            </div>
-          </md-field>
-
-          <md-checkbox v-if="editingId" v-model="isEditPassword">Edit Password</md-checkbox>
-          <div style="red-outline">
-            <md-field>
-              <label>Mật khẩu</label>
-              <md-input type="password"
-                        :name="`${_uid}_password`"
-                        data-vv-validate-on="none"
-                        data-vv-as="password"
-                        ref="password"
-                        v-validate="'required|min:6|max:30'"
-                        data-vv-scope="general"
-                        v-model="student.password"
-                        :disabled="!!editingId && !isEditPassword"
-                        :class="errors.has(`general.${_uid}_password`) ? 'is-invalid' : ''">
-             </md-input>
-             <div v-if="errors.has(`general.${_uid}_password`)">
-               <md-icon class="md-accent">warning</md-icon>
-               {{errors.first(`general.${_uid}_password`)}}
-             </div>
-            </md-field>
-
-            <md-field :md-toggle-password="false">
-              <label>Nhập lại mật khẩu</label>
-              <md-input type="password"
-                        :name="`${_uid}_repassword`"
-                        data-vv-validate-on="none"
-                        data-vv-as="retype password"
-                        v-validate="'required|confirmed:password'"
-                        data-vv-scope="general"
-                        v-model="student.retype_password"
-                        :disabled="!!editingId && !isEditPassword"
-                        :class="errors.has(`general.${_uid}_password`) ? 'is-invalid' : ''">
-              </md-input>
-              <div v-if="errors.has(`general.${_uid}_repassword`)">
-                <md-icon class="md-accent">warning</md-icon>
-                {{errors.first(`general.${_uid}_repassword`)}}
-              </div>
-            </md-field>
           </div>
       </div>
 
@@ -121,30 +45,27 @@ import rf from '../requests/RequestFactory';
 export default {
   data () {
     return {
-      title: 'Student',
+      title: 'University',
       editingId: '',
-      isEditPassword: false,
-      student: {
-        full_name: '',
+      university: {
         name: '',
-        email: '',
+        short_name: ''
       }
     }
   },
   methods: {
     beforeOpen (event) {
       this.title = event.params.title;
-      if(event.params.studentId) {
-        this.editingId = event.params.studentId;
-        rf.getRequest('StudentRequest').show(this.editingId).then((student)=>{
-          this.student = student;
+      if(event.params.universityId) {
+        this.editingId = event.params.universityId;
+        rf.getRequest('UniversityRequest').show(this.editingId).then((university)=>{
+          this.university = university;
         });
       }
     },
     beforeClose() {
       this.editingId = '';
-      this.isEditPassword = false,
-      this.student = {
+      this.university = {
         name: '',
         full_name: '',
         email: '',
@@ -158,34 +79,31 @@ export default {
               return;
             }
             if(this.editingId) {
-              this.updateOneStudent();
+              this.updateOneUniversity();
             } else {
-              this.createOneStudent();
+              this.createOneUniversity();
             }
         });
       },
-    updateOneStudent() {
-      let params = this.student;
-      if(!this.isEditPassword) {
-        params = {};
-        params.name = this.student.name;
-        params.full_name = this.student.full_name;
-        params.email = this.student.email;
-      }
-      rf.getRequest('StudentRequest').update(this.editingId, params).then((res)=> {
-        this.$modal.hide('student');
+    updateOneUniversity() {
+      let params = this.university;
+      params = {};
+      params.name = this.university.name;
+      params.short_name = this.university.short_name;
+      rf.getRequest('UniversityRequest').update(this.editingId, params).then((res)=> {
+        this.$modal.hide('university');
         this.$emit('refresh');
       });
-      this.$toasted.show('Cập nhật sinh viên thành công!', {
+      this.$toasted.show('Cập nhật trường thành công!', {
         theme: 'bubble',
         position: 'top-right',
         duration : 1500,
         type: 'success'
       });
     },
-    createOneStudent() {
-          rf.getRequest('StudentRequest').store(this.student).then((res)=>{
-            this.$modal.hide('student');
+    createOneUniversity() {
+          rf.getRequest('UniversityRequest').store(this.university).then((res)=>{
+            this.$modal.hide('university');
             this.$emit('refresh');
           }).catch((err) => {
             // this.$toasted.show('Đã có lỗi xảy ra, vui lòng kiểm tra lại!', {
@@ -197,7 +115,7 @@ export default {
           });
     },
     cancel() {
-      this.$modal.hide('student');
+      this.$modal.hide('university');
     }
   }
 }

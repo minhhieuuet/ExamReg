@@ -3,9 +3,9 @@
     <div class="md-layout">
       <div class="md-layout md-gutter">
         <div class="md-layout-item">
-          <md-button  class="md-primary" @click="createStudent">Thêm</md-button>
+          <md-button  class="md-primary" @click="createUniversity">Thêm</md-button>
           <md-button  class="md-info" @click="refresh">Làm mới</md-button>
-          <md-button  class="md-danger" @click="removeManyStudent()">Xóa</md-button>
+          <md-button  class="md-danger" @click="removeManyUniversity()">Xóa</md-button>
         </div>
         <div class="md-layout-item md-size-30">
           <md-field >
@@ -18,17 +18,16 @@
       <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
         <md-card>
           <md-card-header data-background-color="green">
-            <h4 class="title">Quản lí sinh viên</h4>
-            <p class="category">Here is a subtitle for this table</p>
+            <h4 class="title">Quản lí trường</h4>
+<!--            <p class="category">Here is a subtitle for this table</p>-->
           </md-card-header>
           <md-card-content>
             <data-table :get-data="getData" ref="datatable">
                 <th class="col_checkbox">
                   <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
                 </th>
-                <th class="col_title_en">Tên đăng nhập</th>
-                <th class="col_title_jp">Email</th>
-                <th class="col_summary_en">Tên</th>
+                <th class="col_title_en">Tên</th>
+                <th class="col_title_en">Tên viết tắt</th>
                 <th class="col_created_at">Ngày tạo</th>
                 <th class="col_tools">Công cụ</th>
                 <template slot="body" slot-scope="{ item, index }">
@@ -37,12 +36,11 @@
                       <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
                     </td>
                     <td class="text-center" v-html="item.name"></td>
-                    <td class="text-center" v-html="item.email"></td>
-                    <td class="text-center" v-html="item.full_name"></td>
+                    <td class="text-center" v-html="item.short_name"></td>
                     <td class="text-center" v-html="item.created_at"></td>
                     <td class="text-center">
-                      <md-button class="md-info" @click="editStudent(item.id)">Sửa</md-button>
-                      <md-button class="md-danger" @click="removeOneStudent(item.id)">Xóa</md-button>
+                      <md-button class="md-info" @click="editUniversity(item.id)">Sửa</md-button>
+                      <md-button class="md-danger" @click="removeOneUniversity(item.id)">Xóa</md-button>
                     </td>
                   </tr>
                 </template>
@@ -78,7 +76,7 @@ export default{
     }
   },
   methods: {
-    removeOneStudent(studentId) {
+    removeOneUniversity(universityId) {
       this.$modal.show('dialog', {
         title: 'Cảnh báo!',
         text: 'Bạn có chắc chắn muốn xóa ?',
@@ -93,10 +91,10 @@ export default{
             title: 'Xác nhận',
             default: true,
             handler: () => {
-              return rf.getRequest('StudentRequest').removeOneStudent(studentId).then(() => {
+              return rf.getRequest('UniversityRequest').removeOneUniversity(universityId).then(() => {
                 this.$modal.hide('dialog');
                 this.$refs.datatable.refresh();
-                this.$toasted.show('Xóa sinh viên thành công!', {
+                this.$toasted.show('Xóa trường thành công!', {
                   theme: 'bubble',
                   position: 'top-right',
                   duration : 1500,
@@ -104,11 +102,11 @@ export default{
                 });
               });
             }
-          },
+          }
         ]
       });
     },
-    removeManyStudent() {
+    removeManyUniversity() {
         this.$modal.show('dialog', {
           title: 'Cảnh báo!',
           text: 'Bạn có chắc chắn muốn xóa ?',
@@ -123,14 +121,14 @@ export default{
               title: 'Xác nhận',
               default: true,
               handler: () => {
-                const studentIds = this.$refs.datatable.rows.filter((row) => {
+                const universityIds = this.$refs.datatable.rows.filter((row) => {
                   return row.selected === true;
                 }).map(record => record.id);
 
-                return rf.getRequest('StudentRequest').removeManyStudents(studentIds).then(() => {
+                return rf.getRequest('UniversityRequest').removeManyUniversities(universityIds).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('Student removed successfully!', {
+                  this.$toasted.show('University removed successfully!', {
                     theme: 'bubble',
                     position: 'top-right',
                     duration : 1500,
@@ -142,11 +140,11 @@ export default{
           ]
         });
       },
-      createStudent() {
-        this.$modal.show('university', {title: 'Thêm sinh viên'});
+      createUniversity() {
+        this.$modal.show('university', {title: 'Thêm trường'});
       },
-      editStudent(studentId) {
-        this.$modal.show('student', {title: 'Sửa thông tin sinh viên', studentId: studentId});
+      editUniversity(universityId) {
+        this.$modal.show('university', {title: 'Sửa thông tin trường', universityId: universityId});
       },
       listenSelectRow() {
         if (!this.$refs.datatable) {
