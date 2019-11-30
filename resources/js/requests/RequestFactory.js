@@ -3,12 +3,15 @@ import StudentRequest from './StudentRequest';
 import ExamSessionRequest from './ExamSessionRequest';
 import UniversityRequest from './UniversityRequest';
 import RoomRequest from './RoomRequest';
+import ModuleRequest from './ModuleRequest';
 const requestMap = {
   UserRequest,
   StudentRequest,
   ExamSessionRequest,
   UniversityRequest,
-  RoomRequest
+  RoomRequest,
+  ModuleRequest,
+
 };
 
 const instances = {};
