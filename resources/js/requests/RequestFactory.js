@@ -1,6 +1,7 @@
 import UserRequest from './UserRequest';
 import StudentRequest from './StudentRequest';
 import ExamSessionRequest from './ExamSessionRequest';
+import UniversityRequest from './UniversityRequest';
 const requestMap = {
   UserRequest,
   StudentRequest,
