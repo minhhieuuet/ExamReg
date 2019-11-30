@@ -24,6 +24,10 @@
         <md-icon>content_paste</md-icon>
         <p>Phòng máy</p>
       </sidebar-link>
+      <sidebar-link to="/admin/module">
+        <md-icon>content_paste</md-icon>
+        <p>Học phần</p>
+      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">
