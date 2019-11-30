@@ -39,8 +39,14 @@
                     <td class="text-center" v-html="item.short_name"></td>
                     <td class="text-center" v-html="item.created_at"></td>
                     <td class="text-center">
-                      <md-button class="md-info" @click="editUniversity(item.id)">Sửa</md-button>
-                      <md-button class="md-danger" @click="removeOneUniversity(item.id)">Xóa</md-button>
+                      <md-button class="md-just-icon md-simple md-primary" @click="editUniversity(item.id)">
+                        <md-icon>edit</md-icon>
+                        <md-tooltip md-direction="top">Sửa</md-tooltip>
+                      </md-button>
+                      <md-button class="md-just-icon md-simple md-danger" @click="removeOneUniversity(item.id)">
+                        <md-icon>close</md-icon>
+                        <md-tooltip md-direction="top">Xóa</md-tooltip>
+                      </md-button>
                     </td>
                   </tr>
                 </template>
