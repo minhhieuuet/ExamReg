@@ -2,10 +2,7 @@
   <div class="content">
     <div class="md-layout">
       <div class="md-layout md-gutter">
-        <div class="md-layout-item">
-          <md-button  class="md-primary" @click="createStudent">Thêm</md-button>
-          <md-button  class="md-info" @click="refresh">Làm mới</md-button>
-          <md-button  class="md-danger" @click="removeManyStudent()">Xóa</md-button>
+        <div class="md-layout-item md-size-5">
         </div>
         <div class="md-layout-item md-size-30">
           <md-field >
@@ -13,6 +10,13 @@
             <md-input type="text" name="text" v-model="searchInput" @keyup.enter="$refs.datatable.refresh()"></md-input>
             <md-icon>search</md-icon>
           </md-field>
+        </div>
+        <div class="md-layout-item md-size-35">
+        </div>
+        <div class="md-layout-item">
+          <md-button  class="md-success" @click="createStudent">Thêm</md-button>
+          <md-button  class="md-info" @click="refresh">Làm mới</md-button>
+          <md-button  class="md-danger" @click="removeManyStudent()">Xóa</md-button>
         </div>
       </div>
       <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
@@ -41,8 +45,14 @@
                     <td class="text-center" v-html="item.full_name"></td>
                     <td class="text-center" v-html="item.created_at"></td>
                     <td class="text-center">
-                      <md-button class="md-info" @click="editStudent(item.id)">Sửa</md-button>
-                      <md-button class="md-danger" @click="removeOneStudent(item.id)">Xóa</md-button>
+                        <md-button class="md-just-icon md-simple md-primary" @click="editStudent(item.id)">
+                          <md-icon>edit</md-icon>
+                          <md-tooltip md-direction="top">Sửa</md-tooltip>
+                        </md-button>
+                        <md-button class="md-just-icon md-simple md-danger" @click="removeOneStudent(item.id)">
+                          <md-icon>close</md-icon>
+                          <md-tooltip md-direction="top">Xóa</md-tooltip>
+                        </md-button>
                     </td>
                   </tr>
                 </template>

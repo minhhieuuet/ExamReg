@@ -17,7 +17,7 @@
               <label>Search...</label>
             </md-autocomplete>
           </div> -->
-          <md-list>
+          <!-- <md-list>
             <md-list-item>
               <i class="material-icons">dashboard</i>
               <p class="hidden-lg hidden-md">Dashboard</p>
@@ -38,7 +38,7 @@
                   <li><a href="#">Another One</a></li>
                 </ul>
               </drop-down>
-            </md-list-item>
+            </md-list-item> -->
 
             <md-list-item to="/user">
               <i class="material-icons">person</i>
@@ -95,6 +95,12 @@ export default{
 
   p {
     color: white !important;
+  }
+
+  .md-list-item-router {
+    &:hover {
+      background-color: gray !important;
+    }
   }
 }
 </style>

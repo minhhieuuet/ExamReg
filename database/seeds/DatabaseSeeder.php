@@ -21,5 +21,9 @@ class DatabaseSeeder extends Seeder
           ]
         ]);
         factory(App\User::class, 50)->create();
+
+        $this->call(ModulesTableSeeder::class);
+        $this->call(RoomsTableSeeder::class);
+        $this->call(UniversitiesTableSeeder::class);
     }
 }

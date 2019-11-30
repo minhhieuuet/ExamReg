@@ -17,6 +17,8 @@ class CreateExamsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('university_id');
             $table->string('name');
+            $table->bigInteger('register_started_at')->nullable();
+            $table->bigInteger('register_finished_at')->nullable();
             $table->timestamps();
         });
     }

@@ -40,10 +40,8 @@ docker-init:
 init-db-full:
 	make autoload
 	php artisan migrate:fresh
-	make update-master
 	php artisan db:seed
-	./bin/import_seed_data.sh
-
+	php artisan passport:install --force
 docker-init-db-full:
 	docker exec -it app make init-db-full
 
