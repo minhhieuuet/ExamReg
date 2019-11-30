@@ -20,6 +20,10 @@
         <md-icon>content_paste</md-icon>
         <p>Trường</p>
       </sidebar-link>
+      <sidebar-link to="/admin/room">
+        <md-icon>content_paste</md-icon>
+        <p>Phòng máy</p>
+      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">

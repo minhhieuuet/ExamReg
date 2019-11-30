@@ -5,6 +5,7 @@ import AdminDashboard from '@/pages/admin/Dashboard.vue';
 import AdminStudent from '@/pages/admin/Student.vue';
 import AdminExamSession from '@/pages/admin/ExamSession.vue';
 import AdminUniversity from '@/pages/admin/University.vue';
+import AdminRoom from '@/pages/admin/Room.vue';
 
 import UserDashboardLayout from '@/pages/user/Layout/DashboardLayout.vue'
 import UserDashboard from '@/pages/user/Dashboard.vue';
@@ -83,6 +84,14 @@ export default {
           path: 'university',
           name: 'Trường',
           component: AdminUniversity,
+          meta: {
+            requiresAdmin: true
+          }
+        },
+        {
+          path: 'room',
+          name: 'Phòng máy',
+          component: AdminRoom,
           meta: {
             requiresAdmin: true
           }
