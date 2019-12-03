@@ -15,7 +15,7 @@ class CreateTestRoomsTable extends Migration
     {
         Schema::create('test_rooms', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('test_site_id');
+            $table->unsignedInteger('exam_session_id');
             $table->unsignedInteger('room_id');
             $table->string('name');
             $table->timestamps();

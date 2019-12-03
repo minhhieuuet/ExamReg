@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModuleStudentsTable extends Migration
+class CreateTestRoomStudentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateModuleStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('module_student', function (Blueprint $table) {
+        Schema::create('test_room_student', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('exam_id');
-            $table->unsignedInteger('module_id');
+            $table->unsignedInteger('test_room_id');
             $table->unsignedInteger('student_id');
-            $table->boolean('status');
+            $table->unsignedInteger('candidate_number');
+            $table->unsignedInteger('ordinal_number');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateModuleStudentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('module_student');
+        Schema::dropIfExists('test_room_student');
     }
 }
