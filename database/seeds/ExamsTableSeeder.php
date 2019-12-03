@@ -12,6 +12,8 @@ class ExamsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('exams')->truncate();
+
         DB::table('exams')->insert([
             'name' => 'Học kì 1 - Năm học 2018-2019',
         ]);

@@ -12,6 +12,8 @@ class ExamSessionsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('exam_sessions')->truncate();
+
         DB::table('exam_sessions')->insert([
             'test_site_id' => '5',
             'module_id' => '1',

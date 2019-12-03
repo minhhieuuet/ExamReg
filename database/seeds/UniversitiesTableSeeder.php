@@ -13,7 +13,7 @@ class UniversitiesTableSeeder extends Seeder
      */
     public function run()
     {
-//        DB::table('universities')->truncate();
+        DB::table('universities')->truncate();
 //        factory(University::class, 10)->create();
 
         DB::table('universities')->insert([

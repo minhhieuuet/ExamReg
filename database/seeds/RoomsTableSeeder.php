@@ -13,7 +13,7 @@ class RoomsTableSeeder extends Seeder
      */
     public function run()
     {
-//        DB::table('rooms')->truncate();
+        DB::table('rooms')->truncate();
 //        factory(Room::class, 10)->create();
 
         DB::table('rooms')->insert([

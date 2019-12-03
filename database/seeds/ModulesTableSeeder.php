@@ -13,7 +13,7 @@ class ModulesTableSeeder extends Seeder
      */
     public function run()
     {
-//        DB::table('modules')->truncate();
+        DB::table('modules')->truncate();
 //        factory(Module::class, 10)->create();
 
         DB::table('modules')->insert([

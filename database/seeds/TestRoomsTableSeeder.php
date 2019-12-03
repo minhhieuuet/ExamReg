@@ -12,6 +12,8 @@ class TestRoomsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('test_rooms')->truncate();
+
         DB::table('test_rooms')->insert([
             'test_site_id' => '5',
             'exam_session_id' => '1',

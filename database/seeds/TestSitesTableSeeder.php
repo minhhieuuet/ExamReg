@@ -12,6 +12,8 @@ class TestSitesTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('test_sites')->truncate();
+
         DB::table('test_sites')->insert([
             'exam_id' => '1',
             'name' => 'Trường Đại học Công nghệ'
