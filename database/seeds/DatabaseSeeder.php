@@ -22,8 +22,14 @@ class DatabaseSeeder extends Seeder
         ]);
         factory(App\User::class, 50)->create();
 
+        $this->call(ExamSessionsTableSeeder::class);
+        $this->call(ExamsTableSeeder::class);
         $this->call(ModulesTableSeeder::class);
+        $this->call(ModuleUserTableSeeder::class);
         $this->call(RoomsTableSeeder::class);
+        $this->call(TestRoomsTableSeeder::class);
+        $this->call(TestRoomUserTableSeeder::class);
+        $this->call(TestSitesTableSeeder::class);
         $this->call(UniversitiesTableSeeder::class);
     }
 }
