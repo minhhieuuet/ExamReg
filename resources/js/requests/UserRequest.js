@@ -5,6 +5,24 @@ export default class UserRequest extends BaseModelRequest {
     return 'users';
   }
 
+  getAllAvaiableExamSessions(moduleId) {
+    return this.get('/user/all-exam-sessions/' + moduleId);
+  }
+
+  getAllModules() {
+    return this.get('/user/all-modules');
+  }
+
+  getAllRegistedSessions() {
+    return this.get('/user/all-registed-sessions');
+  }
+
+  getTotalExamSessionComputers (examSessionId) {
+    return this.get('/user/exam-session-computers/' + examSessionId);
+  }
+  registerSession (sessionId) {
+    return this.post('/user/register-session/', {session_id: sessionId});
+  }
   login (params) {
     return this.post('/auth/login', params);
   }
