@@ -4,6 +4,7 @@ namespace App\Providers;
 use Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+      Schema::defaultStringLength(191);
       Validator::extend('greater_than', function($attribute, $value, $params, $validator){
         $other = Input::get($params[0]);
         return intval($value) > intval($other);
