@@ -26,7 +26,10 @@ import MaterialDashboard from './material-dashboard';
 
 import Chartist from 'chartist';
 import DataTable from './components/datatable/DataTable';
-
+import Loading from 'vue-loading-overlay';
+    // Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
+Vue.use(Loading);
 Vue.use(VueMaterial);
 Vue.use(VeeValidate);
 Vue.use(VModal, { dialog: true });
@@ -41,6 +44,7 @@ Vue.use(Notifications)
 
 
 Vue.component('multiselect', Multiselect)
+Vue.component('loading', Loading)
 // global library setup
 Object.defineProperty(Vue.prototype, '$Chartist', {
   get () {
