@@ -1,9 +1,17 @@
 import UserRequest from './UserRequest';
 import StudentRequest from './StudentRequest';
-
+import ExamSessionRequest from './ExamSessionRequest';
+import UniversityRequest from './UniversityRequest';
+import RoomRequest from './RoomRequest';
+import ModuleRequest from './ModuleRequest';
 const requestMap = {
   UserRequest,
-  StudentRequest
+  StudentRequest,
+  ExamSessionRequest,
+  UniversityRequest,
+  RoomRequest,
+  ModuleRequest,
+
 };
 
 const instances = {};

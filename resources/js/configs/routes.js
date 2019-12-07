@@ -3,6 +3,10 @@ import Login from '@/pages/LoginPage.vue';
 import AdminDashboardLayout from '@/pages/admin/Layout/DashboardLayout.vue'
 import AdminDashboard from '@/pages/admin/Dashboard.vue';
 import AdminStudent from '@/pages/admin/Student.vue';
+import AdminExamSession from '@/pages/admin/ExamSession.vue';
+import AdminUniversity from '@/pages/admin/University.vue';
+import AdminRoom from '@/pages/admin/Room.vue';
+import AdminModule from '@/pages/admin/Module.vue';
 
 import UserDashboardLayout from '@/pages/user/Layout/DashboardLayout.vue'
 import UserDashboard from '@/pages/user/Dashboard.vue';
@@ -69,6 +73,38 @@ export default {
             requiresAdmin: true
           }
         },
+        {
+          path: 'exam-session',
+          name: 'Ca thi',
+          component: AdminExamSession,
+          meta: {
+            requiresAdmin: true
+          }
+        },
+        {
+          path: 'university',
+          name: 'Trường',
+          component: AdminUniversity,
+          meta: {
+            requiresAdmin: true
+          }
+        },
+        {
+          path: 'room',
+          name: 'Phòng máy',
+          component: AdminRoom,
+          meta: {
+            requiresAdmin: true
+          }
+        },
+        {
+          path: 'module',
+          name: 'Học phần',
+          component: AdminModule,
+          meta: {
+            requiresAdmin: true
+          }
+        }
       ]
     }
   ]

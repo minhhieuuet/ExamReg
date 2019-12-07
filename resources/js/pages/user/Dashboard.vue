@@ -1,279 +1,203 @@
-<template>
+<template ref="dashboard">
   <div class="content">
-    <div class="md-layout">
-      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33">
-        <chart-card
-          :chart-data="dailySalesChart.data"
-          :chart-options="dailySalesChart.options"
-          :chart-type="'Line'"
-          data-background-color="blue">
-          <template slot="content">
-            <h4 class="title">Daily Sales</h4>
-              <p class="category">
-                <span class="text-success"><i class="fas fa-long-arrow-alt-up"></i> 55% </span> increase in today sales.
-              </p>
-          </template>
+    <loading :active.sync="isLoading" :can-cancel="false"></loading>
+    <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100 table-1">
+      <md-card>
+        <md-card-header data-background-color="green">
+          <h4 class="title">Đăng ký ca thi</h4>
+        </md-card-header>
+        <md-card-content>
+          <multiselect width="20px" v-model="selectedModule" :options="modules" :custom-label="nameWithCode" :searchable="true" label="name" placeholder="Chọn môn học"></multiselect>
+          <h2 v-if="selectedModule.isRegisted">Môn thi đã được đăng ký</h2>
+          <md-table v-else>
+              <th>STT</th>
+              <th>Mã học phần</th>
+              <th class="col_title_en">Môn thi</th>
+              <th>Thời gian bắt đầu</th>
+              <th>Thời gian kết thúc</th>
+              <th class="col_title_en">Điểm thi</th>
+              <th>Trạng thái</th>
+              <th class="col_tools">Đăng ký</th>
 
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              updated 4 minutes ago
-            </div>
-          </template>
-        </chart-card>
-      </div>
-      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33">
-        <chart-card
-          :chart-data="emailsSubscriptionChart.data"
-          :chart-options="emailsSubscriptionChart.options"
-          :chart-responsive-options="emailsSubscriptionChart.responsiveOptions"
-          :chart-type="'Bar'"
-          data-background-color="red">
-          <template slot="content">
-            <h4 class="title">Email Subscription</h4>
-              <p class="category">
-                Last Campaign Performance
-              </p>
-          </template>
+                <tr v-for="(item, index) in examSessions">
+                  <td>{{index+1}}</td>
+                  <td>{{item.module_code}}</td>
+                  <td class="text-center" v-html="item.module_name"></td>
+                  <td class="text-center" v-html="item.started_at"></td>
+                  <td class="text-center" v-html="item.finished_at"></td>
+                  <td class="text-center" v-html="item.test_site_name"></td>
+                  <td class="text-center">{{item.registed_computers}}/{{item.total_computers}}</td>
+                  <td class="text-center">
+                    <md-checkbox v-model="item.selected" @change="registerSession(item)"></md-checkbox>
+                  </td>
+                </tr>
 
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              updated 10 days ago
-            </div>
-          </template>
-        </chart-card>
-      </div>
-      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33">
-        <chart-card
-          :chart-data="dataCompletedTasksChart.data"
-          :chart-options="dataCompletedTasksChart.options"
-          :chart-type="'Line'"
-          data-background-color="green">
-          <template slot="content">
-            <h4 class="title">Completed Tasks</h4>
-              <p class="category">
-                Last Campaign Performance
-              </p>
-          </template>
+          </md-table>
+        </md-card-content>
+      </md-card>
+    </div>
 
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              campaign sent 26 minutes ago
-            </div>
-          </template>
-        </chart-card>
-      </div>
-      <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
-        <stats-card data-background-color="green">
-          <template slot="header">
-            <md-icon >store</md-icon>
-          </template>
-
-          <template slot="content">
-            <p class="category">Revenue</p>
-            <h3 class="title">$34,245</h3>
-          </template>
-
-          <template slot="footer">
-            <div class="stats">
-                <md-icon>date_range</md-icon>
-                Last 24 Hours
-            </div>
-          </template>
-        </stats-card>
-      </div>
-      <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
-        <stats-card data-background-color="orange">
-          <template slot="header">
-            <md-icon >content_copy</md-icon>
-          </template>
-
-          <template slot="content">
-            <p class="category">Used Space</p>
-            <h3 class="title">49/50
-                <small>GB</small>
-            </h3>
-          </template>
-
-          <template slot="footer">
-            <div class="stats">
-              <md-icon class="text-danger">warning</md-icon>
-              <a href="#pablo">Get More Space...</a>
-            </div>
-          </template>
-        </stats-card>
-      </div>
-      <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
-        <stats-card data-background-color="red">
-          <template  slot="header">
-            <md-icon >info_outline</md-icon>
-          </template>
-
-          <template slot="content">
-            <p class="category">Fixed Issues</p>
-            <h3 class="title">75</h3>
-          </template>
-
-          <template slot="footer">
-            <div class="stats">
-               <md-icon>local_offer</md-icon>
-               Tracked from Github
-            </div>
-          </template>
-        </stats-card>
-      </div>
-      <div class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25">
-        <stats-card data-background-color="blue">
-          <template  slot="header">
-            <i class="fab fa-twitter"></i>
-          </template>
-
-          <template slot="content">
-            <p class="category">Folowers</p>
-            <h3 class="title">+245</h3>
-          </template>
-
-          <template slot="footer">
-            <div class="stats">
-               <md-icon>update</md-icon>
-               Just Updated
-            </div>
-          </template>
-        </stats-card>
-      </div>
-      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
-        <md-card>
-          <md-card-header data-background-color="orange">
-            <h4 class="title">Employees Stats</h4>
-            <p class="category">New employees on 15th September, 2016</p>
-          </md-card-header>
-          <md-card-content>
-            <ordered-table table-header-color="orange"></ordered-table>
-          </md-card-content>
-        </md-card>
-      </div>
-      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
-        <nav-tabs-card>
-          <template slot="content">
-            <span class="md-nav-tabs-title">Tasks:</span>
-            <md-tabs md-sync-route class="md-success" md-alignment="left">
-
-              <md-tab id="tab-home" md-label="Bugs" md-icon="bug_report">
-                <nav-tabs-table></nav-tabs-table>
-              </md-tab>
-
-              <md-tab id="tab-pages" md-label="Website" md-icon="code">
-                <nav-tabs-table></nav-tabs-table>
-              </md-tab>
-
-              <md-tab id="tab-posts" md-label="server" md-icon="cloud">
-                <nav-tabs-table></nav-tabs-table>
-              </md-tab>
-            </md-tabs>
-          </template>
-        </nav-tabs-card>
-      </div>
+    <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100 table-2">
+      <md-card>
+        <md-card-header data-background-color="green">
+          <h4 class="title">Ca thi đã đăng ký</h4>
+        </md-card-header>
+        <md-card-content>
+          <data-table :get-data="getAllRegistedSessions" ref="datatable">
+              <th>STT</th>
+              <th>Mã học phần</th>
+              <th class="col_title_en">Môn thi</th>
+              <th>Thời gian bắt đầu</th>
+              <th>Thời gian kết thúc</th>
+              <th>Phòng thi</th>
+              <th class="col_title_en">Điểm thi</th>
+              <th class="col_tools">Công cụ</th>
+              <template slot="body" slot-scope="{ item, index }">
+                <tr>
+                  <td>{{index+1}}</td>
+                  <td>{{item.module_code}}</td>
+                  <td class="text-center" v-html="item.module_name"></td>
+                  <td class="text-center" v-html="item.started_at"></td>
+                  <td class="text-center" v-html="item.finished_at"></td>
+                  <td class="text-center">{{item.test_room_name}} - {{item.room_name}}</td>
+                  <td class="text-center" v-html="item.test_site_name"></td>
+                  <td class="text-center">
+                    <md-button class="md-just-icon md-simple md-danger" @click="unRegisterASession(item)">
+                      <md-icon>close</md-icon>
+                      <md-tooltip md-direction="top">Hủy</md-tooltip>
+                    </md-button>
+                  </td>
+                </tr>
+              </template>
+          </data-table>
+        </md-card-content>
+        <v-dialog/>
+      </md-card>
     </div>
   </div>
 </template>
 
 <script>
-import {
-  StatsCard,
-  ChartCard,
-  NavTabsCard,
-  NavTabsTable,
-  OrderedTable
-} from '@/components'
-
+import rf from '../../requests/RequestFactory';
 export default{
-  components: {
-    StatsCard,
-    ChartCard,
-    NavTabsCard,
-    NavTabsTable,
-    OrderedTable
-  },
   data () {
     return {
-      dailySalesChart: {
-        data: {
-          labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-          series: [
-            [12, 17, 7, 17, 23, 18, 38]
-          ]
-        },
-        options: {
-          lineSmooth: this.$Chartist.Interpolation.cardinal({
-            tension: 0
-          }),
-          low: 0,
-          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-          }
-        }
+      isLoading: false,
+      value: '',
+      selectedModule: {
+        isRegisted: false
       },
-      dataCompletedTasksChart: {
-        data: {
-          labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-          series: [
-            [230, 750, 450, 300, 280, 240, 200, 190]
-          ]
-        },
-
-        options: {
-          lineSmooth: this.$Chartist.Interpolation.cardinal({
-            tension: 0
-          }),
-          low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-          }
-        }
-      },
-      emailsSubscriptionChart: {
-        data: {
-          labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
-          series: [
-            [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
-
-          ]
-        },
-        options: {
-          axisX: {
-            showGrid: false
-          },
-          low: 0,
-          high: 1000,
-          chartPadding: {
-            top: 0,
-            right: 5,
-            bottom: 0,
-            left: 0
-          }
-        },
-        responsiveOptions: [
-          ['screen and (max-width: 640px)', {
-            seriesBarDistance: 5,
-            axisX: {
-              labelInterpolationFnc: function (value) {
-                return value[0]
-              }
-            }
-          }]
-        ]
-      }
+      modules: [],
+      examSessions: [],
+      reRender: true
     }
+  },
+  watch: {
+    selectedModule: function () {
+      this.getData();
+      this.updateModuleStatus();
+    }
+  },
+  methods: {
+    getData (params) {
+      rf.getRequest('UserRequest').getAllAvaiableExamSessions(this.selectedModule.module_id).then(res=>{
+        this.examSessions = res;
+      })
+    },
+    getAllRegistedSessions () {
+      return rf.getRequest('UserRequest').getAllRegistedSessions();
+    },
+    nameWithCode ({ name, module_code }) {
+      if(!name || !module_code) {
+        return 'Chọn môn học';
+      }
+      return `${module_code} — [${name}]`;
+    },
+    registerSession(session) {
+      session.selected = true;
+      this.isLoading = true;
+      rf.getRequest('UserRequest').registerSession(session.id).then(data => {
+        this.isLoading = false;
+        this.refresh();
+        this.updateModuleStatus();
+        session.selected = false;
+        this.$toasted.show('Đăng ký ca thi thành công', {
+          theme: 'bubble',
+          position: 'top-right',
+          duration : 1500,
+          type: 'success'
+        });
+      });
+    },
+    updateModuleStatus() {
+      rf.getRequest('UserRequest').isRegistedModule(this.selectedModule.module_id).then(res =>{
+        this.selectedModule.isRegisted = res;
+        this.$forceUpdate();
+      })
+    },
+    unRegisterASession(item) {
+      this.$modal.show('dialog', {
+        title: 'Cảnh báo!',
+        text: 'Bạn có chắc chắn muốn xóa ?',
+        buttons: [
+          {
+            title: 'Bỏ qua',
+            handler: () => {
+              this.$modal.hide('dialog');
+            }
+          },
+          {
+            title: 'Xác nhận',
+            default: true,
+            handler: () => {
+              return rf.getRequest('UserRequest').unRegisterASession(item.test_room_id).then((res) => {
+                this.$modal.hide('dialog');
+                this.$refs.datatable.refresh();
+
+                //Enable register form when unregisted
+                this.$data.modules.forEach(module => {
+                  if(module.module_id == item.module_id) {
+                    module.isRegisted = false;
+                  }
+                })
+                this.$toasted.show('Hủy ca thi thành công!', {
+                  theme: 'bubble',
+                  position: 'top-right',
+                  duration : 1500,
+                  type: 'success'
+                });
+              });
+            }
+          },
+        ]
+      });
+    },
+    refresh() {
+      this.$refs.datatable.refresh();
+    },
+  },
+  created: function () {
+    this.getData();
+    setInterval(()=>{
+      this.examSessions.forEach(item =>{
+        rf.getRequest('UserRequest').getTotalExamSessionComputers(item.id).then(data =>{
+          item.registed_computers = data.registed_computers;
+          item.total_computers = data.total_computers;
+          this.$forceUpdate();
+        })
+      })
+    }, 2000);
+    rf.getRequest('UserRequest').getAllModules().then((res) => {
+      this.modules = res;
+    });
   }
 }
 </script>
+<style lang="css" scoped>
+  .table-1 {
+    height: 300px  !important;
+  }
+  .v--modal-overlay{
+
+  }
+</style>

@@ -6,7 +6,7 @@
  */
 
 require('./bootstrap');
-
+import './common/filters';
 import Vue from 'vue';
 import VeeValidate, { Validator } from 'vee-validate';
 import VueRouter from 'vue-router';
@@ -14,6 +14,7 @@ import Routers from './configs/routes';
 import VueMaterial from 'vue-material';
 import VModal from 'vue-js-modal';
 import Toasted from 'vue-toasted';
+import Multiselect from 'vue-multiselect';
 
 import 'vue-material/dist/vue-material.min.css';
 import GlobalComponents from './globalComponents';
@@ -25,7 +26,10 @@ import MaterialDashboard from './material-dashboard';
 
 import Chartist from 'chartist';
 import DataTable from './components/datatable/DataTable';
-
+import Loading from 'vue-loading-overlay';
+    // Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
+Vue.use(Loading);
 Vue.use(VueMaterial);
 Vue.use(VeeValidate);
 Vue.use(VModal, { dialog: true });
@@ -38,6 +42,9 @@ Vue.use(GlobalComponents)
 Vue.use(GlobalDirectives)
 Vue.use(Notifications)
 
+
+Vue.component('multiselect', Multiselect)
+Vue.component('loading', Loading)
 // global library setup
 Object.defineProperty(Vue.prototype, '$Chartist', {
   get () {
