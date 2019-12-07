@@ -90,4 +90,6 @@ Route::group(['middleware' => ['auth:api', 'isAdminOrSelf'], 'prefix' => 'user']
     Route::get('/exam-session-computers/{examSession}', 'ClientController@totalExamSessionComputers');
     Route::get('/exam-session-registed-computers/{examSession}', 'ClientController@totalExamSessionRegistedComputers');
     Route::post('/register-session', 'ClientController@registerSession');
+    Route::post('/unregister-session', 'ClientController@unRegisterASession');
+    Route::get('/is-registed-module/{module}', 'ClientController@isRegistedModule');
 });

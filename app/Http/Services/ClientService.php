@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Models\ExamSession;
 use App\Models\TestRoomUser;
 use App\Models\TestRoom;
+use App\Models\Module;
 
 class ClientService
 {
@@ -56,7 +57,8 @@ class ClientService
               'exam_sessions.finished_at as finished_at',
               'test_rooms.name as test_room_name',
               'rooms.name as room_name',
-              'test_sites.name as test_site_name')->paginate(100);
+              'test_sites.name as test_site_name',
+              'test_rooms.id as test_room_id')->paginate(100);
   }
   public function totalRegistedComputers($examSession) {
     $totalRegistedComputers = TestRoomUser::join('test_rooms', 'test_room_user.test_room_id', 'test_rooms.id')
@@ -70,6 +72,12 @@ class ClientService
               ->join('rooms', 'test_rooms.room_id', 'rooms.id')->sum('capacity');
     $response = ['registed_computers' => $totalRegistedComputers, 'total_computers' => $totalExamSessionComputers];
     return $response;
+  }
+  public function isRegistedModule($module) {
+      return TestRoom::join('exam_sessions', 'test_rooms.exam_session_id', 'exam_sessions.id')
+              ->join('test_room_user', 'test_room_user.test_room_id', 'test_rooms.id')
+              ->where('module_id', $module->id)
+              ->where('user_id', Auth::user()->id)->count() ? 1 : 0;
   }
 
   public function registerSession($request) {
@@ -92,6 +100,11 @@ class ClientService
     }
     TestRoomUser::insert(['test_room_id' => $selectedTestRoom->id, 'user_id' => Auth::user()->id]);
     return $testRooms;
+  }
+
+  public function unRegisterASession($request) {
+    TestRoomUser::where(['test_room_id' => array_get($request, 'test_room_id'), 'user_id' => Auth::user()->id])->delete();
+    return 'ok';
   }
 
 }

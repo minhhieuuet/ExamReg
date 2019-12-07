@@ -1,4 +1,4 @@
-<template>
+<template ref="dashboard">
   <div class="content">
     <loading :active.sync="isLoading" :can-cancel="false"></loading>
     <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100 table-1">
@@ -8,7 +8,8 @@
         </md-card-header>
         <md-card-content>
           <multiselect width="20px" v-model="selectedModule" :options="modules" :custom-label="nameWithCode" :searchable="true" label="name" placeholder="Chọn môn học"></multiselect>
-          <md-table v-if="reRender">
+          <h2 v-if="selectedModule.isRegisted">Môn thi đã được đăng ký</h2>
+          <md-table v-else>
               <th>STT</th>
               <th>Mã học phần</th>
               <th class="col_title_en">Môn thi</th>
@@ -42,7 +43,7 @@
           <h4 class="title">Ca thi đã đăng ký</h4>
         </md-card-header>
         <md-card-content>
-          <data-table :get-data="getAllRegistedSessions">
+          <data-table :get-data="getAllRegistedSessions" ref="datatable">
               <th>STT</th>
               <th>Mã học phần</th>
               <th class="col_title_en">Môn thi</th>
@@ -61,7 +62,7 @@
                   <td class="text-center">{{item.test_room_name}} - {{item.room_name}}</td>
                   <td class="text-center" v-html="item.test_site_name"></td>
                   <td class="text-center">
-                    <md-button class="md-just-icon md-simple md-danger" @click="removeOneExamSession(item.id)">
+                    <md-button class="md-just-icon md-simple md-danger" @click="unRegisterASession(item.test_room_id)">
                       <md-icon>close</md-icon>
                       <md-tooltip md-direction="top">Hủy</md-tooltip>
                     </md-button>
@@ -70,6 +71,7 @@
               </template>
           </data-table>
         </md-card-content>
+        <v-dialog/>
       </md-card>
     </div>
   </div>
@@ -82,7 +84,9 @@ export default{
     return {
       isLoading: false,
       value: '',
-      selectedModule: {},
+      selectedModule: {
+        isRegisted: false
+      },
       modules: [],
       examSessions: [],
       reRender: true
@@ -91,6 +95,7 @@ export default{
   watch: {
     selectedModule: function () {
       this.getData();
+      this.updateModuleStatus();
     }
   },
   methods: {
@@ -112,16 +117,56 @@ export default{
       session.selected = true;
       this.isLoading = true;
       rf.getRequest('UserRequest').registerSession(session.id).then(data => {
-        console.log(data);
         this.isLoading = false;
+        this.refresh();
+        this.updateModuleStatus();
+        this.$toasted.show('Đăng ký ca thi thành công', {
+          theme: 'bubble',
+          position: 'top-right',
+          duration : 1500,
+          type: 'success'
+        });
+      });
+    },
+    updateModuleStatus() {
+      rf.getRequest('UserRequest').isRegistedModule(this.selectedModule.module_id).then(res =>{
+        this.selectedModule.isRegisted = res;
+        this.$forceUpdate();
+      })
+    },
+    unRegisterASession(testRoomId) {
+      this.$modal.show('dialog', {
+        title: 'Cảnh báo!',
+        text: 'Bạn có chắc chắn muốn xóa ?',
+        buttons: [
+          {
+            title: 'Bỏ qua',
+            handler: () => {
+              this.$modal.hide('dialog');
+            }
+          },
+          {
+            title: 'Xác nhận',
+            default: true,
+            handler: () => {
+              return rf.getRequest('UserRequest').unRegisterASession(testRoomId).then((res) => {
+                this.$modal.hide('dialog');
+                this.$refs.datatable.refresh();
+                this.$refs.dashboard.updateModuleStatus();
+                this.$toasted.show('Hủy ca thi thành công!', {
+                  theme: 'bubble',
+                  position: 'top-right',
+                  duration : 1500,
+                  type: 'success'
+                });
+              });
+            }
+          },
+        ]
       });
     },
     refresh() {
-      this.isLoading = true;
       this.$refs.datatable.refresh();
-      this.$refs.datatable.$on('DataTable:finish', () => {
-        this.isLoading = false;
-      });
     },
   },
   created: function () {
@@ -143,12 +188,9 @@ export default{
 </script>
 <style lang="css" scoped>
   .table-1 {
-    position: relative;
-    z-index: 100;
+    height: 300px  !important;
   }
+  .v--modal-overlay{
 
-  .table-2 {
-    position: relative;
-    z-index: 10;
   }
 </style>

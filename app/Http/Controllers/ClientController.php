@@ -47,8 +47,16 @@ class ClientController extends Controller
       return $this->clientService->totalExamSessionComputers($examSession);
     }
 
-    public function registerSession(Request $requests) {
-      return $this->clientService->registerSession($requests->all());
+    public function registerSession(Request $request) {
+      return $this->clientService->registerSession($request->all());
+    }
+
+    public function unRegisterASession(Request $request) {
+      return $this->clientService->unRegisterASession($request->all());
+    }
+
+    public function isRegistedModule(Module $module) {
+      return $this->clientService->isRegistedModule($module);
     }
 
 }
