@@ -62,7 +62,7 @@
                   <td class="text-center">{{item.test_room_name}} - {{item.room_name}}</td>
                   <td class="text-center" v-html="item.test_site_name"></td>
                   <td class="text-center">
-                    <md-button class="md-just-icon md-simple md-danger" @click="unRegisterASession(item.test_room_id)">
+                    <md-button class="md-just-icon md-simple md-danger" @click="unRegisterASession(item)">
                       <md-icon>close</md-icon>
                       <md-tooltip md-direction="top">Hủy</md-tooltip>
                     </md-button>
@@ -135,7 +135,7 @@ export default{
         this.$forceUpdate();
       })
     },
-    unRegisterASession(testRoomId) {
+    unRegisterASession(item) {
       this.$modal.show('dialog', {
         title: 'Cảnh báo!',
         text: 'Bạn có chắc chắn muốn xóa ?',
@@ -150,13 +150,15 @@ export default{
             title: 'Xác nhận',
             default: true,
             handler: () => {
-              return rf.getRequest('UserRequest').unRegisterASession(testRoomId).then((res) => {
+              return rf.getRequest('UserRequest').unRegisterASession(item.test_room_id).then((res) => {
                 this.$modal.hide('dialog');
                 this.$refs.datatable.refresh();
-                rf.getRequest('UserRequest').isRegistedModule(this.selectedModule.module_id).then(res =>{
-                  this.$data.selectedModule.isRegisted = res;
-                  this.$data.selectedModule = {isRegisted: false};
-                  this.$forceUpdate();
+
+                //Enable register form when unregisted
+                this.$data.modules.forEach(module => {
+                  if(module.module_id == item.module_id) {
+                    module.isRegisted = false;
+                  }
                 })
                 this.$toasted.show('Hủy ca thi thành công!', {
                   theme: 'bubble',

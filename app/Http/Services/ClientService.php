@@ -51,6 +51,7 @@ class ClientService
             ->join('test_sites', 'exam_sessions.test_site_id', 'test_sites.id')
             ->join('modules', 'exam_sessions.module_id', 'modules.id')
             ->select(
+              'modules.id as module_id',
               'modules.code as module_code',
               'modules.name as module_name',
               'exam_sessions.started_at as started_at',
