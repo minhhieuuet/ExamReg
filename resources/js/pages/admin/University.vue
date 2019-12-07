@@ -2,10 +2,7 @@
   <div class="content">
     <div class="md-layout">
       <div class="md-layout md-gutter">
-        <div class="md-layout-item">
-          <md-button  class="md-primary" @click="createUniversity">Thêm</md-button>
-          <md-button  class="md-info" @click="refresh">Làm mới</md-button>
-          <md-button  class="md-danger" @click="removeManyUniversity()">Xóa</md-button>
+        <div class="md-layout-item md-size-5">
         </div>
         <div class="md-layout-item md-size-30">
           <md-field >
@@ -13,6 +10,13 @@
             <md-input type="text" name="text" v-model="searchInput" @keyup.enter="$refs.datatable.refresh()"></md-input>
             <md-icon>search</md-icon>
           </md-field>
+        </div>
+        <div class="md-layout-item md-size-35">
+        </div>
+        <div class="md-layout-item">
+          <md-button  class="md-success" @click="createUniversity">Thêm</md-button>
+          <md-button  class="md-info" @click="refresh">Làm mới</md-button>
+          <md-button  class="md-danger" @click="removeManyUniversity()">Xóa</md-button>
         </div>
       </div>
       <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
