@@ -13,6 +13,7 @@
               <th>STT</th>
               <th>Mã học phần</th>
               <th class="col_title_en">Môn thi</th>
+              <th>Ngày thi</th>
               <th>Thời gian bắt đầu</th>
               <th>Thời gian kết thúc</th>
               <th class="col_title_en">Điểm thi</th>
@@ -23,8 +24,9 @@
                   <td>{{index+1}}</td>
                   <td>{{item.module_code}}</td>
                   <td class="text-center" v-html="item.module_name"></td>
-                  <td class="text-center" v-html="item.started_at"></td>
-                  <td class="text-center" v-html="item.finished_at"></td>
+                  <td class="text-center">{{item.started_at | toDateFormat}}</td>
+                  <td class="text-center">{{item.started_at | toTimeFormat}}</td>
+                  <td class="text-center">{{item.finished_at | toTimeFormat}}</td>
                   <td class="text-center" v-html="item.test_site_name"></td>
                   <td class="text-center">{{item.registed_computers}}/{{item.total_computers}}</td>
                   <td class="text-center">
@@ -47,6 +49,7 @@
               <th>STT</th>
               <th>Mã học phần</th>
               <th class="col_title_en">Môn thi</th>
+              <th>Ngày thi</th>
               <th>Thời gian bắt đầu</th>
               <th>Thời gian kết thúc</th>
               <th>Phòng thi</th>
@@ -57,8 +60,9 @@
                   <td>{{index+1}}</td>
                   <td>{{item.module_code}}</td>
                   <td class="text-center" v-html="item.module_name"></td>
-                  <td class="text-center" v-html="item.started_at"></td>
-                  <td class="text-center" v-html="item.finished_at"></td>
+                  <td class="text-center"> {{item.started_at | toDateFormat}}</td>
+                  <td class="text-center">{{item.started_at | toTimeFormat}}</td>
+                  <td class="text-center">{{item.started_at | toTimeFormat}}</td>
                   <td class="text-center">{{item.test_room_name}} - {{item.room_name}}</td>
                   <td class="text-center" v-html="item.test_site_name"></td>
                   <td class="text-center">

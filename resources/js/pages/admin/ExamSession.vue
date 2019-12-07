@@ -34,7 +34,7 @@
 
           <md-card-content>
               <label>Học phần</label>
-              <multiselect v-model="selectedModule" label="name" :options="modules"></multiselect>
+              <multiselect v-model="selectedModule" :custom-label="nameWithCode" :searchable="true" :options="modules"></multiselect>
           </md-card-content>
 
           <md-card-content>
@@ -65,7 +65,8 @@
                   <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
                 </th>
                 <th>STT</th>
-                <th class="col_title_en">Học phần</th>
+                <th class="col_title_en">Mã học phần</th>
+                <th>Tên học phần</th>
                 <th class="col_title_jp">Địa điểm thi</th>
                 <th>Ngày thi</th>
                 <th class="col_summary_en">Bắt đầu</th>
@@ -77,7 +78,8 @@
                       <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
                     </td>
                     <td class="text-center" v-html="index+1"></td>
-                    <td class="text-center" v-html="item.module_name"></td>
+                    <td class="text-center">{{item.module_code}}</td>
+                    <td class="text-center">{{item.module_name}}</td>
                     <td class="text-center" v-html="item.test_site_name"></td>
                     <td class="text-center">{{item.started_at | toDateFormat}}</td>
                     <td class="text-center">{{item.started_at | toTimeFormat}}</td>
@@ -133,6 +135,9 @@ export default{
     }
   },
   methods: {
+    nameWithCode ({ name, code }) {
+      return `${code} — [${name}]`;
+    },
     removeOneExamSession(studentId) {
       this.$modal.show('dialog', {
         title: 'Cảnh báo!',
