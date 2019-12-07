@@ -120,6 +120,7 @@ export default{
         this.isLoading = false;
         this.refresh();
         this.updateModuleStatus();
+        session.selected = false;
         this.$toasted.show('Đăng ký ca thi thành công', {
           theme: 'bubble',
           position: 'top-right',
@@ -152,7 +153,11 @@ export default{
               return rf.getRequest('UserRequest').unRegisterASession(testRoomId).then((res) => {
                 this.$modal.hide('dialog');
                 this.$refs.datatable.refresh();
-                this.$refs.dashboard.updateModuleStatus();
+                rf.getRequest('UserRequest').isRegistedModule(this.selectedModule.module_id).then(res =>{
+                  this.$data.selectedModule.isRegisted = res;
+                  this.$data.selectedModule = {isRegisted: false};
+                  this.$forceUpdate();
+                })
                 this.$toasted.show('Hủy ca thi thành công!', {
                   theme: 'bubble',
                   position: 'top-right',
