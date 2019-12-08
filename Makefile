@@ -36,7 +36,8 @@ init-app:
 docker-init:
 	git submodule update --init
 	docker exec -it app make init-app
-
+npm-install:
+	docker exec -it app npm install
 init-db-full:
 	make autoload
 	php artisan migrate:fresh

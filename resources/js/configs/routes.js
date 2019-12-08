@@ -11,8 +11,7 @@ import AdminModule from '@/pages/admin/Module.vue';
 import UserDashboardLayout from '@/pages/user/Layout/DashboardLayout.vue'
 import UserDashboard from '@/pages/user/Dashboard.vue';
 import UserProfile from '@/pages/user/UserProfile.vue';
-import UserTableList from '@/pages/user/TableList.vue';
-
+import UserViewRegisted from '@/pages/user/ViewRegisted.vue';
 export default {
   mode: 'history',
   routes: [
@@ -43,9 +42,9 @@ export default {
           }
         },
         {
-          path: 'table',
-          name: 'Table List',
-          component: UserTableList,
+          path: '/registed-sessions',
+          name: 'Xem và in',
+          component: UserViewRegisted,
           meta: {
             requiresAuth: true
           }

@@ -43,6 +43,10 @@ class ClientController extends Controller
       return $this->clientService->getAllRegistedSessions();
     }
 
+    public function getAllRegistedSessionsNp() {
+      return $this->clientService->getAllRegistedSessionsNp();
+    }
+
     public function totalExamSessionComputers(ExamSession $examSession) {
       return $this->clientService->totalExamSessionComputers($examSession);
     }

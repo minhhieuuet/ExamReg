@@ -29,6 +29,8 @@ import DataTable from './components/datatable/DataTable';
 import Loading from 'vue-loading-overlay';
     // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
+import VueHtmlToPaper from 'vue-html-to-paper';
+Vue.use(VueHtmlToPaper);
 Vue.use(Loading);
 Vue.use(VueMaterial);
 Vue.use(VeeValidate);

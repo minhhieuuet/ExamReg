@@ -9,7 +9,10 @@
         <md-icon>dashboard</md-icon>
         <p>Trang chủ</p>
       </sidebar-link>
-
+      <sidebar-link to="/registed-sessions">
+        <md-icon>account_circle</md-icon>
+        <p>Xem và in</p>
+      </sidebar-link>
       <sidebar-link to="/user">
         <md-icon>account_circle</md-icon>
         <p>Thông tin sinh viên</p>

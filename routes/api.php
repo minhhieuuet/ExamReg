@@ -87,6 +87,7 @@ Route::group(['middleware' => ['auth:api', 'isAdminOrSelf'], 'prefix' => 'user']
     Route::get('/all-modules', 'ClientController@getAllModules');
     Route::get('/all-exam-sessions/{module}', 'ClientController@getAllModuleExamSessions');
     Route::get('/all-registed-sessions', 'ClientController@getAllRegistedSessions');
+    Route::get('/all-registed-sessions-np', 'ClientController@getAllRegistedSessionsNp');
     Route::get('/exam-session-computers/{examSession}', 'ClientController@totalExamSessionComputers');
     Route::get('/exam-session-registed-computers/{examSession}', 'ClientController@totalExamSessionRegistedComputers');
     Route::post('/register-session', 'ClientController@registerSession');
