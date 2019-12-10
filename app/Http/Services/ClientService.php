@@ -110,13 +110,17 @@ class ClientService
 
     //Decide which room will be select
     $computerCounter = 0;
-    $selectedTestRoom = $testRooms->first();
+    $selectedTestRoom = [];
     foreach($testRooms as $testRoom) {
       $computerCounter+= $testRoom->capacity;
       if($computerCounter > $totalRegistedComputers) {
         $selectedTestRoom = $testRoom;
         break;
       }
+    }
+    if(empty($selectedTestRoom)) {
+      throw new \Exception("Không còn phòng thi nào còn trống, mong bạn thử lại sau", 1);
+
     }
     TestRoomUser::insert(['test_room_id' => $selectedTestRoom->id, 'user_id' => Auth::user()->id]);
     return $testRooms;
