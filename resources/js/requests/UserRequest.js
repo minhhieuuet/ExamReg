@@ -17,6 +17,10 @@ export default class UserRequest extends BaseModelRequest {
     return this.get('/user/all-registed-sessions');
   }
 
+  getAllRegistedSessionsWithoutPagination() {
+    return this.get('/user/all-registed-sessions-np');
+  }
+
   getTotalExamSessionComputers (examSessionId) {
     return this.get('/user/exam-session-computers/' + examSessionId);
   }

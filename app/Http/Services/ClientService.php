@@ -61,6 +61,25 @@ class ClientService
               'test_sites.name as test_site_name',
               'test_rooms.id as test_room_id')->paginate(100);
   }
+
+  public function getAllRegistedSessionsNp() {
+    return TestRoomUser::where('user_id', Auth::user()->id)
+            ->join('test_rooms', 'test_room_user.test_room_id', 'test_rooms.id')
+            ->join('rooms', 'test_rooms.room_id', 'rooms.id')
+            ->join('exam_sessions', 'test_rooms.exam_session_id', 'exam_sessions.id')
+            ->join('test_sites', 'exam_sessions.test_site_id', 'test_sites.id')
+            ->join('modules', 'exam_sessions.module_id', 'modules.id')
+            ->select(
+              'modules.id as module_id',
+              'modules.code as module_code',
+              'modules.name as module_name',
+              'exam_sessions.started_at as started_at',
+              'exam_sessions.finished_at as finished_at',
+              'test_rooms.name as test_room_name',
+              'rooms.name as room_name',
+              'test_sites.name as test_site_name',
+              'test_rooms.id as test_room_id')->get();
+  }
   public function totalRegistedComputers($examSession) {
     $totalRegistedComputers = TestRoomUser::join('test_rooms', 'test_room_user.test_room_id', 'test_rooms.id')
                               ->where('test_rooms.exam_session_id', $examSession->id)->count();
@@ -91,13 +110,17 @@ class ClientService
 
     //Decide which room will be select
     $computerCounter = 0;
-    $selectedTestRoom = $testRooms->first();
+    $selectedTestRoom = [];
     foreach($testRooms as $testRoom) {
       $computerCounter+= $testRoom->capacity;
       if($computerCounter > $totalRegistedComputers) {
         $selectedTestRoom = $testRoom;
         break;
       }
+    }
+    if(empty($selectedTestRoom)) {
+      throw new \Exception("Không còn phòng thi nào còn trống, mong bạn thử lại sau", 1);
+
     }
     TestRoomUser::insert(['test_room_id' => $selectedTestRoom->id, 'user_id' => Auth::user()->id]);
     return $testRooms;

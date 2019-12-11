@@ -29,17 +29,17 @@ export default class ExamSessionRequest extends BaseModelRequest {
   }
 
   update(examSessionId, params) {
-    const url = '/admin/examSession/' + examSessionId;
+    const url = '/admin/exam-session/' + examSessionId;
     return this.put(url, params);
   }
 
   removeOneExamSession(examSessionId) {
-    const url = '/admin/examSession/' + examSessionId;
+    const url = '/admin/exam-session/' + examSessionId;
     return this.del(url);
   }
 
   removeManyExamSessions(examSessionIds) {
-    const url = '/admin/many-examSessions';
+    const url = '/admin/many-exam-sessions';
     return this.del(url, {ids: examSessionIds});
   }
 

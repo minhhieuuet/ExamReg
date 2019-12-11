@@ -66,7 +66,14 @@ export default class BaseRequest {
         });
       });
     }
-
+    if(err.response.status == 500) {
+        Vue.toasted.show(err.response.data.message, {
+          theme: 'bubble',
+          position: 'top-right',
+          duration : 2500,
+          type: 'error'
+        });
+    }
     if (err.message === 'Network Error' && err.response && err.response.status === 503) {
       Vue.prototype.$isMaintenanceMode = true;
       window.app.$broadcast('MaintenanceSetting', 1);

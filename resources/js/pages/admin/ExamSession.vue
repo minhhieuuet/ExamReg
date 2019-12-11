@@ -34,7 +34,7 @@
 
           <md-card-content>
               <label>Học phần</label>
-              <multiselect v-model="selectedModule" label="name" :options="modules"></multiselect>
+              <multiselect v-model="selectedModule" :custom-label="nameWithCode" :searchable="true" :options="modules"></multiselect>
           </md-card-content>
 
           <md-card-content>
@@ -65,7 +65,8 @@
                   <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
                 </th>
                 <th>STT</th>
-                <th class="col_title_en">Học phần</th>
+                <th class="col_title_en">Mã học phần</th>
+                <th>Tên học phần</th>
                 <th class="col_title_jp">Địa điểm thi</th>
                 <th>Ngày thi</th>
                 <th class="col_summary_en">Bắt đầu</th>
@@ -77,7 +78,8 @@
                       <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
                     </td>
                     <td class="text-center" v-html="index+1"></td>
-                    <td class="text-center" v-html="item.module_name"></td>
+                    <td class="text-center">{{item.module_code}}</td>
+                    <td class="text-center">{{item.module_name}}</td>
                     <td class="text-center" v-html="item.test_site_name"></td>
                     <td class="text-center">{{item.started_at | toDateFormat}}</td>
                     <td class="text-center">{{item.started_at | toTimeFormat}}</td>
@@ -127,13 +129,16 @@ export default{
       selectedDate: moment().toDate(),
       modules: [],
       testSites: [],
-      selectedModule: '',
-      selectedTestSite: '',
+      selectedModule: {},
+      selectedTestSite: {},
       isShowSessionForm: false
     }
   },
   methods: {
-    removeOneExamSession(studentId) {
+    nameWithCode ({ name, code }) {
+      return `${code} — [${name}]`;
+    },
+    removeOneExamSession(examSessionId) {
       this.$modal.show('dialog', {
         title: 'Cảnh báo!',
         text: 'Bạn có chắc chắn muốn xóa ?',
@@ -148,10 +153,10 @@ export default{
             title: 'Xác nhận',
             default: true,
             handler: () => {
-              return rf.getRequest('ExamSessionRequest').removeOneExamSession(studentId).then(() => {
+              return rf.getRequest('ExamSessionRequest').removeOneExamSession(examSessionId).then(() => {
                 this.$modal.hide('dialog');
                 this.$refs.datatable.refresh();
-                this.$toasted.show('Xóa sinh viên thành công!', {
+                this.$toasted.show('Xóa ca thi thành công!', {
                   theme: 'bubble',
                   position: 'top-right',
                   duration : 1500,
@@ -178,14 +183,14 @@ export default{
               title: 'Xác nhận',
               default: true,
               handler: () => {
-                const studentIds = this.$refs.datatable.rows.filter((row) => {
+                const examSessionIds = this.$refs.datatable.rows.filter((row) => {
                   return row.selected === true;
                 }).map(record => record.id);
 
-                return rf.getRequest('ExamSessionRequest').removeManyExamSessions(studentIds).then(() => {
+                return rf.getRequest('ExamSessionRequest').removeManyExamSessions(examSessionIds).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('ExamSession removed successfully!', {
+                  this.$toasted.show('Xóa ca thi thành công!', {
                     theme: 'bubble',
                     position: 'top-right',
                     duration : 1500,
@@ -228,8 +233,14 @@ export default{
           // });
         });
       },
-      editExamSession(studentId) {
-        this.$modal.show('student', {title: 'Sửa thông tin sinh viên', studentId: studentId});
+      editExamSession(examSessionId) {
+        this.isShowSessionForm = true;
+        rf.getRequest('ExamSessionRequest').show(examSessionId).then(res => {
+          rf.getRequest('ModuleRequest').show(res.module_id).then(module => {
+            this.selectedModule = module;
+          });
+
+        });
       },
       listenSelectRow() {
         if (!this.$refs.datatable) {
