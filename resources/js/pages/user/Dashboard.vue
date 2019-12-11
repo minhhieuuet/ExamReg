@@ -6,10 +6,10 @@
         <md-card-header data-background-color="green">
           <h4 class="title">Đăng ký ca thi</h4>
         </md-card-header>
-        <md-card-content>
+        <md-card-content class="md-table-1">
           <multiselect width="20px" v-model="selectedModule" :options="modules" :custom-label="nameWithCode" :searchable="true" label="name" placeholder="Chọn môn học"></multiselect>
           <h2 v-if="selectedModule.isRegisted">Môn thi đã được đăng ký</h2>
-          <md-table v-else>
+          <md-table class="session-table" v-else>
               <th>STT</th>
               <th>Mã học phần</th>
               <th class="col_title_en">Môn thi</th>
@@ -103,6 +103,15 @@ export default{
     }
   },
   methods: {
+    updateSessionStatus() {
+      this.examSessions.forEach(item =>{
+        rf.getRequest('UserRequest').getTotalExamSessionComputers(item.id).then(data =>{
+          item.registed_computers = data.registed_computers;
+          item.total_computers = data.total_computers;
+          this.$forceUpdate();
+        })
+      })
+    },
     getData (params) {
       rf.getRequest('UserRequest').getAllAvaiableExamSessions(this.selectedModule.module_id).then(res=>{
         this.examSessions = res;
@@ -131,6 +140,12 @@ export default{
           duration : 1500,
           type: 'success'
         });
+      })
+      .catch(err =>{
+        this.isLoading = false;
+        this.refresh();
+        this.updateModuleStatus();
+        session.selected = false;
       });
     },
     updateModuleStatus() {
@@ -182,26 +197,42 @@ export default{
   },
   created: function () {
     this.getData();
+    this.updateSessionStatus();
     setInterval(()=>{
-      this.examSessions.forEach(item =>{
-        rf.getRequest('UserRequest').getTotalExamSessionComputers(item.id).then(data =>{
-          item.registed_computers = data.registed_computers;
-          item.total_computers = data.total_computers;
-          this.$forceUpdate();
-        })
-      })
-    }, 2000);
+      this.updateSessionStatus();
+    }, 5000);
     rf.getRequest('UserRequest').getAllModules().then((res) => {
       this.modules = res;
     });
   }
 }
 </script>
-<style lang="css" scoped>
-  .table-1 {
-    height: 300px  !important;
-  }
-  .v--modal-overlay{
+<style lang="scss" scoped>
+  .session-table {
+    max-height: 371px;
+    scroll-behavior: auto;
+    overflow: auto;
+    th {
+      color: #4CAF50;
+      padding: 5px;
+      font-weight: normal;
+      text-align: center;
+      border-bottom: 1px solid #dfe2e5;
+      font-size: 16px;
+      line-height: 22px;
+    }
 
+    tr td {
+      border-bottom: 1px solid #dfe2e5;
+    }
+
+
+  }
+  .table-1 {
+    height: 500px  !important;
+  }
+
+  .table-2 {
+    margin-top: 22px;
   }
 </style>
