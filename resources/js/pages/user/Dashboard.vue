@@ -100,6 +100,7 @@ export default{
     selectedModule: function () {
       this.getData();
       this.updateModuleStatus();
+      this.updateSessionStatus();
     }
   },
   methods: {
@@ -127,6 +128,7 @@ export default{
       return `${module_code} — [${name}]`;
     },
     registerSession(session) {
+      this.updateSessionStatus();
       session.selected = true;
       this.isLoading = true;
       rf.getRequest('UserRequest').registerSession(session.id).then(data => {
@@ -155,6 +157,7 @@ export default{
       })
     },
     unRegisterASession(item) {
+      this.updateSessionStatus();
       this.$modal.show('dialog', {
         title: 'Cảnh báo!',
         text: 'Bạn có chắc chắn muốn xóa ?',
@@ -200,7 +203,7 @@ export default{
     this.updateSessionStatus();
     setInterval(()=>{
       this.updateSessionStatus();
-    }, 5000);
+    }, 1000);
     rf.getRequest('UserRequest').getAllModules().then((res) => {
       this.modules = res;
     });
