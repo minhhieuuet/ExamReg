@@ -28,6 +28,10 @@
         <md-icon>content_paste</md-icon>
         <p>Học phần</p>
       </sidebar-link>
+      <sidebar-link to="/admin/test-room">
+        <md-icon>content_paste</md-icon>
+        <p>Phòng thi</p>
+      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">

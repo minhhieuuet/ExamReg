@@ -17,12 +17,14 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
     /* Admin 4 */
-    // Route::get('/test-rooms', 'TestRoomController@getTestRooms');
-    // Route::get('test-room/{testRoom}', 'TestRoomController@getOneTestRoom');
-    // Route::post('test-room', 'TestRoomController@storeTestRoom');
-    // Route::put('test-room/{testRoom}', 'TestRoomController@updateTestRoom');
-    // Route::delete('test-room/{testRoom}', 'TestRoomController@deleteOneTestRoom');
-    // Route::delete('many-test-rooms', 'TestRoomController@deleteManyTestRooms');
+    Route::get('/test-rooms', 'TestRoomController@getTestRooms');
+    Route::get('test-room/{testRoom}', 'TestRoomController@getOneTestRoom');
+    Route::post('test-room', 'TestRoomController@storeTestRoom');
+    Route::put('test-room/{testRoom}', 'TestRoomController@updateTestRoom');
+    Route::delete('test-room/{testRoom}', 'TestRoomController@deleteOneTestRoom');
+    Route::delete('many-test-rooms', 'TestRoomController@deleteManyTestRooms');
+    Route::get('/all-rooms', 'TestRoomController@getAllRooms');
+    Route::get('/all-exam-sessions', 'TestRoomController@getAllExamSessions');
 
     /* Admin 5 */
     // Route::get('/test-sites', 'TestSiteController@getTestSites');
