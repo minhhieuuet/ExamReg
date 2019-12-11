@@ -129,8 +129,8 @@ export default{
       selectedDate: moment().toDate(),
       modules: [],
       testSites: [],
-      selectedModule: '',
-      selectedTestSite: '',
+      selectedModule: {},
+      selectedTestSite: {},
       isShowSessionForm: false
     }
   },
@@ -138,7 +138,7 @@ export default{
     nameWithCode ({ name, code }) {
       return `${code} — [${name}]`;
     },
-    removeOneExamSession(studentId) {
+    removeOneExamSession(examSessionId) {
       this.$modal.show('dialog', {
         title: 'Cảnh báo!',
         text: 'Bạn có chắc chắn muốn xóa ?',
@@ -153,10 +153,10 @@ export default{
             title: 'Xác nhận',
             default: true,
             handler: () => {
-              return rf.getRequest('ExamSessionRequest').removeOneExamSession(studentId).then(() => {
+              return rf.getRequest('ExamSessionRequest').removeOneExamSession(examSessionId).then(() => {
                 this.$modal.hide('dialog');
                 this.$refs.datatable.refresh();
-                this.$toasted.show('Xóa sinh viên thành công!', {
+                this.$toasted.show('Xóa ca thi thành công!', {
                   theme: 'bubble',
                   position: 'top-right',
                   duration : 1500,
@@ -183,14 +183,14 @@ export default{
               title: 'Xác nhận',
               default: true,
               handler: () => {
-                const studentIds = this.$refs.datatable.rows.filter((row) => {
+                const examSessionIds = this.$refs.datatable.rows.filter((row) => {
                   return row.selected === true;
                 }).map(record => record.id);
 
-                return rf.getRequest('ExamSessionRequest').removeManyExamSessions(studentIds).then(() => {
+                return rf.getRequest('ExamSessionRequest').removeManyExamSessions(examSessionIds).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('ExamSession removed successfully!', {
+                  this.$toasted.show('Xóa ca thi thành công!', {
                     theme: 'bubble',
                     position: 'top-right',
                     duration : 1500,
@@ -233,8 +233,14 @@ export default{
           // });
         });
       },
-      editExamSession(studentId) {
-        this.$modal.show('student', {title: 'Sửa thông tin sinh viên', studentId: studentId});
+      editExamSession(examSessionId) {
+        this.isShowSessionForm = true;
+        rf.getRequest('ExamSessionRequest').show(examSessionId).then(res => {
+          rf.getRequest('ModuleRequest').show(res.module_id).then(module => {
+            this.selectedModule = module;
+          });
+
+        });
       },
       listenSelectRow() {
         if (!this.$refs.datatable) {

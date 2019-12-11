@@ -17,7 +17,7 @@ class ExamSessionService
 
         return ExamSession::join('modules', 'exam_sessions.module_id','modules.id')
         ->join('test_sites', 'exam_sessions.test_site_id','test_sites.id')
-        ->select('modules.code as module_code', 'modules.name as module_name', 'test_sites.name as test_site_name', 'exam_sessions.started_at', 'exam_sessions.finished_at')
+        ->select('exam_sessions.id as id', 'modules.code as module_code', 'modules.name as module_name', 'test_sites.name as test_site_name', 'exam_sessions.started_at', 'exam_sessions.finished_at')
         ->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
             $search = array_get($params, 'search');
             return $query->where('name', 'like', "%$search%");
