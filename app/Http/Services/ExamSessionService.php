@@ -39,6 +39,17 @@ class ExamSessionService
      */
     public function storeExamSession($params)
     {
+        if(array_get($params, 'started_at') >= array_get($params, 'finished_at')) {
+          throw new \Exception("Thời điểm bắt đầu phải trước thời điểm kết thúc", 1);
+        }
+
+        if(ExamSession::where(['module_id' => array_get($params, 'module_id'),
+                    'test_site_id' => array_get($params, 'test_site_id'),
+                    'started_at' => array_get($params, 'started_at'),
+                    'finished_at' => array_get($params, 'finished_at'),])->count()) {
+          throw new \Exception("Ca thi đã tồn tại", 1);
+
+        }
         $examSession = ExamSession::create([
             'module_id' => array_get($params, 'module_id'),
             'test_site_id' => array_get($params, 'test_site_id'),

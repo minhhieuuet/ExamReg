@@ -7,7 +7,18 @@
           <h4 class="title">Đăng ký ca thi</h4>
         </md-card-header>
         <md-card-content class="md-table-1">
-          <multiselect width="20px" v-model="selectedModule" :options="modules" :custom-label="nameWithCode" :searchable="true" label="name" placeholder="Chọn môn học"></multiselect>
+          <multiselect width="20px" v-model="selectedModule"
+            :options="modules"
+            :allow-empty="false"
+            deselectLabel=""
+            selectLabel="Nhấn enter để chọn"
+            selectedLabel="Đã chọn"
+            :maxHeight="300"
+            :custom-label="nameWithCode"
+            :searchable="true"
+            label="name"
+            placeholder="Chọn môn học">
+          </multiselect>
           <h2 v-if="selectedModule.isRegisted">Môn thi đã được đăng ký</h2>
           <md-table class="session-table" v-else>
               <th>STT</th>

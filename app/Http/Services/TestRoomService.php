@@ -45,6 +45,10 @@ class TestRoomService
      */
     public function storeTestRoom($params)
     {
+        if(TestRoom::where(['room_id' => array_get($params, 'room_id'),'exam_session_id' => array_get($params, 'exam_session_id')])->count()) {
+          throw new \Exception("Phòng thi đã tồn tại, vui lòng chọn lại phòng máy hoặc ca thi khác", 1);
+
+        }
         $testRoom = TestRoom::create([
             'name' => array_get($params, 'name'),
             'room_id' => array_get($params, 'room_id'),
