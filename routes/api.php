@@ -27,12 +27,12 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::get('/all-exam-sessions', 'TestRoomController@getAllExamSessions');
 
     /* Admin 5 */
-    // Route::get('/test-sites', 'TestSiteController@getTestSites');
-    // Route::get('test-site/{testSite}', 'TestSiteController@getOneTestSite');
-    // Route::post('test-site', 'TestSiteController@storeTestSite');
-    // Route::put('test-site/{testSite}', 'TestSiteController@updateTestSite');
-    // Route::delete('test-site/{testSite}', 'TestSiteController@deleteOneTestSite');
-    // Route::delete('many-test-sites', 'TestSiteController@deleteManyTestSites');
+    Route::get('/test-sites', 'TestSiteController@getTestSites');
+    Route::get('test-site/{testSite}', 'TestSiteController@getOneTestSite');
+    Route::post('test-site', 'TestSiteController@storeTestSite');
+    Route::put('test-site/{testSite}', 'TestSiteController@updateTestSite');
+    Route::delete('test-site/{testSite}', 'TestSiteController@deleteOneTestSite');
+    Route::delete('many-test-sites', 'TestSiteController@deleteManyTestSites');
 
     /* Admin 6 */
     Route::get('/exams', 'ExamController@getExams');
