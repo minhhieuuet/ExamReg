@@ -49,6 +49,9 @@ export default class UserRequest extends BaseModelRequest {
     return this.post('/auth/users', params);
   }
 
+  changePassword (params) {
+    return this.post('/user/change-pass', params);
+  }
   resendConfirmEmail (email, recaptcha) {
     const params = { email, recaptcha, locale: window.i18n.locale };
     return this.post('/resend-confirm-email', params);
