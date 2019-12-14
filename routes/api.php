@@ -16,6 +16,16 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
+    /* Admin 3 */
+    Route::get('/exam-sessions', 'ExamSessionController@getExamSessions');
+    Route::get('exam-session/{examSession}', 'ExamSessionController@getOneExamSession');
+    Route::get('all-module', 'ExamSessionController@getAllModules');
+    Route::get('all-testSites', 'ExamSessionController@getAllTestSites');
+    Route::post('exam-session', 'ExamSessionController@storeExamSession');
+    Route::put('exam-session/{examSession}', 'ExamSessionController@updateExamSession');
+    Route::delete('exam-session/{examSession}', 'ExamSessionController@deleteOneExamSession');
+    Route::delete('many-exam-sessions', 'ExamSessionController@deleteManyExamSessions');
+
     /* Admin 4 */
     Route::get('/test-rooms', 'TestRoomController@getTestRooms');
     Route::get('test-room/{testRoom}', 'TestRoomController@getOneTestRoom');
@@ -73,16 +83,6 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::put('university/{university}', 'UniversityController@updateUniversity');
     Route::delete('university/{university}', 'UniversityController@deleteOneUniversity');
     Route::delete('many-universities', 'UniversityController@deleteManyUniversities');
-
-    /* Admin 3 */
-    Route::get('/exam-sessions', 'ExamSessionController@getExamSessions');
-    Route::get('exam-session/{examSession}', 'ExamSessionController@getOneExamSession');
-    Route::get('all-module', 'ExamSessionController@getAllModules');
-    Route::get('all-testSites', 'ExamSessionController@getAllTestSites');
-    Route::post('exam-session', 'ExamSessionController@storeExamSession');
-    Route::put('exam-session/{examSession}', 'ExamSessionController@updateExamSession');
-    Route::delete('exam-session/{examSession}', 'ExamSessionController@deleteOneExamSession');
-    Route::delete('many-exam-sessions', 'ExamSessionController@deleteManyExamSessions');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdminOrSelf'], 'prefix' => 'user'], function () {
