@@ -43,6 +43,14 @@
                     <td class="text-center" v-html="item.code"></td>
                     <td class="text-center" v-html="item.created_at"></td>
                     <td class="text-center">
+                      <md-button class="md-just-icon md-simple md-primary" @click="addStudent(item.id)">
+                        <md-icon>person_add</md-icon>
+                        <md-tooltip md-direction="top">Thêm sinh viên</md-tooltip>
+                      </md-button>
+                      <md-button class="md-just-icon md-simple md-primary" @click="showListStudentsModule(item.id)">
+                        <md-icon>remove_red_eye</md-icon>
+                        <md-tooltip md-direction="top">Xem</md-tooltip>
+                      </md-button>
                         <md-button class="md-just-icon md-simple md-primary" @click="editModule(item.id)">
                           <md-icon>edit</md-icon>
                           <md-tooltip md-direction="top">Sửa</md-tooltip>
@@ -60,6 +68,8 @@
       </div>
       <v-dialog/>
       <ModuleModal @refresh="refresh()"/>
+      <AddStudent @refresh="refresh()"/>
+      <ListStudentsModule @refresh="refresh()"/>
     </div>
   </div>
 </template>
@@ -71,13 +81,17 @@ import {
 } from '@/components'
 
 import rf from '../../requests/RequestFactory';
-import ModuleModal from '../../modals/Module'
+import ModuleModal from '../../modals/Module';
+import AddStudent from '../../modals/AddStudent'
+import ListStudentsModule from '../../modals/ListStudentsModule'
 
 export default{
   components: {
     OrderedTable,
     SimpleTable,
-    ModuleModal
+    ModuleModal,
+    AddStudent,
+    ListStudentsModule
   },
   data () {
     return {
@@ -86,6 +100,16 @@ export default{
     }
   },
   methods: {
+    addStudent(moduleId){
+      this.$modal.show('add-student', {
+        title: 'Thêm sinh viên'
+      });
+    },
+    showListStudentsModule(moduleId){
+      this.$modal.show('list-students-module', {
+        title: 'Xem danh sách sinh viên'
+      })
+    },
     removeOneModule(moduleId) {
       this.$modal.show('dialog', {
         title: 'Cảnh báo!',
