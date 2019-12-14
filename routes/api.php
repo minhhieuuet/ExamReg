@@ -16,6 +16,16 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
+    /* Admin 3 */
+    Route::get('/exam-sessions', 'ExamSessionController@getExamSessions');
+    Route::get('exam-session/{examSession}', 'ExamSessionController@getOneExamSession');
+    Route::get('all-module', 'ExamSessionController@getAllModules');
+    Route::get('all-testSites', 'ExamSessionController@getAllTestSites');
+    Route::post('exam-session', 'ExamSessionController@storeExamSession');
+    Route::put('exam-session/{examSession}', 'ExamSessionController@updateExamSession');
+    Route::delete('exam-session/{examSession}', 'ExamSessionController@deleteOneExamSession');
+    Route::delete('many-exam-sessions', 'ExamSessionController@deleteManyExamSessions');
+
     /* Admin 4 */
     Route::get('/test-rooms', 'TestRoomController@getTestRooms');
     Route::get('test-room/{testRoom}', 'TestRoomController@getOneTestRoom');
@@ -27,20 +37,20 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::get('/all-exam-sessions', 'TestRoomController@getAllExamSessions');
 
     /* Admin 5 */
-    // Route::get('/test-sites', 'TestSiteController@getTestSites');
-    // Route::get('test-site/{testSite}', 'TestSiteController@getOneTestSite');
-    // Route::post('test-site', 'TestSiteController@storeTestSite');
-    // Route::put('test-site/{testSite}', 'TestSiteController@updateTestSite');
-    // Route::delete('test-site/{testSite}', 'TestSiteController@deleteOneTestSite');
-    // Route::delete('many-test-sites', 'TestSiteController@deleteManyTestSites');
+    Route::get('/test-sites', 'TestSiteController@getTestSites');
+    Route::get('test-site/{testSite}', 'TestSiteController@getOneTestSite');
+    Route::post('test-site', 'TestSiteController@storeTestSite');
+    Route::put('test-site/{testSite}', 'TestSiteController@updateTestSite');
+    Route::delete('test-site/{testSite}', 'TestSiteController@deleteOneTestSite');
+    Route::delete('many-test-sites', 'TestSiteController@deleteManyTestSites');
 
     /* Admin 6 */
-    // Route::get('/exams', 'ExamController@getExams');
-    // Route::get('exam/{exam}', 'ExamController@getOneExam');
-    // Route::post('exam', 'ExamController@storeExam');
-    // Route::put('exam/{exam}', 'ExamController@updateExam');
-    // Route::delete('exam/{exam}', 'ExamController@deleteOneExam');
-    // Route::delete('many-exams', 'ExamController@deleteManyExams');
+    Route::get('/exams', 'ExamController@getExams');
+    Route::get('exam/{exam}', 'ExamController@getOneExam');
+    Route::post('exam', 'ExamController@storeExam');
+    Route::put('exam/{exam}', 'ExamController@updateExam');
+    Route::delete('exam/{exam}', 'ExamController@deleteOneExam');
+    Route::delete('many-exams', 'ExamController@deleteManyExams');
 
     /* Admin 7 */
     Route::get('/students', 'StudentController@getStudents');
@@ -73,16 +83,6 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::put('university/{university}', 'UniversityController@updateUniversity');
     Route::delete('university/{university}', 'UniversityController@deleteOneUniversity');
     Route::delete('many-universities', 'UniversityController@deleteManyUniversities');
-
-    /* Admin 3 */
-    Route::get('/exam-sessions', 'ExamSessionController@getExamSessions');
-    Route::get('exam-session/{examSession}', 'ExamSessionController@getOneExamSession');
-    Route::get('all-module', 'ExamSessionController@getAllModules');
-    Route::get('all-testSites', 'ExamSessionController@getAllTestSites');
-    Route::post('exam-session', 'ExamSessionController@storeExamSession');
-    Route::put('exam-session/{examSession}', 'ExamSessionController@updateExamSession');
-    Route::delete('exam-session/{examSession}', 'ExamSessionController@deleteOneExamSession');
-    Route::delete('many-exam-sessions', 'ExamSessionController@deleteManyExamSessions');
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdminOrSelf'], 'prefix' => 'user'], function () {

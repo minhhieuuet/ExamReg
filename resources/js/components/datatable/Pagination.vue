@@ -155,7 +155,7 @@
 <style lang="scss" scoped>
   .pagination {
     list-style-type: none !important;
-    padding-bottom: 31px !important;
+    
   }
   .page-item {
     &.active {

@@ -7,7 +7,18 @@
           <h4 class="title">Đăng ký ca thi</h4>
         </md-card-header>
         <md-card-content class="md-table-1">
-          <multiselect width="20px" v-model="selectedModule" :options="modules" :custom-label="nameWithCode" :searchable="true" label="name" placeholder="Chọn môn học"></multiselect>
+          <multiselect width="20px" v-model="selectedModule"
+            :options="modules"
+            :allow-empty="false"
+            deselectLabel=""
+            selectLabel="Nhấn enter để chọn"
+            selectedLabel="Đã chọn"
+            :maxHeight="300"
+            :custom-label="nameWithCode"
+            :searchable="true"
+            label="name"
+            placeholder="Chọn môn học">
+          </multiselect>
           <h2 v-if="selectedModule.isRegisted">Môn thi đã được đăng ký</h2>
           <md-table class="session-table" v-else>
               <th>STT</th>
@@ -100,6 +111,7 @@ export default{
     selectedModule: function () {
       this.getData();
       this.updateModuleStatus();
+      this.updateSessionStatus();
     }
   },
   methods: {
@@ -127,6 +139,7 @@ export default{
       return `${module_code} — [${name}]`;
     },
     registerSession(session) {
+      this.updateSessionStatus();
       session.selected = true;
       this.isLoading = true;
       rf.getRequest('UserRequest').registerSession(session.id).then(data => {
@@ -155,6 +168,7 @@ export default{
       })
     },
     unRegisterASession(item) {
+      this.updateSessionStatus();
       this.$modal.show('dialog', {
         title: 'Cảnh báo!',
         text: 'Bạn có chắc chắn muốn xóa ?',
@@ -200,7 +214,7 @@ export default{
     this.updateSessionStatus();
     setInterval(()=>{
       this.updateSessionStatus();
-    }, 5000);
+    }, 1000);
     rf.getRequest('UserRequest').getAllModules().then((res) => {
       this.modules = res;
     });
