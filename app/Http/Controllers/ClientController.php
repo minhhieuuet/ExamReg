@@ -63,4 +63,8 @@ class ClientController extends Controller
       return $this->clientService->isRegistedModule($module);
     }
 
+    public function changePassword(Request $request) {
+      return $this->clientService->changePassword($request);
+    }
+
 }

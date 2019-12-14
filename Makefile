@@ -21,7 +21,7 @@ docker-restart:
 	make docker-link-storage
 
 docker-connect:
-	docker exec -it app bash
+	docker exec -u root -t -i app /bin/bash
 
 init-app:
 	cp .env.example .env

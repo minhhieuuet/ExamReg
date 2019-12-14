@@ -32,6 +32,10 @@
         <md-icon>content_paste</md-icon>
         <p>Phòng thi</p>
       </sidebar-link>
+      <sidebar-link to="/admin/exam">
+        <md-icon>content_paste</md-icon>
+        <p>Kỳ thi</p>
+      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">

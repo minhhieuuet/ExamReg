@@ -95,4 +95,6 @@ Route::group(['middleware' => ['auth:api', 'isAdminOrSelf'], 'prefix' => 'user']
     Route::post('/register-session', 'ClientController@registerSession');
     Route::post('/unregister-session', 'ClientController@unRegisterASession');
     Route::get('/is-registed-module/{module}', 'ClientController@isRegistedModule');
+
+    Route::post('/change-pass', 'ClientController@changePassword');
 });

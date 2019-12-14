@@ -131,4 +131,19 @@ class ClientService
     return 'ok';
   }
 
+  public function changePassword($request) {
+    $oldPass = array_get($request, 'old_pass');
+    $newPass = array_get($request, 'new_pass');
+    $confirmPass = array_get($request, 'confirm_pass');
+
+    $user = User::find(Auth::user()->id);
+    if(password_verify($oldPass, $user->password)) {
+      $user->password = bcrypt($newPass);
+      $user->save();
+      return 'ok';
+    } else {
+      throw new \Exception("Mật khẩu không đúng", 1);
+    }
+  }
+
 }
