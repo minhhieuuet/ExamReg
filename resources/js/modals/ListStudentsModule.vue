@@ -10,29 +10,6 @@
     <div class="content">
       <span class="md-title">{{title}}</span>
 
-<!--      <data-table ref="datatable">-->
-<!--        <th class="col_title_en">Mã sinh viên</th>-->
-<!--        <th class="col_title_jp">Họ và tên</th>-->
-<!--        <th class="col_summary_en">Trường</th>-->
-<!--        <th class="col_created_at">Trạng thái</th>-->
-<!--        <th class="col_created_at">Công cụ</th>-->
-
-<!--        <template slot="body" slot-scope="{ item, index }">-->
-<!--          <tr>-->
-<!--            <td class="text-center" v-html="item.account"></td>-->
-<!--            <td class="text-center" v-html="item.full_name"></td>-->
-<!--            <td class="text-center" v-html="item.university_id"></td>-->
-<!--            <td class="text-center" v-html="item.status"></td>-->
-<!--            <td class="text-center">-->
-<!--              <md-button class="md-just-icon md-simple md-danger" @click="removeOneStudent(item.id)">-->
-<!--                <md-icon>close</md-icon>-->
-<!--                <md-tooltip md-direction="top">Xóa</md-tooltip>-->
-<!--              </md-button>-->
-<!--            </td>-->
-<!--          </tr>-->
-<!--        </template>-->
-<!--      </data-table>-->
-
       <md-table class="session-table">
         <th>Mã sinh viên</th>
         <th>Họ và tên</th>
@@ -40,37 +17,25 @@
         <th>Trạng thái</th>
         <th>Công cụ</th>
 
-        <tr>
-          <td class="text-center">16021614</td>
-          <td class="text-center">Bui Phuong Nam</td>
+        <tr v-for="student in students">
+          <td class="text-center">{{student.name}}</td>
+          <td class="text-center">{{student.full_name}}</td>
           <td class="text-center">UET</td>
-          <td class="text-center">Được thi</td>
+          <td class="text-center">{{student.status}}</td>
           <td class="text-center">
-            <md-button class="md-just-icon md-simple md-danger" @click="removeOneStudent(item.id)">
+            <md-button class="md-just-icon md-simple md-danger" @click="removeOneStudentFromModule(student.id)">
               <md-icon>close</md-icon>
-              <md-tooltip md-direction="top">Xóa</md-tooltip>
             </md-button>
           </td>
         </tr>
-
-<!--        <tr v-for="(item, index) in examSessions">-->
-<!--          <td class="text-center" v-html="item.account"></td>-->
-<!--          <td class="text-center" v-html="item.full_name"></td>-->
-<!--          <td class="text-center" v-html="item.university_id"></td>-->
-<!--          <td class="text-center" v-html="item.status"></td>-->
-<!--          <td class="text-center">-->
-<!--            <md-button class="md-just-icon md-simple md-danger" @click="removeOneStudent(item.id)">-->
-<!--              <md-icon>close</md-icon>-->
-<!--              <md-tooltip md-direction="top">Xóa</md-tooltip>-->
-<!--            </md-button>-->
-<!--          </td>-->
-<!--        </tr>-->
       </md-table>
     </div>
       <div class="md-right">
         <md-button class="md-raised md-info" @click="cancel">Đóng</md-button>
       </div>
+      <v-dialog/>
   </modal>
+
 </template>
 
 <script>
@@ -81,6 +46,8 @@
     return {
       title: 'Student',
       editingId: '',
+      moduleId: '',
+      students: '',
       isEditPassword: false,
       student: {
         full_name: '',
@@ -92,12 +59,10 @@
   methods: {
     beforeOpen (event) {
       this.title = event.params.title;
-      if(event.params.studentId) {
-        this.editingId = event.params.studentId;
-        rf.getRequest('StudentRequest').show(this.editingId).then((student)=>{
-          this.student = student;
-        });
-      }
+      this.moduleId = event.params.moduleId;
+      rf.getRequest('ModuleRequest').getAllStudentsInModule(this.moduleId).then(res => {
+        this.students = res;
+      });
     },
     beforeClose() {
       this.editingId = '';
@@ -108,8 +73,39 @@
         email: '',
       };
     },
-    getData(params){
+    removeOneStudentFromModule (studentId) {
+      this.$modal.show('dialog', {
+        title: 'Cảnh báo!',
+        text: 'Bạn có chắc chắn muốn xóa sinh viên này khỏi học phần ?',
+        buttons: [
+          {
+            title: 'Bỏ qua',
+            handler: () => {
+              this.$modal.hide('dialog');
+            }
+          },
+          {
+            title: 'Xác nhận',
+            default: true,
+            handler: () => {
 
+              return rf.getRequest('ModuleRequest').removeOneStudentFromModule(this.moduleId, studentId).then((res) => {
+                this.$modal.hide('dialog');
+                console.log(res);
+                rf.getRequest('ModuleRequest').getAllStudentsInModule(this.moduleId).then(res => {
+                  this.students = res;
+                });
+                this.$toasted.show('Xóa sinh viên thành công!', {
+                  theme: 'bubble',
+                  position: 'top-right',
+                  duration : 1500,
+                  type: 'success'
+                });
+              });
+            }
+          },
+        ]
+      });
     },
     cancel() {
       this.$modal.hide('list-students-module');
