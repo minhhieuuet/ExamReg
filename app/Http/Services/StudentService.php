@@ -69,6 +69,10 @@ class StudentService
 
     public function importExel($request) {
       $file = $request->file('file');
+      if($file->getClientOriginalExtension() !== 'xlsx'){
+        throw new \Exception("Định dạng file không đúng", 1);
+
+      }
       $rows = (new FastExcel)->import($file)->toArray();
       foreach($rows as $student) {
         $value = array_values($student);
@@ -76,7 +80,7 @@ class StudentService
         $password = preg_replace('/[\s]+/mu', ' ', $value[2]);
         $email = preg_replace('/[\s]+/mu', ' ', $value[3]);
         $full_name = preg_replace('/[\s]+/mu', ' ', $value[4]);
-        
+
         User::updateOrCreate(['name'=> $username], [
           'name' => $username,
           'full_name' => $full_name,
