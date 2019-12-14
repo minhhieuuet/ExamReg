@@ -33,4 +33,8 @@ export default class StudentRequest extends BaseModelRequest {
     return this.del(url, {ids: studentIds});
   }
 
+  importExel(formData) {
+    const url = '/admin/student/import';
+    return this.post(url, formData,{  headers: {  'Content-Type': 'multipart/form-data'}});
+  }
 }

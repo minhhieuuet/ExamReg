@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::put('student/{student}', 'StudentController@updateStudent');
     Route::delete('student/{student}', 'StudentController@deleteOneStudent');
     Route::delete('many-students', 'StudentController@deleteManyStudents');
-
+    Route::post('student/import', 'StudentController@importExcel');
     /* Admin 8 */
     Route::get('/modules', 'ModuleController@getModules');
     Route::get('module/{module}', 'ModuleController@getOneModule');

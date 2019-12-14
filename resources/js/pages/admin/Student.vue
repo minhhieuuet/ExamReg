@@ -11,9 +11,11 @@
             <md-icon>search</md-icon>
           </md-field>
         </div>
-        <div class="md-layout-item md-size-35">
+        <div class="md-layout-item md-size-25">
         </div>
         <div class="md-layout-item">
+          <md-button class="md-success" @click="$refs.file.click()"><md-icon>attach_file</md-icon> Nhập excel</md-button>
+          <input type="file" style="display:none;" id="file" ref="file" v-on:change="handleFileUpload()">
           <md-button  class="md-success" @click="createStudent">Thêm</md-button>
           <md-button  class="md-info" @click="refresh">Làm mới</md-button>
           <md-button  class="md-danger" @click="removeManyStudent()">Xóa</md-button>
@@ -84,7 +86,8 @@ export default{
   data () {
     return {
       searchInput: '',
-      selectedAll: false
+      selectedAll: false,
+      file: ''
     }
   },
   methods: {
@@ -178,6 +181,30 @@ export default{
           this.isLoading = false;
         });
       },
+      async handleFileUpload(){
+        this.file = this.$refs.file.files[0];
+        let formData = new FormData();
+        formData.append('file', this.file);
+        rf.getRequest('StudentRequest').importExel(formData).then(res =>{
+          console.log(res);
+          this.file = '';
+          this.$toasted.show('Nhập sinh viên thành công!', {
+            theme: 'bubble',
+            position: 'top-right',
+            duration : 1500,
+            type: 'success'
+          });
+          this.refresh();
+        })
+        .catch(err => {
+          this.$toasted.show('Đã xảy ra lỗi, vui lòng kiểm tra lại định dạng file', {
+            theme: 'bubble',
+            position: 'top-right',
+            duration : 2500,
+            type: 'danger'
+          });
+        });
+      }
   },
   watch: {
     searchInput() {

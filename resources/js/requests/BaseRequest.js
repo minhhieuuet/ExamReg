@@ -28,9 +28,9 @@ export default class BaseRequest {
     }
   }
 
-  async post (url, data = {}) {
+  async post (url, data = {}, params = {}) {
     try {
-      const response = await window.axios.post(this.getUrlPrefix() + url, data);
+      const response = await window.axios.post(this.getUrlPrefix() + url, data, params);
       return this._responseHandler(response);
     } catch (error) {
       this._errorHandler(error);
