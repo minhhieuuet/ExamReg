@@ -8,6 +8,7 @@ import AdminUniversity from '@/pages/admin/University.vue';
 import AdminRoom from '@/pages/admin/Room.vue';
 import AdminModule from '@/pages/admin/Module.vue';
 import AdminTestRoom from '@/pages/admin/TestRoom.vue';
+import AdminExam from '@/pages/admin/Exam.vue';
 
 import UserDashboardLayout from '@/pages/user/Layout/DashboardLayout.vue'
 import UserDashboard from '@/pages/user/Dashboard.vue';
@@ -109,6 +110,14 @@ export default {
           path: 'test-room',
           name: 'Phòng thi',
           component: AdminTestRoom,
+          meta: {
+            requiresAdmin: true
+          }
+        },
+        {
+          path: 'exam',
+          name: 'Kỳ thi',
+          component: AdminExam,
           meta: {
             requiresAdmin: true
           }
