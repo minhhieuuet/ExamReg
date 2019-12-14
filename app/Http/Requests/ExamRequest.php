@@ -25,8 +25,8 @@ class ExamRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'register_started_at' => 'required',
-            'register_finished_at' => 'required',
+            'register_started_at' => 'required, numeric',
+            'register_finished_at' => 'required, numeric',
         ];
     }
 
