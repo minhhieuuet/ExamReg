@@ -121,4 +121,20 @@ class ModuleController extends Controller
             throw $e;
         }
     }
+
+    public function getAllStudentsInModule(Module $module) {
+      return $this->moduleService->getAllStudentsInModule($module);
+    }
+
+    public function removeOneStudentFromModule(Request $request) {
+      return $this->moduleService->removeOneStudentFromModule($request);
+    }
+
+    public function getAllStudentsToAdd(Module $module) {
+      return $this->moduleService->getAllStudentsToAdd($module);
+    }
+
+    public function addStudentsToModule(Request $request) {
+      return $this->moduleService->addStudentsToModule($request);
+    }
 }
