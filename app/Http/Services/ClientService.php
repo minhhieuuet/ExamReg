@@ -10,7 +10,7 @@ use App\Models\ExamSession;
 use App\Models\TestRoomUser;
 use App\Models\TestRoom;
 use App\Models\Module;
-
+use App\Models\ModuleUser;
 class ClientService
 {
 
@@ -100,9 +100,17 @@ class ClientService
               ->where('user_id', Auth::user()->id)->count() ? 1 : 0;
   }
 
+  public function isUserAbleToRegisterModule($moduleId) {
+    return ModuleUser::where(['module_id' => Module::find($moduleId)->id, 'user_id' => Auth::user()->id])->first()->status ?? 0;
+  }
   public function registerSession($request) {
     $sessionId = array_get($request, 'session_id');
     $session = ExamSession::find($sessionId);
+    //Check user can register module
+    if(!$this->isUserAbleToRegisterModule($session->module_id)) {
+      throw new \Exception("Bạn không có quyền đăng ký ca thi này", 1);
+
+    }
     $testRooms = TestRoom::where('exam_session_id', $sessionId)->orderBy('test_rooms.id', 'asc')
             ->join('rooms', 'test_rooms.room_id', 'rooms.id')
             ->select('test_rooms.id as id', 'rooms.capacity as capacity')->get();
@@ -119,7 +127,7 @@ class ClientService
       }
     }
     if(empty($selectedTestRoom)) {
-      throw new \Exception("Không còn phòng thi nào còn trống, mong bạn thử lại sau", 1);
+      throw new \Exception("Không còn phòng thi nào còn trống, vui lòng thử lại sau", 1);
 
     }
     TestRoomUser::insert(['test_room_id' => $selectedTestRoom->id, 'user_id' => Auth::user()->id]);
