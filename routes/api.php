@@ -71,6 +71,7 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::post('module/remove-one-student', 'ModuleController@removeOneStudentFromModule');
     Route::get('/module/all-students-to-add/{module}', 'ModuleController@getAllStudentsToAdd');
     Route::post('/module/add-students', 'ModuleController@addStudentsToModule');
+    Route::post('/module/toggle-student-status', 'ModuleController@toggleStudentModuleStatus');
     /* Admin 9 */
     Route::get('/rooms', 'RoomController@getRooms');
     Route::get('room/{room}', 'RoomController@getOneRoom');

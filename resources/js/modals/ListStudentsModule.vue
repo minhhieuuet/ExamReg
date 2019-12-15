@@ -21,7 +21,14 @@
           <td class="text-center">{{student.name}}</td>
           <td class="text-center">{{student.full_name}}</td>
           <td class="text-center">UET</td>
-          <td class="text-center">{{student.status}}</td>
+          <td class="text-center">
+            <md-button class="md-just-icon md-simple md-success" title="Được thi" v-if="student.status" @click="toogleStudentModuleStatus(student.id)">
+              <md-icon>check_circle</md-icon>
+            </md-button>
+            <md-button class="md-just-icon md-simple md-danger" title="Bị cấm thi" v-else @click="toogleStudentModuleStatus(student.id)">
+              <md-icon>error</md-icon>
+            </md-button>
+          </td>
           <td class="text-center">
             <md-button class="md-just-icon md-simple md-danger" @click="removeOneStudentFromModule(student.id)">
               <md-icon>close</md-icon>
@@ -105,6 +112,14 @@
             }
           },
         ]
+      });
+    },
+    toogleStudentModuleStatus (studentId) {
+      rf.getRequest('ModuleRequest').toggleStudentModuleStatus(this.moduleId, studentId).then(res => {
+        console.log(res);
+        rf.getRequest('ModuleRequest').getAllStudentsInModule(this.moduleId).then(res => {
+          this.students = res;
+        });
       });
     },
     cancel() {

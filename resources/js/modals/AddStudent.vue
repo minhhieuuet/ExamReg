@@ -26,10 +26,10 @@
         <md-table class="student-table">
           <thead>
             <th>STT</th>
-            <th>Mã sinh viên</th>
-            <th>Họ và tên</th>
-            <th>Email</th>
-            <th></th>
+            <th style="width: 130px;">Mã sinh viên</th>
+            <th style="width: 122px;">Họ và tên</th>
+            <th style="width:129px;">Email</th>
+            <th style="width: 70px;"></th>
           </thead>
           <tbody>
             <tr v-for="(student, index) in selectedStudents">
@@ -79,7 +79,7 @@
       this.selectedStudents = [];
     },
     beforeClose() {
-      location.reload();
+      this.$emit('refresh');
     },
     submit() {
       let ids = this.selectedStudents.map(student => student.id);

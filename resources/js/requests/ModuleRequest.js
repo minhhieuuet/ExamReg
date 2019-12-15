@@ -42,6 +42,11 @@ export default class ModuleRequest extends BaseModelRequest {
     return this.post(url, {module_id: moduleId, student_id: studentId});
   }
 
+  toggleStudentModuleStatus(moduleId, studentId) {
+    const url = '/admin/module/toggle-student-status';
+    return this.post(url, {module_id: moduleId, student_id: studentId});
+  }
+
   getAllStudentsToAdd(moduleId) {
     const url = '/admin/module/all-students-to-add/'+ moduleId;
     return this.get(url);

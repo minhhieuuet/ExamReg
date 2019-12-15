@@ -137,4 +137,8 @@ class ModuleController extends Controller
     public function addStudentsToModule(Request $request) {
       return $this->moduleService->addStudentsToModule($request);
     }
+
+    public function toggleStudentModuleStatus(Request $request) {
+      return $this->moduleService->toggleStudentModuleStatus($request);
+    }
 }

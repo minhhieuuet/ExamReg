@@ -104,6 +104,11 @@ class ModuleService
       return $status;
     }
 
+    public function toggleStudentModuleStatus($request) {
+      $moduleUser = ModuleUser::where(['user_id' => $request->student_id, 'module_id' => $request->module_id])->first();
+      $moduleUser->update(['status' => !$moduleUser->status]);
+      return $moduleUser;
+    }
     public function getAllStudentsToAdd($module) {
       return User::where('role', 1)->get();
     }
