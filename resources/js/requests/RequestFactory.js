@@ -6,6 +6,7 @@ import RoomRequest from './RoomRequest';
 import ModuleRequest from './ModuleRequest';
 import TestRoomRequest from './TestRoomRequest';
 import ExamRequest from './ExamRequest';
+import TestSiteRequest from './TestSiteRequest';
 const requestMap = {
   UserRequest,
   StudentRequest,
@@ -14,7 +15,8 @@ const requestMap = {
   RoomRequest,
   ModuleRequest,
   TestRoomRequest,
-  ExamRequest
+  ExamRequest,
+  TestSiteRequest
 };
 
 const instances = {};

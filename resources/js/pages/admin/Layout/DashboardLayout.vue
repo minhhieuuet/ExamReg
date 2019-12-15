@@ -36,6 +36,11 @@
         <md-icon>content_paste</md-icon>
         <p>Kỳ thi</p>
       </sidebar-link>
+      <sidebar-link to="/admin/test-site">
+        <md-icon>content_paste</md-icon>
+        <p>Điểm thi</p>
+      </sidebar-link>
+      
     </side-bar>
 
     <div class="main-panel">
