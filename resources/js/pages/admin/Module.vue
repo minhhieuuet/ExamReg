@@ -32,6 +32,7 @@
                 </th>
                 <th class="col_title_en">Tên</th>
                 <th class="col_title_jp">Code</th>
+                <th>Tổng số sinh viên</th>
                 <th class="col_created_at">Ngày tạo</th>
                 <th class="col_tools">Công cụ</th>
                 <template slot="body" slot-scope="{ item, index }">
@@ -41,6 +42,7 @@
                     </td>
                     <td class="text-center" v-html="item.name"></td>
                     <td class="text-center" v-html="item.code"></td>
+                    <td class="text-center" v-html="item.total_user"></td>
                     <td class="text-center" v-html="item.created_at"></td>
                     <td class="text-center">
                       <md-button class="md-just-icon md-simple md-primary" @click="addStudent(item.id)">
@@ -102,12 +104,14 @@ export default{
   methods: {
     addStudent(moduleId){
       this.$modal.show('add-student', {
-        title: 'Thêm sinh viên'
+        title: 'Thêm sinh viên',
+        moduleId: moduleId
       });
     },
     showListStudentsModule(moduleId){
       this.$modal.show('list-students-module', {
-        title: 'Xem danh sách sinh viên'
+        title: 'Xem danh sách sinh viên',
+        moduleId: moduleId
       })
     },
     removeOneModule(moduleId) {
