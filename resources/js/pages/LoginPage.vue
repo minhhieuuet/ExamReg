@@ -3,9 +3,9 @@
     <md-content class="md-elevation-3">
 
       <div class="title">
-        <img src="https://vuematerial.io/assets/logo-color.png">
-        <div class="md-title">Vue Material</div>
-        <div class="md-body-1">Build beautiful apps with Material Design and Vue.js</div>
+        <img src="images/vue-logo.png">
+        <div class="md-title">ExamReg</div>
+        <div class="md-body-1"></div>
       </div>
 
       <div class="form">
@@ -21,7 +21,7 @@
       </div>
 
       <div class="actions md-layout md-alignment-center-space-between">
-        <a href="/resetpassword">Reset password</a>
+        <a href="/resetpassword"></a>
         <md-button class="md-raised md-primary" @click="submit">Log in</md-button>
       </div>
 
