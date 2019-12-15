@@ -22,7 +22,7 @@
       <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
         <md-card>
           <md-card-header data-background-color="green">
-            <h4 class="title">Quản lí trường</h4>
+            <h4 class="title">Quản lí phòng thi</h4>
 <!--            <p class="category">Here is a subtitle for this table</p>-->
           </md-card-header>
           <md-card-content>
@@ -32,6 +32,8 @@
                 </th>
                 <th class="col_title_en">Tên</th>
                 <th class="col_title_en">Phòng máy</th>
+                <th>Mã môn thi</th>
+                <th>Môn thi</th>
                 <th>Ca thi</th>
                 <th class="col_tools">Công cụ</th>
                 <template slot="body" slot-scope="{ item, index }">
@@ -41,6 +43,8 @@
                     </td>
                     <td class="text-center" v-html="item.name"></td>
                     <td class="text-center" v-html="item.room_name"></td>
+                    <td class="text-center">{{item.module_code}}</td>
+                    <td class="text-center"> {{item.module_name}}</td>
                     <td class="text-center">{{item.started_at | toTimeFormat}}- {{item.finished_at| toTimeFormat}} <br>{{item.started_at | toDateFormat}}</td>
                     <td class="text-center">
                       <md-button class="md-just-icon md-simple md-primary" @click="editTestRoom(item.id)">

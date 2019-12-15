@@ -19,8 +19,11 @@ class TestRoomService
 
         return TestRoom::join('exam_sessions', 'test_rooms.exam_session_id', 'exam_sessions.id')
             ->join('rooms', 'test_rooms.room_id', 'rooms.id')
+            ->join('modules', 'exam_sessions.module_id', 'modules.id')
             ->select('test_rooms.id as id',
             'test_rooms.name as name',
+            'modules.name as module_name',
+            'modules.code as module_code',
             'exam_sessions.started_at as started_at',
             'exam_sessions.finished_at as finished_at',
             'rooms.name as room_name')
@@ -110,6 +113,7 @@ class TestRoomService
       return ExamSession::join('modules', 'exam_sessions.module_id','modules.id')
       ->join('test_sites', 'exam_sessions.test_site_id','test_sites.id')
       ->select('exam_sessions.id as id', 'modules.code as module_code', 'modules.name as module_name', 'test_sites.name as test_site_name', 'exam_sessions.started_at', 'exam_sessions.finished_at')
+      ->orderBy('module_code')
       ->get();
     }
 }
