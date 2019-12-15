@@ -66,7 +66,7 @@
           <md-card-content>
             <data-table :get-data="getData" ref="datatable">
                 <th class="col_checkbox">
-                  <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
+                  <md-checkbox :plain="true" v-model="selectedAll" class="cb-success"></md-checkbox>
                 </th>
                 <th>STT</th>
                 <th class="col_title_en">Mã học phần</th>
@@ -79,7 +79,7 @@
                 <template slot="body" slot-scope="{ item, index }">
                   <tr>
                     <td class="text-center">
-                      <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
+                      <md-checkbox v-model="item.selected" @input="listenSelectRow" class="cb-success"></md-checkbox>
                     </td>
                     <td class="text-center" v-html="index+1"></td>
                     <td class="text-center">{{item.module_code}}</td>

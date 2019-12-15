@@ -7,7 +7,7 @@
         <div class="md-layout-item md-size-30">
           <md-field >
             <label>Tìm kiếm</label>
-            <md-input type="text" name="text" v-model="searchInput" @keyup.enter="$refs.datatable.refresh()"></md-input>
+            <md-input type="text" name="text" v-model="searchInput" @keyup.enter="$refs.datatable.refresh()" ></md-input>
             <md-icon>search</md-icon>
           </md-field>
         </div>
@@ -28,7 +28,7 @@
           <md-card-content>
             <data-table :get-data="getData" ref="datatable">
                 <th class="col_checkbox">
-                  <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
+                  <md-checkbox :plain="true" v-model="selectedAll" class="cb-success"></md-checkbox>
                 </th>
                 <th class="col_title_en">Tên đăng nhập</th>
                 <th class="col_title_jp">Email</th>
@@ -38,7 +38,7 @@
                 <template slot="body" slot-scope="{ item, index }">
                   <tr>
                     <td class="text-center">
-                      <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
+                      <md-checkbox v-model="item.selected" @input="listenSelectRow" class="cb-success"></md-checkbox>
                     </td>
                     <td class="text-center" v-html="item.name"></td>
                     <td class="text-center" v-html="item.email"></td>

@@ -26,3 +26,19 @@
     opacity: .26;
   }
 }
+
+
+.md-checkbox.md-checked {
+  &.cb-success {
+    .md-checkbox-container {
+      background-color: #fff;
+      border-color: #000;
+      border: 1px solid rgba(0, 0, 0, .54);
+      border-radius: 3px;
+
+      .md-ripple {
+        overflow: hidden;
+      }
+    }
+  }
+}
