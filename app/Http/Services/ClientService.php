@@ -103,6 +103,10 @@ class ClientService
   public function isUserAbleToRegisterModule($moduleId) {
     return ModuleUser::where(['module_id' => Module::find($moduleId)->id, 'user_id' => Auth::user()->id])->first()->status ?? 0;
   }
+
+  public function totalTestRoomRegistedComputers($testRoom) {
+    return TestRoomUser::where('test_room_id', $testRoom->id)->count();
+  }
   public function registerSession($request) {
     $sessionId = array_get($request, 'session_id');
     $session = ExamSession::find($sessionId);
@@ -120,8 +124,7 @@ class ClientService
     $computerCounter = 0;
     $selectedTestRoom = [];
     foreach($testRooms as $testRoom) {
-      $computerCounter+= $testRoom->capacity;
-      if($computerCounter > $totalRegistedComputers) {
+      if($this->totalTestRoomRegistedComputers($testRoom) < $testRoom->capacity) {
         $selectedTestRoom = $testRoom;
         break;
       }
