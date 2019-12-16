@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Models\TestSite;
+use App\Models\Exam;
 use Exception;
 
 class TestSiteService
@@ -15,7 +16,8 @@ class TestSiteService
     {
         $limit = array_get($params, 'limit', 10);
 
-        return TestSite::when(!empty(array_get($params, 'search')), function ($query) use ($params) {
+        return TestSite::join('exams', 'test_sites.exam_id', 'exams.id')
+        ->select('test_sites.*', 'exams.name as exam_name')->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
             $search = array_get($params, 'search');
             return $query->where('name', 'like', "%$search%")->orWhere('capacity', 'like', "%$search%");
         })->orderBy('created_at', 'desc')->paginate($limit);
@@ -84,5 +86,9 @@ class TestSiteService
         $testSite->delete();
 
         return 'ok';
+    }
+
+    public function getAllExams() {
+      return Exam::all();
     }
 }

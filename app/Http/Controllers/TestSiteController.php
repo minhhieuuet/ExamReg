@@ -121,4 +121,8 @@ class TestSiteController extends Controller
             throw $e;
         }
     }
+
+    public function getAllExams() {
+      return $this->testSiteService->getAllExams();
+    }
 }
