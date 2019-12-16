@@ -68,10 +68,9 @@ export default {
     },
     beforeClose() {
       this.editingId = '';
-      this.module = {
+      this.testSite = {
         name: '',
-        full_name: '',
-        email: '',
+        exam_id: ''
       };
     },
     async submit() {
