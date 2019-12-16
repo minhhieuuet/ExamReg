@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Services;
-
+use Rap2hpoutre\FastExcel\FastExcel;
 use App\User;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -65,5 +65,30 @@ class StudentService
             User::whereIn('id', $studentIds)->delete();
         }
         return 'ok';
+    }
+
+    public function importExel($request) {
+      $file = $request->file('file');
+      if($file->getClientOriginalExtension() !== 'xlsx'){
+        throw new \Exception("Định dạng file không đúng", 1);
+
+      }
+      $rows = (new FastExcel)->import($file)->toArray();
+      foreach($rows as $student) {
+        $value = array_values($student);
+        $username = preg_replace('/[^0-9]/', '', $value[1]);
+        $password = preg_replace('/[\s]+/mu', ' ', $value[2]);
+        $email = preg_replace('/[\s]+/mu', ' ', $value[3]);
+        $full_name = preg_replace('/[\s]+/mu', ' ', $value[4]);
+
+        User::updateOrCreate(['name'=> $username], [
+          'name' => $username,
+          'full_name' => $full_name,
+          'password' => bcrypt($password),
+          'email' => $email,
+          'role' => 1
+        ]);
+      }
+      return 'ok';
     }
 }

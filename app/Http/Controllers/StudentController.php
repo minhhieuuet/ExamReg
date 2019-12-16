@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Services\StudentService;
 use Illuminate\Http\Request;
 use App\Models\Student;
@@ -81,5 +82,17 @@ class StudentController extends Controller
         }
     }
 
+    public function importExcel(Request $request) {
+      DB::beginTransaction();
+      try {
+          $status = $this->studentService->importExel($request);
+          DB::commit();
+          return $status;
+      } catch (\Exception $e) {
+          DB::rollBack();
+          Log::error($e->getMessage());
+          throw $e;
+      }
+    }
 
 }
