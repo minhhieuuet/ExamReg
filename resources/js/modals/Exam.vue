@@ -23,19 +23,15 @@
             </md-input>
           </md-field>
 
+
+            <md-datepicker v-model="exam.register_started_at">
+              <label>Bắt đầu</label>
+            </md-datepicker>
+
           <md-field>
-            <label>Thời điểm bắt đầu</label>
-            <md-input type="text"
-                      v-model="exam.register_started_at"
-                      md-counter="30">
-           </md-input>
-          </md-field>
-          <md-field>
-            <label>Thời điểm kết thúc</label>
-            <md-input type="text"
-                      v-model="exam.register_finished_at"
-                      md-counter="30">
-           </md-input>
+            <md-datepicker v-model="exam.register_finished_at">
+              <label>Kết thúc</label>
+            </md-datepicker>
           </md-field>
           </div>
       </div>
@@ -49,6 +45,7 @@
 
 <script>
 import rf from '../requests/RequestFactory';
+import moment from 'moment';
 export default {
   data () {
     return {
@@ -61,13 +58,21 @@ export default {
       }
     }
   },
+  watch: {
+    register_started_at (newVal) {
+      this.register_started_at = moment(newVal).format('x');
+    }
+  },
   methods: {
     beforeOpen (event) {
       this.title = event.params.title;
       if(event.params.examId) {
         this.editingId = event.params.examId;
         rf.getRequest('ExamRequest').show(this.editingId).then((exam)=>{
-          this.exam = exam;
+          this.exam.name = exam.name;
+          // console.log(moment(exam.register_started_at))
+          this.exam.register_started_at = moment(exam.register_started_at).format('YYYY-MM-DD');
+          this.exam.register_finished_at = moment(exam.register_finished_at).format('YYYY-MM-DD');
         });
       }
     },
@@ -97,8 +102,8 @@ export default {
       let params = this.exam;
       params = {};
       params.name = this.exam.name;
-      params.register_started_at = this.exam.register_started_at;
-      params.register_finished_at = this.exam.register_finished_at;
+      params.register_started_at = moment(this.exam.register_started_at, 'YYYY-MM-DD').format('x');
+      params.register_finished_at = moment(this.exam.register_finished_at, 'YYYY-MM-DD').format('x');
       rf.getRequest('ExamRequest').update(this.editingId, params).then((res)=> {
         this.$modal.hide('exam');
         this.$emit('refresh');
@@ -111,7 +116,10 @@ export default {
       });
     },
     createOneExam() {
-          rf.getRequest('ExamRequest').store(this.exam).then((res)=>{
+          let params = this.exam;
+          params.register_started_at = moment(this.exam.register_started_at, 'YYYY-MM-DD').format('x');
+          params.register_finished_at = moment(this.exam.register_finished_at, 'YYYY-MM-DD').format('x');
+          rf.getRequest('ExamRequest').store(params).then((res)=>{
             this.$modal.hide('exam');
             this.$emit('refresh');
           }).catch((err) => {
