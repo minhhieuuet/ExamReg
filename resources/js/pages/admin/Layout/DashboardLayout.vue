@@ -9,15 +9,15 @@
         <p>Trang chủ</p>
       </sidebar-link>
       <sidebar-link to="/admin/module">
-        <md-icon>content_paste</md-icon>
+        <md-icon>class</md-icon>
         <p>Học phần</p>
       </sidebar-link>
       <sidebar-link to="/admin/exam-session">
-        <md-icon>content_paste</md-icon>
+        <md-icon>calendar_today</md-icon>
         <p>Ca thi</p>
       </sidebar-link>
       <sidebar-link to="/admin/test-room">
-        <md-icon>content_paste</md-icon>
+        <md-icon>meeting_room</md-icon>
         <p>Phòng thi</p>
       </sidebar-link>
       <sidebar-link to="/admin/exam">
@@ -25,19 +25,19 @@
         <p>Kỳ thi</p>
       </sidebar-link>
       <sidebar-link to="/admin/student">
-        <md-icon>content_paste</md-icon>
+        <md-icon>people</md-icon>
         <p>Sinh viên</p>
       </sidebar-link>
       <sidebar-link to="/admin/test-site">
-        <md-icon>content_paste</md-icon>
+        <md-icon>local_offer</md-icon>
         <p>Điểm thi</p>
       </sidebar-link>
       <sidebar-link to="/admin/room">
-        <md-icon>content_paste</md-icon>
+        <md-icon>computer</md-icon>
         <p>Phòng máy</p>
       </sidebar-link>
       <sidebar-link to="/admin/university">
-        <md-icon>content_paste</md-icon>
+        <md-icon>school</md-icon>
         <p>Trường</p>
       </sidebar-link>
     </side-bar>

@@ -10,7 +10,7 @@
         <p>Trang chủ</p>
       </sidebar-link>
       <sidebar-link to="/registed-sessions">
-        <md-icon>account_circle</md-icon>
+        <md-icon>local_printshop</md-icon>
         <p>Xem và in</p>
       </sidebar-link>
       <sidebar-link to="/user">
