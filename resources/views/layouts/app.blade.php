@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/theme/default.css">
     <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <link rel="icon" href="/images/favicon.ico">
+    <link rel="icon" href="/images/vue-logo.png">
 </head>
 <body>
     <div id="app">

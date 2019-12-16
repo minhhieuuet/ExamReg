@@ -4,7 +4,9 @@ namespace App\Http\Services;
 
 use App\Models\Module;
 use Exception;
-
+use App\User;
+use DB;
+use App\Models\ModuleUser;
 class ModuleService
 {
     /**
@@ -18,7 +20,13 @@ class ModuleService
         return Module::when(!empty(array_get($params, 'search')), function ($query) use ($params) {
             $search = array_get($params, 'search');
             return $query->where('name', 'like', "%$search%")->orWhere('code', 'like', "%$search%");
-        })->orderBy('created_at', 'desc')->paginate($limit);
+        })->select('modules.*')
+        ->addSelect(DB::raw(
+                    "COALESCE((select count(*)
+                    from module_user
+                    where  modules.id = module_user.module_id), 0) as total_user"
+                ))
+        ->orderBy('created_at', 'desc')->paginate($limit);
     }
 
     /**
@@ -84,5 +92,38 @@ class ModuleService
         $module->delete();
 
         return 'ok';
+    }
+
+    public function getAllStudentsInModule($module) {
+      return ModuleUser::leftJoin('users', 'module_user.user_id', 'users.id')
+              ->where(['role' => 1, 'module_id' => $module->id])->get();
+    }
+
+    public function removeOneStudentFromModule($request) {
+      $status = ModuleUser::where(['user_id' => $request->student_id, 'module_id' => $request->module_id])->delete();
+      return $status;
+    }
+
+    public function toggleStudentModuleStatus($request) {
+      $moduleUser = ModuleUser::where(['user_id' => $request->student_id, 'module_id' => $request->module_id])->first();
+      $moduleUser->update(['status' => !$moduleUser->status]);
+      return $moduleUser;
+    }
+    public function getAllStudentsToAdd($module) {
+      return User::where('role', 1)->get();
+    }
+
+    public function addStudentsToModule($request) {
+      $studentIds = array_get($request, 'ids');
+      $moduleId = array_get($request, 'module_id');
+      foreach($studentIds as $id) {
+        ModuleUser::firstOrCreate(['user_id' => $id, 'module_id' => $moduleId], [
+          'user_id' => $id,
+          'module_id' => $moduleId,
+          'status' => 1,
+          'exam_id' => 5
+        ]);
+      }
+      return 'ok';
     }
 }

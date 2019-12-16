@@ -14,7 +14,11 @@
         <div class="md-layout-item md-size-35">
         </div>
         <div class="md-layout-item">
-          <md-button  class="md-success" @click="isShowSessionForm = !isShowSessionForm">Thêm</md-button>
+          <md-button  class="md-success" @click="isShowSessionForm = !isShowSessionForm">
+            Thêm
+            <md-icon v-if="!isShowSessionForm">keyboard_arrow_down</md-icon>
+            <md-icon v-if="isShowSessionForm">keyboard_arrow_up</md-icon>
+          </md-button>
           <md-button  class="md-info" @click="refresh">Làm mới</md-button>
           <md-button  class="md-danger" @click="removeManyExamSession()">Xóa</md-button>
         </div>
@@ -48,8 +52,8 @@
           </md-card-content>
 
           <md-card-actions style="padding-bottom: 20px;">
-            <md-button class="md-success" @click="createExamSession">Xác nhận</md-button>
-            <md-button class="md-danger">Bỏ qua</md-button>
+            <md-button class="md-success" @click="submit">Xác nhận</md-button>
+            <md-button class="md-danger" @click="isShowSessionForm = !isShowSessionForm">Bỏ qua</md-button>
           </md-card-actions>
 
       </md-card>
@@ -62,7 +66,7 @@
           <md-card-content>
             <data-table :get-data="getData" ref="datatable">
                 <th class="col_checkbox">
-                  <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
+                  <md-checkbox :plain="true" v-model="selectedAll" class="cb-success"></md-checkbox>
                 </th>
                 <th>STT</th>
                 <th class="col_title_en">Mã học phần</th>
@@ -75,7 +79,7 @@
                 <template slot="body" slot-scope="{ item, index }">
                   <tr>
                     <td class="text-center">
-                      <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
+                      <md-checkbox v-model="item.selected" @input="listenSelectRow" class="cb-success"></md-checkbox>
                     </td>
                     <td class="text-center" v-html="index+1"></td>
                     <td class="text-center">{{item.module_code}}</td>
@@ -124,6 +128,7 @@ export default{
     return {
       searchInput: '',
       selectedAll: false,
+      editingId: '',
       startTime: moment().toDate(),
       finishTime: moment().add(1, 'hours').toDate(),
       selectedDate: moment().toDate(),
@@ -202,7 +207,33 @@ export default{
           ]
         });
       },
-      createExamSession() {
+      submit() {
+        if(this.editingId) {
+          var date = moment(this.selectedDate).format('DD/MM/YYYY');
+          var startTime = moment(this.startTime).format('HH:mm');
+          var finishTime = moment(this.finishTime).format('HH:mm');
+          startTime = moment(date + ' ' + startTime, 'DD/MM/YYYY HH:mm').format('x');
+          finishTime = moment(date + ' ' + finishTime, 'DD/MM/YYYY HH:mm').format('x');
+          let params = {
+            module_id: this.selectedModule.id,
+            test_site_id: this.selectedTestSite.id,
+            started_at: startTime,
+            finished_at: finishTime
+          };
+
+          rf.getRequest('ExamSessionRequest').update(this.editingId, params).then((res)=>{
+            this.$refs.datatable.refresh();
+            this.isShowSessionForm = false;
+            this.$toasted.show('Sửa ca thi thành công', {
+              theme: 'bubble',
+              position: 'top-right',
+              duration : 1500,
+              type: 'success'
+            });
+          }).catch((err) => {
+          });
+          return;
+        }
         var date = moment(this.selectedDate).format('DD/MM/YYYY');
         var startTime = moment(this.startTime).format('HH:mm');
         var finishTime = moment(this.finishTime).format('HH:mm');
@@ -235,11 +266,13 @@ export default{
       },
       editExamSession(examSessionId) {
         this.isShowSessionForm = true;
+        this.editingId = examSessionId;
         rf.getRequest('ExamSessionRequest').show(examSessionId).then(res => {
-          rf.getRequest('ModuleRequest').show(res.module_id).then(module => {
-            this.selectedModule = module;
-          });
-
+          this.startTime = moment(res.started_at).toDate();
+          this.finishTime = moment(res.finished_at).toDate();
+          this.selectedDate = moment(res.started_at).toDate();
+          this.selectedTestSite = this.testSites.find(testSite => res.test_site_id == testSite.id);
+          this.selectedModule = this.modules.find(module => res.module_id == module.id);
         });
       },
       listenSelectRow() {

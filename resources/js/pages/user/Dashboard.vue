@@ -31,7 +31,7 @@
               <th>Trạng thái</th>
               <th class="col_tools">Đăng ký</th>
 
-                <tr v-for="(item, index) in examSessions">
+                <tr v-for="(item, index) in examSessions" :title="selectedModule.status ? '':'Bạn không được phép đăng ký môn học này'" :class="{disabled: !selectedModule.status}">
                   <td>{{index+1}}</td>
                   <td>{{item.module_code}}</td>
                   <td class="text-center" v-html="item.module_name"></td>
@@ -41,7 +41,8 @@
                   <td class="text-center" v-html="item.test_site_name"></td>
                   <td class="text-center">{{item.registed_computers}}/{{item.total_computers}}</td>
                   <td class="text-center">
-                    <md-checkbox v-model="item.selected" @change="registerSession(item)"></md-checkbox>
+                    <md-checkbox v-if="!selectedModule.status" disabled></md-checkbox>
+                    <md-checkbox title="Đăng ký" v-else v-model="item.selected" @change="registerSession(item)"></md-checkbox>
                   </td>
                 </tr>
 
@@ -248,5 +249,10 @@ export default{
 
   .table-2 {
     margin-top: 22px;
+  }
+  .disabled {
+    cursor: not-allowed;
+    background-color: #dddddd;
+    opacity: 0.7;
   }
 </style>

@@ -155,12 +155,12 @@
 <style lang="scss" scoped>
   .pagination {
     list-style-type: none !important;
-    
+    padding-bottom: 25px !important;
   }
   .page-item {
     &.active {
       a {
-        background-color: rgb(0, 112, 192);
+        background-color: #4caf50;
         color: white;
       }
     }

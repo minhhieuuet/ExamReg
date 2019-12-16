@@ -81,6 +81,8 @@ export default {
           this.selectedRoomId = testRoom.room_id;
           this.selectedExamSessionId = testRoom.exam_session_id;
         });
+      } else {
+        this.resetData();
       }
     },
     beforeClose() {
@@ -90,6 +92,15 @@ export default {
         full_name: '',
         email: '',
       };
+    },
+    resetData () {
+      this.selectedExamSessionId = '';
+      this.selectedRoomId = '';
+      this.testRoom = {
+        name: '',
+        room_id: '',
+        exam_session_id: ''
+      }
     },
     async submit() {
         Promise.all([

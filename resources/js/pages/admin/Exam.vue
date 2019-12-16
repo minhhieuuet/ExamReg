@@ -28,7 +28,7 @@
           <md-card-content>
             <data-table :get-data="getData" ref="datatable">
                 <th class="col_checkbox">
-                  <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
+                  <md-checkbox :plain="true" v-model="selectedAll" class="cb-success"></md-checkbox>
                 </th>
                 <th class="col_title_en">Tên</th>
                 <th class="col_title_en">Thời điểm bắt đầu</th>
@@ -38,11 +38,11 @@
                 <template slot="body" slot-scope="{ item, index }">
                   <tr>
                     <td class="text-center">
-                      <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
+                      <md-checkbox v-model="item.selected" @input="listenSelectRow" class="cb-success"></md-checkbox>
                     </td>
                     <td class="text-center" v-html="item.name"></td>
-                    <td class="text-center" v-html="item.register_started_at"></td>
-                    <td class="text-center" v-html="item.register_finished_at"></td>
+                    <td class="text-center"> {{item.register_started_at | toDateFormat}}</td>
+                    <td class="text-center">{{item.register_finished_at | toDateFormat}}</td>
                     <td class="text-center" v-html="item.created_at"></td>
                     <td class="text-center">
                       <md-button class="md-just-icon md-simple md-primary" @click="editExam(item.id)">
@@ -194,3 +194,8 @@ export default{
   }
 }
 </script>
+<style lang="scss">
+.md-datepicker-dialog {
+  z-index: 10000 !important;
+}
+</style>
