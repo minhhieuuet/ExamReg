@@ -35,6 +35,8 @@
                 <th>Mã môn thi</th>
                 <th>Môn thi</th>
                 <th>Ca thi</th>
+                <th>Số sinh viên</th>
+                <th>Sức chứa</th>
                 <th class="col_tools">Công cụ</th>
                 <template slot="body" slot-scope="{ item, index }">
                   <tr>
@@ -46,7 +48,15 @@
                     <td class="text-center">{{item.module_code}}</td>
                     <td class="text-center"> {{item.module_name}}</td>
                     <td class="text-center">{{item.started_at | toTimeFormat}}- {{item.finished_at| toTimeFormat}} <br>{{item.started_at | toDateFormat}}</td>
+                    <td class="text-center">{{item.total_user}}</td>
+                    <td class="text-center">{{item.room_capacity}}</td>
                     <td class="text-center">
+                      <md-button class="md-just-icon md-simple md-primary">
+                        <a target="_blank" :href="'/admin/test-room/print/' + item.id">
+                        <md-icon>print</md-icon>
+                        <md-tooltip md-direction="top">In</md-tooltip>
+                        </a>
+                      </md-button>
                       <md-button class="md-just-icon md-simple md-primary" @click="editTestRoom(item.id)">
                         <md-icon>edit</md-icon>
                         <md-tooltip md-direction="top">Sửa</md-tooltip>

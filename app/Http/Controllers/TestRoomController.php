@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TestRoomRequest;
 use App\Http\Services\TestRoomService;
 use App\Models\TestRoom;
+use App\Models\TestRoomUser;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -128,5 +129,23 @@ class TestRoomController extends Controller
 
     public function getAllExamSessions() {
       return $this->testRoomService->getAllExamSessions();
+    }
+
+    public function printTestRoom($testRoomId) {
+      $testRoom = TestRoom::join('exam_sessions', 'test_rooms.exam_session_id', 'exam_sessions.id')
+          ->join('rooms', 'test_rooms.room_id', 'rooms.id')
+          ->join('modules', 'exam_sessions.module_id', 'modules.id')
+          ->select('test_rooms.id as id',
+          'test_rooms.name as name',
+          'modules.name as module_name',
+          'modules.code as module_code',
+          'exam_sessions.started_at as started_at',
+          'exam_sessions.finished_at as finished_at',
+          'rooms.name as room_name')->where('test_rooms.id', $testRoomId)->first();
+      $studentsInTestRoom = TestRoomUser::where('test_room_id', $testRoomId)->join('users', 'test_room_user.user_id', 'users.id')->get();
+      return view("listStudent",[
+        'testRoom' => $testRoom,
+        'studentList' => $studentsInTestRoom
+      ]);
     }
 }

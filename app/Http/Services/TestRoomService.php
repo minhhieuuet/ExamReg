@@ -26,11 +26,17 @@ class TestRoomService
             'modules.code as module_code',
             'exam_sessions.started_at as started_at',
             'exam_sessions.finished_at as finished_at',
-            'rooms.name as room_name')
+            'rooms.name as room_name',
+            'rooms.capacity as room_capacity')
+            ->addSelect(\DB::raw(
+                        "COALESCE((select count(*)
+                        from test_room_user
+                        where  test_rooms.id = test_room_user.test_room_id), 0) as total_user"
+                    ))
             ->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
             $search = array_get($params, 'search');
-            return $query->where('test_rooms.name', 'like', "%$search%");
-        })->orderBy('test_rooms.created_at', 'desc')->paginate($limit);
+            return $query->where('test_rooms.name', 'like', "%$search%")->orWhere('modules.code', 'like', "%$search%");
+        })->orderBy('exam_sessions.id', 'desc')->paginate($limit);
     }
 
     /**

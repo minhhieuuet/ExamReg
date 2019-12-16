@@ -20,7 +20,7 @@ class ExamSessionService
         ->select('exam_sessions.id as id', 'modules.code as module_code', 'modules.name as module_name', 'test_sites.name as test_site_name', 'exam_sessions.started_at', 'exam_sessions.finished_at')
         ->when(!empty(array_get($params, 'search')), function ($query) use ($params) {
             $search = array_get($params, 'search');
-            return $query->where('name', 'like', "%$search%");
+            return $query->where('modules.code', 'like', "%$search%");
         })->orderBy('exam_sessions.created_at', 'desc')->paginate($limit);
     }
 

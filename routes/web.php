@@ -12,5 +12,5 @@
 */
 
 Route::get('/', 'HomeController@index');
-
+Route::get('/admin/test-room/print/{testRoomId}', 'TestRoomController@printTestRoom');
 Route::get('/{view?}', 'HomeController@index')->where('view', '(.*)');
