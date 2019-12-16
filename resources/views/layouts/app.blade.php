@@ -13,9 +13,9 @@
         <meta name="authenticated" content="1">
     @endif
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
-    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/theme/default.css">
-    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+    <link rel="stylesheet" href="/css/vue-material.min.css">
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/vue-multiselect.min.css">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <link rel="icon" href="/images/vue-logo.png">
 </head>
@@ -23,8 +23,8 @@
     <div id="app">
       <router-view></router-view>
     </div>
-    <script src="https://unpkg.com/vue"></script>
-    <script src="https://unpkg.com/vue-material"></script>
+    <script src="/js/vue.js"></script>
+    <script src="/js/vue-material.min.js"></script>
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

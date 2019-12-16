@@ -30,6 +30,7 @@ import Loading from 'vue-loading-overlay';
     // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
 import VueHtmlToPaper from 'vue-html-to-paper';
+import materialIcons from 'material-design-icons/iconfont/material-icons.css';
 Vue.use(VueHtmlToPaper);
 Vue.use(Loading);
 Vue.use(VueMaterial);
