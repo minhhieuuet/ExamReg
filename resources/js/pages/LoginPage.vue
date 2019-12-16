@@ -3,7 +3,7 @@
     <md-content class="md-elevation-3">
 
       <div class="title">
-        <img src="images/vue-logo.png">
+        <img src="/images/vnu-logo.png">
         <div class="md-title">ExamReg</div>
         <div class="md-body-1"></div>
       </div>
