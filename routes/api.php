@@ -16,6 +16,7 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], function () {
+    Route::get('/summary-report', 'SummaryController@getSummaryReport');
     /* Admin 3 */
     Route::get('/exam-sessions', 'ExamSessionController@getExamSessions');
     Route::get('exam-session/{examSession}', 'ExamSessionController@getOneExamSession');

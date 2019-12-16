@@ -1,6 +1,9 @@
 import BaseModelRequest from './BaseModelRequest';
 
 export default class UserRequest extends BaseModelRequest {
+  getSummaryReport() {
+    return this.get('/admin/summary-report');
+  }
   getModelName () {
     return 'users';
   }

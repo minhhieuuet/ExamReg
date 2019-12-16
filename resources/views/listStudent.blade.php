@@ -26,12 +26,18 @@
         <table style="width: 100%; border: none; border-collapse: collapse; margin-top: 30px;">
             <tbody>
               <tr>
-                <td>Học phần: {{$testRoom['module_code']}}</td>
-                <td>Phòng máy: {{$testRoom['room_name']}}</td>
+                <td>Học phần: <b>{{$testRoom['module_code']}}</b></td>
+                <td>Ngày thi : <b><?php echo date('d/m/Y', $testRoom['finished_at'] / 1000); ?> </b></td>
             </tr>
             <tr>
-              <td>Thời điểm bắt đầu: {{$testRoom['started_at']}}</td>
-              <td>Thời điểm kết thúc: {{$testRoom['finished_at']}}</td>
+              <td>Phòng máy: <b>{{$testRoom['room_name']}}</b></td>
+            </tr>
+            <tr>
+              <td>Thời điểm bắt đầu:<b>
+                <?php echo date('H:i:s', $testRoom['started_at'] / 1000); ?>
+              </b>
+              </td>
+              <td>Thời điểm kết thúc:<b> <?php echo date('H:i:s', $testRoom['finished_at'] / 1000); ?> </b></td>
             </tr>
         </tbody></table>
         <br>

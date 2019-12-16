@@ -4341,7 +4341,7 @@ h2.title {
 
 .sidebar .logo .simple-text .logo-img img,
 .off-canvas-sidebar .logo .simple-text .logo-img img {
-  width: 55%;
+  width: 100%;
   vertical-align: -webkit-baseline-middle;
 }
 

@@ -10,19 +10,19 @@
 
       <div class="form">
         <md-field>
-          <label>Username</label>
+          <label>Tên đăng nhập</label>
           <md-input v-model="name" @keyup.enter="submit"  autofocus></md-input>
         </md-field>
 
         <md-field md-has-password>
-          <label>Password</label>
+          <label>Mật khẩu</label>
           <md-input v-model="password" type="password" @keyup.enter="submit"></md-input>
         </md-field>
       </div>
 
       <div class="actions md-layout md-alignment-center-space-between">
         <a href="/resetpassword"></a>
-        <md-button class="md-raised md-primary" @click="submit">Log in</md-button>
+        <md-button class="md-raised md-primary" @click="submit">Đăng nhập</md-button>
       </div>
 
       <div class="loading-overlay" v-if="loading">
