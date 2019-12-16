@@ -31,7 +31,7 @@
                   <md-checkbox :plain="true" v-model="selectedAll"></md-checkbox>
                 </th>
                 <th class="col_title_en">Tên</th>
-                <th class="col_title_en">Tên viết tắt</th>
+                <th class="col_title_en">Kì thi</th>
                 <th class="col_tools">Công cụ</th>
                 <template slot="body" slot-scope="{ item, index }">
                   <tr>
@@ -39,7 +39,7 @@
                       <md-checkbox v-model="item.selected" @input="listenSelectRow"></md-checkbox>
                     </td>
                     <td class="text-center" v-html="item.name"></td>
-                    <td class="text-center" v-html="item.exam_id"></td>
+                    <td class="text-center" v-html="item.exam_name"></td>
                     <td class="text-center">
                       <md-button class="md-just-icon md-simple md-primary" @click="editTestSite(item.id)">
                         <md-icon>edit</md-icon>
@@ -69,7 +69,7 @@ import {
 } from '@/components'
 
 import rf from '../../requests/RequestFactory';
-import TestSiteModal from '../../modals/TestSite'
+import TestSiteModal from '../../modals/TestSite';
 
 export default{
   components: {

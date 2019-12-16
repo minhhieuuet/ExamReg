@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth:api', 'isAdmin'], 'prefix' => 'admin'], fun
     Route::put('test-site/{testSite}', 'TestSiteController@updateTestSite');
     Route::delete('test-site/{testSite}', 'TestSiteController@deleteOneTestSite');
     Route::delete('many-test-sites', 'TestSiteController@deleteManyTestSites');
-
+    Route::get('all-exams', 'TestSiteController@getAllExams');
     /* Admin 6 */
     Route::get('/exams', 'ExamController@getExams');
     Route::get('exam/{exam}', 'ExamController@getOneExam');

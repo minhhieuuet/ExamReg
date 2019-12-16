@@ -33,4 +33,9 @@ export default class TestSiteRequest extends BaseModelRequest {
     return this.del(url, {ids: testSiteIds});
   }
 
+  getAllExams() {
+    const url = '/admin/all-exams';
+    return this.get(url);
+  }
+
 }
