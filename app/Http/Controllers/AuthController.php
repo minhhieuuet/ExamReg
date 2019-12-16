@@ -49,12 +49,18 @@ class AuthController extends Controller
             'name' => 'required|string',
             'password' => 'required|string',
             'remember_me' => 'boolean'
+        ], [
+          'name.required' => 'Bạn chưa nhập tài khoản',
+          'password.required' => 'Bạn chưa nhập mật khẩu'
         ]);
         $credentials = request(['name', 'password']);
-        if(!Auth::attempt($credentials))
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+        if(!Auth::attempt($credentials)) {
+          throw new \Exception("Tài khoản hoặc mật khẩu không đúng", 1);
+
+          return response()->json([
+              'message' => 'Unauthorized'
+          ], 401);
+        }
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
