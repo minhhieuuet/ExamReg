@@ -8,25 +8,13 @@
         <md-icon>dashboard</md-icon>
         <p>Trang chủ</p>
       </sidebar-link>
-      <sidebar-link to="/admin/student">
+      <sidebar-link to="/admin/module">
         <md-icon>content_paste</md-icon>
-        <p>Sinh viên</p>
+        <p>Học phần</p>
       </sidebar-link>
       <sidebar-link to="/admin/exam-session">
         <md-icon>content_paste</md-icon>
         <p>Ca thi</p>
-      </sidebar-link>
-      <sidebar-link to="/admin/university">
-        <md-icon>content_paste</md-icon>
-        <p>Trường</p>
-      </sidebar-link>
-      <sidebar-link to="/admin/room">
-        <md-icon>content_paste</md-icon>
-        <p>Phòng máy</p>
-      </sidebar-link>
-      <sidebar-link to="/admin/module">
-        <md-icon>content_paste</md-icon>
-        <p>Học phần</p>
       </sidebar-link>
       <sidebar-link to="/admin/test-room">
         <md-icon>content_paste</md-icon>
@@ -36,11 +24,22 @@
         <md-icon>content_paste</md-icon>
         <p>Kỳ thi</p>
       </sidebar-link>
+      <sidebar-link to="/admin/student">
+        <md-icon>content_paste</md-icon>
+        <p>Sinh viên</p>
+      </sidebar-link>
       <sidebar-link to="/admin/test-site">
         <md-icon>content_paste</md-icon>
         <p>Điểm thi</p>
       </sidebar-link>
-      
+      <sidebar-link to="/admin/room">
+        <md-icon>content_paste</md-icon>
+        <p>Phòng máy</p>
+      </sidebar-link>
+      <sidebar-link to="/admin/university">
+        <md-icon>content_paste</md-icon>
+        <p>Trường</p>
+      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">
