@@ -14,15 +14,15 @@
       </sidebar-link>
       <sidebar-link to="/admin/module">
         <md-icon>class</md-icon>
-        <p>Học phần</p>
+        <p>Lớp học phần</p>
       </sidebar-link>
       <sidebar-link to="/admin/exam">
         <md-icon>content_paste</md-icon>
         <p>Kỳ thi</p>
       </sidebar-link>
       <sidebar-link to="/admin/test-site">
-        <md-icon>local_offer</md-icon>
-        <p>Điểm thi</p>
+        <md-icon>room</md-icon>
+        <p>Địa điểm thi</p>
       </sidebar-link>
       <sidebar-link to="/admin/exam-session">
         <md-icon>calendar_today</md-icon>

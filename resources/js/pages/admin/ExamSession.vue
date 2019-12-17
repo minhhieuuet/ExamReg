@@ -195,7 +195,7 @@ export default{
                 return rf.getRequest('ExamSessionRequest').removeManyExamSessions(examSessionIds).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('Xóa ca thi thành công!', {
+                  this.$toasted.show('Xóa các ca thi thành công!', {
                     theme: 'bubble',
                     position: 'top-right',
                     duration : 1500,

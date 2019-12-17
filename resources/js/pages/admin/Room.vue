@@ -138,7 +138,7 @@ export default{
                 return rf.getRequest('RoomRequest').removeManyRooms(roomIds).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('Room removed successfully!', {
+                  this.$toasted.show('Xóa phòng máy thành công!', {
                     theme: 'bubble',
                     position: 'top-right',
                     duration : 1500,
