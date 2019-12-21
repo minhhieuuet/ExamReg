@@ -17,9 +17,17 @@
 
       <div style="padding:20px;">
         <label>Sinh viên</label>
+        <br>
+        <md-button class="md-icon-button md-success" title="Thêm sinh viên từ excel">
+          <md-icon>attach_file</md-icon>
+        </md-button>
+        <md-button class="md-icon-button md-danger" title="Thêm sinh viên bị cấm thi từ excel">
+          <md-icon>attach_file</md-icon>
+        </md-button>
         <multiselect
          :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Vui lòng chọn" :custom-label="codeWithName" label="name" track-by="name" :preselect-first="true"
-         v-model="selectedStudents" :options="students">
+         v-model="selectedStudents" :options="students">a
+
          <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} sinh viên đã được chọn</span></template>
        </multiselect>
 
@@ -144,7 +152,10 @@
     border-bottom: 1px solid #dfe2e5;
     text-align: center;
   }
-
+  .md-button:not(.md-just-icon) .md-button-content i {
+    font-size: 1.1rem !important;
+    height: 31px !important;
+  }
 
 }
 </style>

@@ -56,4 +56,9 @@ export default class ModuleRequest extends BaseModelRequest {
     const url = '/admin/module/add-students';
     return this.post(url, {ids: ids, module_id: moduleId});
   }
+
+  importStudentExel(formData) {
+    const url = '/admin/module/import-student';
+    return this.post(url, formData,{  headers: {  'Content-Type': 'multipart/form-data'}});
+  }
 }

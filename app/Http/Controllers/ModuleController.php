@@ -141,4 +141,17 @@ class ModuleController extends Controller
     public function toggleStudentModuleStatus(Request $request) {
       return $this->moduleService->toggleStudentModuleStatus($request);
     }
+
+    public function importStudent(Request $request) {
+      DB::beginTransaction();
+      try {
+          $status = $this->moduleService->importStudent($request);
+          DB::commit();
+          return $status;
+      } catch (\Exception $e) {
+          DB::rollBack();
+          Log::error($e->getMessage());
+          throw $e;
+      }
+    }
 }

@@ -9,15 +9,24 @@
 
     <div class="content">
       <span class="md-title">{{title}}</span>
-
+      <br>
+      <md-button  @click="$refs.file1.click()" class="md-icon-button md-success" title="Thêm sinh viên từ excel">
+        <md-icon>attach_file</md-icon>
+      </md-button>
+      <input type="file" style="display:none;" id="file" ref="file1" v-on:change="handleAddStudentFileUpload()">
+      <md-button class="md-icon-button md-danger" title="Thêm sinh viên bị cấm thi từ excel">
+        <md-icon>attach_file</md-icon>
+      </md-button>
       <md-table class="session-table">
+        <th>STT</th>
         <th>Mã sinh viên</th>
         <th>Họ và tên</th>
         <th>Trường</th>
         <th>Trạng thái</th>
         <th>Công cụ</th>
 
-        <tr v-for="student in students">
+        <tr v-for="(student, index) in students">
+          <td class="text-center">{{index+1}}</td>
           <td class="text-center">{{student.name}}</td>
           <td class="text-center">{{student.full_name}}</td>
           <td class="text-center">UET</td>
@@ -79,6 +88,35 @@
         full_name: '',
         email: '',
       };
+    },
+    async handleAddStudentFileUpload(){
+      this.file1 = this.$refs.file1.files[0];
+      let formData = new FormData();
+      formData.append('file', this.file1);
+      formData.append('module_id', this.moduleId);
+      rf.getRequest('ModuleRequest').importStudentExel(formData).then(res =>{
+        console.log(res);
+        this.file1s = '';
+        this.$toasted.show('Nhập sinh viên thành công!', {
+          theme: 'bubble',
+          position: 'top-right',
+          duration : 1500,
+          type: 'success'
+        });
+        rf.getRequest('ModuleRequest').getAllStudentsInModule(this.moduleId).then(res => {
+          this.students = res;
+        });
+        this.$emit('refresh');
+      })
+      .catch(err => {
+        console.log(err);
+        // this.$toasted.show('Đã xảy ra lỗi, vui lòng kiểm tra lại định dạng file', {
+        //   theme: 'bubble',
+        //   position: 'top-right',
+        //   duration : 2500,
+        //   type: 'danger'
+        // });
+      });
     },
     removeOneStudentFromModule (studentId) {
       this.$modal.show('dialog', {

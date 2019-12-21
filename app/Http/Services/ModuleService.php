@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Models\Module;
+use Rap2hpoutre\FastExcel\FastExcel;
 use Exception;
 use App\User;
 use DB;
@@ -123,6 +124,33 @@ class ModuleService
           'status' => 1,
           'exam_id' => 5
         ]);
+      }
+      return 'ok';
+    }
+
+    public function importStudent($request) {
+      $file = $request->file('file');
+      $moduleId = $request->module_id;
+      if($file->getClientOriginalExtension() !== 'xlsx'){
+        throw new \Exception("Định dạng file không đúng", 1);
+
+      }
+      $rows = (new FastExcel)->import($file)->toArray();
+      foreach($rows as $student) {
+        $value = array_values($student);
+        $username = preg_replace('/[^0-9]/', '', $value[1]);
+        $email = preg_replace('/[\s]+/mu', ' ', $value[2]);
+        $full_name = preg_replace('/[\s]+/mu', ' ', $value[3]);
+
+        $user = User::where('name','LIKE', '%'.$username.'%')->first();
+        if($user['id']) {
+          $moduleUser = ModuleUser::updateOrCreate(['module_id'=> $moduleId, 'user_id' => $user['id']], [
+            'module_id' => $moduleId,
+            'user_id' => $user['id'],
+            'status' => 1,
+            'exam_id' => 5
+          ]);
+        }
       }
       return 'ok';
     }

@@ -31,9 +31,8 @@
                   <md-checkbox :plain="true" v-model="selectedAll" class="cb-success"></md-checkbox>
                 </th>
                 <th class="col_title_en">Tên</th>
-                <th class="col_title_jp">Code</th>
+                <th class="col_title_jp">Mã học phần</th>
                 <th>Tổng số sinh viên</th>
-                <th class="col_created_at">Ngày tạo</th>
                 <th class="col_tools">Công cụ</th>
                 <template slot="body" slot-scope="{ item, index }">
                   <tr>
@@ -43,7 +42,6 @@
                     <td class="text-center" v-html="item.name"></td>
                     <td class="text-center" v-html="item.code"></td>
                     <td class="text-center" v-html="item.total_user"></td>
-                    <td class="text-center" v-html="item.created_at"></td>
                     <td class="text-center">
                       <md-button class="md-just-icon md-simple md-primary" @click="addStudent(item.id)">
                         <md-icon>person_add</md-icon>
