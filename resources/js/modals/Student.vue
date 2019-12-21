@@ -68,7 +68,7 @@
             </div>
           </md-field>
 
-          <md-checkbox v-if="editingId" v-model="isEditPassword">Edit Password</md-checkbox>
+          <md-checkbox v-if="editingId" v-model="isEditPassword">Sửa mật khẩu</md-checkbox>
           <div style="red-outline">
             <md-field>
               <label>Mật khẩu</label>

@@ -140,7 +140,7 @@ export default{
                 return rf.getRequest('ExamRequest').removeManyExams(examIds).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('Exam removed successfully!', {
+                  this.$toasted.show('Xóa các kỳ thi thành công!', {
                     theme: 'bubble',
                     position: 'top-right',
                     duration : 1500,

@@ -25,7 +25,6 @@
         <md-card>
           <md-card-header data-background-color="green">
             <h4 class="title">Quản lí sinh viên</h4>
-            <p class="category">Here is a subtitle for this table</p>
           </md-card-header>
           <md-card-content>
             <data-table :get-data="getData" ref="datatable">
@@ -143,7 +142,7 @@ export default{
                 return rf.getRequest('StudentRequest').removeManyStudents(studentIds).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('Student removed successfully!', {
+                  this.$toasted.show('Xóa sinh viên thành công!', {
                     theme: 'bubble',
                     position: 'top-right',
                     duration : 1500,

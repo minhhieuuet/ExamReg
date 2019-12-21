@@ -40,10 +40,10 @@
               </drop-down>
             </md-list-item> -->
 
-            <md-list-item to="/user">
-              <i class="material-icons">person</i>
-              <p class="hidden-lg hidden-md">Profile</p>
-            </md-list-item>
+<!--            <md-list-item to="/user">-->
+<!--              <i class="material-icons">person</i>-->
+<!--              <p class="hidden-lg hidden-md">Profile</p>-->
+<!--            </md-list-item>-->
 
             <md-list-item @click="logout">
               <i class="material-icons">logout</i>

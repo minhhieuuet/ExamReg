@@ -138,7 +138,7 @@ export default{
                 return rf.getRequest('UniversityRequest').removeManyUniversities(universityIds).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('University removed successfully!', {
+                  this.$toasted.show('Xóa thông tin trường thành công!', {
                     theme: 'bubble',
                     position: 'top-right',
                     duration : 1500,

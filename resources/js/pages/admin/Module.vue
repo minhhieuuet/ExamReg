@@ -166,7 +166,7 @@ export default{
                 return rf.getRequest('ModuleRequest').removeManyModules(moduleIds).then(() => {
                   this.$modal.hide('dialog');
                   this.$refs.datatable.refresh();
-                  this.$toasted.show('Module removed successfully!', {
+                  this.$toasted.show('Xóa học phần thành công!', {
                     theme: 'bubble',
                     position: 'top-right',
                     duration : 1500,
