@@ -28,7 +28,7 @@ export default class UserRequest extends BaseModelRequest {
     return this.get('/user/exam-session-computers/' + examSessionId);
   }
   registerSession (sessionId) {
-    return this.post('/user/register-session/', {session_id: sessionId});
+    return this.post('/user/register-session', {session_id: sessionId});
   }
   unRegisterASession (testRoomId) {
     return this.post('/user/unregister-session', {test_room_id: testRoomId});
