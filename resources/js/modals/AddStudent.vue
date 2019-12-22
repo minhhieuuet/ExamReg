@@ -17,13 +17,6 @@
 
       <div style="padding:20px;">
         <label>Sinh viên</label>
-        <br>
-        <md-button class="md-icon-button md-success" title="Thêm sinh viên từ excel">
-          <md-icon>attach_file</md-icon>
-        </md-button>
-        <md-button class="md-icon-button md-danger" title="Thêm sinh viên bị cấm thi từ excel">
-          <md-icon>attach_file</md-icon>
-        </md-button>
         <multiselect
          :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Vui lòng chọn" :custom-label="codeWithName" label="name" track-by="name" :preselect-first="true"
          v-model="selectedStudents" :options="students">a
