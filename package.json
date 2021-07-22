@@ -61,6 +61,6 @@
     "vue-toasted": "^1.1.27",
     "vue2-highcharts": "^1.2.4",
     "vuejs-datepicker": "^0.9.13",
-    "xlsx": "^0.14.1"
+    "xlsx": "^0.17.0"
   }
 }
