@@ -41,7 +41,7 @@
     "log4js": "^2.3.10",
     "mobile-select": "^1.1.2",
     "moment": "^2.18.1",
-    "moment-timezone": "^0.5.16",
+    "moment-timezone": "^0.5.35",
     "superagent": "^3.8.0",
     "v-tooltip": "^2.0.0-rc.25",
     "vee-validate": "^2.0.0-rc.19",
